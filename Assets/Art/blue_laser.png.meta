@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: 7f69fca1d98a63244a37ffcaa68d3acf
+guid: 28a3602524619ab4c971f663ca41f3ea
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 1333401826788945531
-    second: alien_0
+      213: 8950681845281696607
+    second: blue_laser_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -113,13 +113,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: alien_0
+      name: blue_laser_0
       rect:
         serializedVersion: 2
         x: 0
-        y: 3
-        width: 464
-        height: 500
+        y: 0
+        width: 76
+        height: 421
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -127,8 +127,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: b7eac9495e1318210800000000000000
-      internalID: 1333401826788945531
+      spriteID: f5bad8d27b5373c70800000000000000
+      internalID: 8950681845281696607
       vertices: []
       indices: 
       edges: []
@@ -143,8 +143,7 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
-    nameFileIdTable:
-      alien_0: 1333401826788945531
+    nameFileIdTable: {}
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

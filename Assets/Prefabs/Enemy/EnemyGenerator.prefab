@@ -108,3 +108,4 @@ MonoBehaviour:
   m_enemy_rock: {fileID: 742432110137525935, guid: 4f1f5c96d1b6b61478219b11012c1ce5, type: 3}
   m_enemy_alien: {fileID: 5406024447763677937, guid: b9ffe4a2f13ab5f4ba3824c88d65a2e0, type: 3}
   m_enemy_bonus: {fileID: -6477919877456376410, guid: 14d494e0cb6b8724ea60fba911f499dd, type: 3}
+  m_enemy_laser: {fileID: 257051969736420972, guid: bdf4081c152dc4544a2e2604a53c5e30, type: 3}

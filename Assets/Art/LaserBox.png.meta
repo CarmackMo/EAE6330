@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: 7f69fca1d98a63244a37ffcaa68d3acf
+guid: 9ee675e11ea646f41b03984e309ec41c
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 1333401826788945531
-    second: alien_0
+      213: 4888149801454108469
+    second: Treasure Chest closed 254x254_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -113,13 +113,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: alien_0
+      name: Treasure Chest closed 254x254_0
       rect:
         serializedVersion: 2
         x: 0
-        y: 3
-        width: 464
-        height: 500
+        y: 0
+        width: 254
+        height: 171
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -127,8 +127,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: b7eac9495e1318210800000000000000
-      internalID: 1333401826788945531
+      spriteID: 53f719c885236d340800000000000000
+      internalID: 4888149801454108469
       vertices: []
       indices: 
       edges: []
@@ -144,7 +144,7 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      alien_0: 1333401826788945531
+      Treasure Chest closed 254x254_0: 4888149801454108469
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

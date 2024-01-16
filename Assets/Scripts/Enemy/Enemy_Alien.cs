@@ -43,6 +43,7 @@ public class Enemy_Alien : Enemy
         Enemy_Rock rock = i_collider.GetComponent<Enemy_Rock>();
         Player player = i_collider.GetComponent<Player>();
         Bullet_Player bullet = i_collider.GetComponent<Bullet_Player>();
+        Bullet_Laser laser = i_collider.GetComponent<Bullet_Laser>();
 
         if (rock != null)
         {
@@ -57,6 +58,11 @@ public class Enemy_Alien : Enemy
 
                 Destroy(gameObject);
             }
+        }
+        else if (laser != null)
+        {
+            s_audioManager.PlayOneShot(m_audioClipList[0]);
+            Destroy(gameObject);
         }
     }
 

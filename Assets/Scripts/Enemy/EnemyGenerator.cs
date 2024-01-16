@@ -24,6 +24,7 @@ public class EnemyGenerator : MonoBehaviour
     [SerializeField] private Enemy_Rock m_enemy_rock = null;
     [SerializeField] private Enemy_Alien m_enemy_alien = null;
     [SerializeField] private Enemy_Bonus m_enemy_bonus = null;
+    [SerializeField] private Enemy_Laser m_enemy_laser = null;
 
 
     private void Start()
@@ -106,8 +107,14 @@ public class EnemyGenerator : MonoBehaviour
             bounsSpeed.x *= (sign >= 0) ? 1 : -1;
             bounsSpeed.y = Random.Range(-2.0f, -1.0f);
 
-            Enemy_Bonus newBonus = Instantiate(m_enemy_bonus, bonusPos, transform.rotation);
-            newBonus.Speed = bounsSpeed;
+
+            sign = Random.Range(0.0f, 100.0f);
+            Enemy enemy = null;
+            if (sign > 50.0f)
+                enemy = Instantiate(m_enemy_bonus, bonusPos, transform.rotation);
+            else
+                enemy = Instantiate(m_enemy_laser, bonusPos, transform.rotation);
+            enemy.Speed = bounsSpeed;
 
 
             m_lastSpawnTime_bonus = currentTime;

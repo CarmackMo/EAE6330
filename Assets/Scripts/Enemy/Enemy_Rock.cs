@@ -8,10 +8,14 @@ public class Enemy_Rock : Enemy
 
     private Vector3 m_rotationAxis = Vector3.zero;
 
+    private AudioManager s_audioManager = null;
+
 
     protected override void Start()
     {
         base.Start();
+
+        s_audioManager = AudioManager.Instance;
 
         float sign = Random.Range(-1.0f, 1.0f);
         m_rotationAxis = (sign >= 0) ? Vector3.forward : Vector3.back;
@@ -30,6 +34,13 @@ public class Enemy_Rock : Enemy
     {
         if (i_collider == null)
             return;
+
+        Bullet_Laser laser = i_collider.GetComponent<Bullet_Laser>();
+        if (laser != null)
+        {
+            s_audioManager.PlayOneShot(m_audioClipList[0]);
+            Destroy(gameObject);
+        }
     }
 
 

@@ -8,11 +8,19 @@ public class Player : Singleton<Player>
     [SerializeField] private double m_bonusDuration = 0.0f;
     [SerializeField] private bool m_isBonusState = false;
 
+    [SerializeField] private double m_lastLaserTime = 0.0f;
+    [SerializeField] private double m_laserCooldown = 0.0f;
+    [SerializeField] private double m_laserDuration = 0.0f;
+    [SerializeField] private bool m_isLaserState = false;
+
+
     [SerializeField] private AudioSource m_audioSource = null;
 
     [SerializeField] private Bullet m_prefab_bullet = null;
+    [SerializeField] private Bullet_Laser m_prefab_laser = null;
 
     private GameController s_gameController;
+
 
 
     protected override void Start()
@@ -25,14 +33,21 @@ public class Player : Singleton<Player>
     {
         PlayerControl();
 
-        if (m_isBonusState == false)
+        if (m_isBonusState == false && m_isLaserState == false)
             ShootBullet();
-        else
+        else if (m_isBonusState == true)
         {
             ShootThreeBullets();
             if (Time.time - m_lastBonusTime >= m_bonusDuration)
-            {
                 m_isBonusState = false;
+        }
+        else if (m_isLaserState == true)
+        {
+            ShootLaser();
+            if (Time.time - m_lastLaserTime >= m_laserDuration)
+            {
+                m_prefab_laser.gameObject.SetActive(false);
+                m_isLaserState = false;
             }
         }
     }
@@ -44,14 +59,25 @@ public class Player : Singleton<Player>
             return;
 
         Enemy_Bonus bonus = i_collider.GetComponent<Enemy_Bonus>();
+        Enemy_Laser laser = i_collider.GetComponent<Enemy_Laser>();
 
+        double currentTime = Time.time;
         if (bonus != null)
         {
-            double currentTime = Time.time;
             if (currentTime - m_lastBonusTime >= m_bonusCooldown)
             {
+                m_isLaserState = false;
                 m_isBonusState = true;
                 m_lastBonusTime = currentTime;
+            }
+        }
+        else if (laser != null)
+        {
+            if (currentTime - m_lastLaserTime >= m_laserCooldown)
+            {
+                m_isBonusState = false;
+                m_isLaserState = true;
+                m_lastLaserTime = currentTime;
             }
         }
     }
@@ -122,4 +148,16 @@ public class Player : Singleton<Player>
         }
     }
 
+
+    private void ShootLaser()
+    {
+        if (Input.GetKeyDown(KeyCode.Space)) 
+        {
+            m_prefab_laser.gameObject.SetActive(true);
+        }
+        else if (Input.GetKeyUp(KeyCode.Space))
+        {
+            m_prefab_laser.gameObject.SetActive(false);
+        }
+    }
 }

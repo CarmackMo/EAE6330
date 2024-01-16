@@ -33,11 +33,17 @@ public class Bullet_Enemy : Bullet
 
         Player player = i_collider.GetComponent<Player>();
         Bullet_Player bullet = i_collider.GetComponent<Bullet_Player>();
+        Bullet_Laser laser = i_collider.GetComponent<Bullet_Laser>();
 
         if (player != null || bullet != null)
         {
             s_audioManager.PlayOneShot(m_audioClipList[0]);
 
+            Destroy(gameObject);
+        }
+        else if (laser != null)
+        {
+            s_audioManager.PlayOneShot(m_audioClipList[0]);
             Destroy(gameObject);
         }
         else
