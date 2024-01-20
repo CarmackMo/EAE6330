@@ -53,11 +53,4 @@ public class MineObject : MonoBehaviour
         m_text.text = i_mineNear.ToString();
     }
 
-
-    // Test
-    public void SetColor()
-    {
-        m_text.color = Color.red;
-    }
-
 }
