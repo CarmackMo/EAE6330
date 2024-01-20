@@ -37,8 +37,6 @@ public class MineContainer : MonoBehaviour
         {
             int mineNear = 0;
 
-            int idx = CoordToIdx(x, y, z);
-
             if (x + 1 < m_width && m_mineList[CoordToIdx(x + 1, y, z)].Type == MineObject.e_MineType.Mine)
                 mineNear++;
             if (x - 1 >= 0 && m_mineList[CoordToIdx(x - 1, y, z)].Type == MineObject.e_MineType.Mine)
@@ -76,7 +74,6 @@ public class MineContainer : MonoBehaviour
             }
 
             m_mineList[CoordToIdx(x, y, z)].Type = MineObject.e_MineType.Mine;
-            m_mineList[CoordToIdx(x, y, z)].SetColor();
         }
     }
 

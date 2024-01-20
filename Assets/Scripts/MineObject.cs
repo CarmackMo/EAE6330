@@ -15,7 +15,7 @@ public class MineObject : MonoBehaviour
     public enum e_MineState { UnChecked, Checked, Labeled  };
 
     public e_MineType Type { get { return m_type; } set { m_type = value; } }
-    [SerializeField] private e_MineType m_type = e_MineType.Normal;
+    private e_MineType m_type = e_MineType.Normal;
     public e_MineState State { get { return m_state; } set { m_state = value; } }   
     private e_MineState m_state = e_MineState.UnChecked;
 
