@@ -1,3 +1,5 @@
+using System;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -11,8 +13,10 @@ public class GameplayManager : Singleton<GameplayManager>
 
     private int m_labeledMineNum = 0;
 
-    private GameOverPanel m_gameOverPanel = null;
+    private Stack<Command<MineObject>> m_undoCmdStack = new Stack<Command<MineObject>>();
+    private Stack<Command<MineObject>> m_redoCmdStack = new Stack<Command<MineObject>>();
 
+    private GameOverPanel m_gameOverPanel = null;
 
 
     protected override void Start()
@@ -48,4 +52,22 @@ public class GameplayManager : Singleton<GameplayManager>
     }
 
 
+    public void RegisterUndoCmd(MineObject i_mineObject, Action<MineObject> i_undoAction)
+    {
+        Command<MineObject> undoCmd = new Command<MineObject>(i_mineObject, i_undoAction);
+        m_undoCmdStack.Push(undoCmd);
+    }
+
+
+    public void RegisterRedoCmd(MineObject i_mineObject, Action<MineObject> i_redoAction)
+    {
+        Command<MineObject> redoCmd = new Command<MineObject>(i_mineObject, i_redoAction);
+        m_redoCmdStack.Push(redoCmd); 
+    }
+
+
+    public void Undo()
+    {
+
+    }
 }
