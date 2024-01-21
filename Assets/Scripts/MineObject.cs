@@ -55,6 +55,9 @@ public class MineObject : MonoBehaviour
             m_mine_unchecked.SetActive(false);
             m_mine_indicator.SetActive(true);
         }
+
+        m_gameplayManager.RegisterUndoCmd(this, r => r.ReverseRightMouseClick());
+        m_gameplayManager.ResetRedoStack();
     }
 
 
@@ -101,10 +104,13 @@ public class MineObject : MonoBehaviour
                 m_gameplayManager.UnlabelMine();
             }
         }
+
+        m_gameplayManager.RegisterUndoCmd(this, r => r.ReverseScrollMouseClick());
+        m_gameplayManager.ResetRedoStack();
     }
 
 
-    private void ReverseScrollMouseClick()
+    public void ReverseScrollMouseClick()
     {
         OnScrollMouseClick();
     }

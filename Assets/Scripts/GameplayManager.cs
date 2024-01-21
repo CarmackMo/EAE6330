@@ -108,7 +108,7 @@ public class GameplayManager : Singleton<GameplayManager>
             }
             else if (redoCmd.action == action_scrollMouse)
             {
-                Action<MineObject> action = r => r.OnScrollMouseClick();
+                Action<MineObject> action = r => r.ReverseScrollMouseClick();
                 RegisterUndoCmd(redoCmd.receiver, action);
             }
         }
@@ -116,5 +116,11 @@ public class GameplayManager : Singleton<GameplayManager>
         {
             Debug.Log("Cannot redo as there is no redo command");
         }
+    }
+
+
+    public void ResetRedoStack()
+    {
+        m_redoCmdStack.Clear();
     }
 }

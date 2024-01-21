@@ -9,6 +9,16 @@ public class ControlManager : Singleton<ControlManager>
 
     [SerializeField] private GameObject m_mineContaimer = null;
 
+    private GameplayManager m_gameplayManager = null;
+
+
+
+    protected override void Start()
+    {
+        base.Start();
+
+        m_gameplayManager = GameplayManager.Instance;
+    }
 
 
     protected override void Update()
@@ -48,9 +58,15 @@ public class ControlManager : Singleton<ControlManager>
                     mineObj.OnScrollMouseClick();
                 }
             }
-
         }
 
 
+        if (Input.GetKeyDown(KeyCode.LeftControl) || Input.GetKeyDown(KeyCode.RightControl)) 
+        {
+            if (Input.GetKeyUp(KeyCode.Z))
+                m_gameplayManager.Undo();
+            else if (Input.GetKeyUp(KeyCode.Y))
+                m_gameplayManager.Redo();
+        }
     }
 }
