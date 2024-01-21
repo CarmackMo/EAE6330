@@ -42,6 +42,7 @@ public class ControlManager : Singleton<ControlManager>
                 if (mineObj != null) 
                 {
                     mineObj.OnRightMouseClick();
+                    m_gameplayManager.ResetRedoStack();
                 }
             }
         }
@@ -56,17 +57,23 @@ public class ControlManager : Singleton<ControlManager>
                 if (mineObj != null)
                 {
                     mineObj.OnScrollMouseClick();
+                    m_gameplayManager.ResetRedoStack();
                 }
             }
         }
 
 
-        if (Input.GetKeyDown(KeyCode.LeftControl) || Input.GetKeyDown(KeyCode.RightControl)) 
-        {
-            if (Input.GetKeyUp(KeyCode.Z))
-                m_gameplayManager.Undo();
-            else if (Input.GetKeyUp(KeyCode.Y))
-                m_gameplayManager.Redo();
-        }
+        if (Input.GetKeyUp(KeyCode.Z))
+            m_gameplayManager.Undo();
+        else if (Input.GetKeyUp(KeyCode.Y))
+            m_gameplayManager.Redo();
+
+        //if (Input.GetKeyDown(KeyCode.LeftAlt) || Input.GetKeyDown(KeyCode.RightAlt)) 
+        //{
+        //    if (Input.GetKeyUp(KeyCode.Z))
+        //        m_gameplayManager.Undo();
+        //    else if (Input.GetKeyUp(KeyCode.Y))
+        //        m_gameplayManager.Redo();
+        //}
     }
 }

@@ -56,8 +56,7 @@ public class MineObject : MonoBehaviour
             m_mine_indicator.SetActive(true);
         }
 
-        m_gameplayManager.RegisterUndoCmd(this, r => r.ReverseRightMouseClick());
-        m_gameplayManager.ResetRedoStack();
+        m_gameplayManager.RegisterUndoCmd(this, r => r.ReverseRightMouseClick(), ECmdType.RightMouse);
     }
 
 
@@ -105,8 +104,7 @@ public class MineObject : MonoBehaviour
             }
         }
 
-        m_gameplayManager.RegisterUndoCmd(this, r => r.ReverseScrollMouseClick());
-        m_gameplayManager.ResetRedoStack();
+        m_gameplayManager.RegisterUndoCmd(this, r => r.ReverseScrollMouseClick(), ECmdType.ScrollMouse);
     }
 
 

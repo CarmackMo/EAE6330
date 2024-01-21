@@ -53,16 +53,16 @@ public class GameplayManager : Singleton<GameplayManager>
     }
 
 
-    public void RegisterUndoCmd(MineObject i_mineObject, Action<MineObject> i_undoAction)
+    public void RegisterUndoCmd(MineObject i_mineObject, Action<MineObject> i_undoAction, ECmdType i_type)
     {
-        Command<MineObject> undoCmd = new Command<MineObject>(i_mineObject, i_undoAction);
+        Command<MineObject> undoCmd = new Command<MineObject>(i_mineObject, i_undoAction, i_type);
         m_undoCmdStack.Push(undoCmd);
     }
 
 
-    public void RegisterRedoCmd(MineObject i_mineObject, Action<MineObject> i_redoAction)
+    public void RegisterRedoCmd(MineObject i_mineObject, Action<MineObject> i_redoAction, ECmdType i_type)
     {
-        Command<MineObject> redoCmd = new Command<MineObject>(i_mineObject, i_redoAction);
+        Command<MineObject> redoCmd = new Command<MineObject>(i_mineObject, i_redoAction, i_type);
         m_redoCmdStack.Push(redoCmd); 
     }
 
@@ -72,19 +72,19 @@ public class GameplayManager : Singleton<GameplayManager>
         Command<MineObject> undoCmd = null;
         if (m_undoCmdStack.TryPeek(out undoCmd))
         {
-            Action<MineObject> action_revRightMouse = r => r.ReverseRightMouseClick();
-            Action<MineObject> action_revScrollMouse = r => r.ReverseScrollMouseClick();
-
-            if (undoCmd.action == action_revRightMouse)
+            if (undoCmd.CmdType == ECmdType.RightMouse)
             {
                 Action<MineObject> action = r => r.OnRightMouseClick();
-                RegisterRedoCmd(undoCmd.receiver, action);
+                RegisterRedoCmd(undoCmd.receiver, action, ECmdType.RightMouse);
             }
-            else if (undoCmd.action == action_revScrollMouse)
+            else if (undoCmd.CmdType == ECmdType.ScrollMouse)
             {
                 Action<MineObject> action = r => r.OnScrollMouseClick();
-                RegisterRedoCmd(undoCmd.receiver, action);
+                RegisterRedoCmd(undoCmd.receiver, action, ECmdType.ScrollMouse);
             }
+
+            undoCmd.Execute();
+            m_undoCmdStack.Pop();
         }
         else
         {
@@ -98,19 +98,19 @@ public class GameplayManager : Singleton<GameplayManager>
         Command<MineObject> redoCmd = null;
         if (m_redoCmdStack.TryPeek(out redoCmd))
         {
-            Action<MineObject> action_rightMouse = r => r.OnRightMouseClick();
-            Action<MineObject> action_scrollMouse = r => r.OnScrollMouseClick();
-
-            if (redoCmd.action == action_rightMouse)
+            if (redoCmd.CmdType == ECmdType.RightMouse)
             {
                 Action<MineObject> action = r => r.ReverseRightMouseClick();
-                RegisterUndoCmd(redoCmd.receiver, action);
+                RegisterUndoCmd(redoCmd.receiver, action, ECmdType.RightMouse);
             }
-            else if (redoCmd.action == action_scrollMouse)
+            else if (redoCmd.CmdType == ECmdType.ScrollMouse)
             {
                 Action<MineObject> action = r => r.ReverseScrollMouseClick();
-                RegisterUndoCmd(redoCmd.receiver, action);
+                RegisterUndoCmd(redoCmd.receiver, action, ECmdType.ScrollMouse);
             }
+
+            redoCmd.Execute();
+            m_redoCmdStack.Pop();
         }
         else
         {
