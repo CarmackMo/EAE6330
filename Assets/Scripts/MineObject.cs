@@ -43,11 +43,11 @@ public class MineObject : MonoBehaviour
     {
         if (m_type == e_MineType.Mine)
         {
-            Time.timeScale = 0.0f;
             m_gameOverPanel.SetPanelVisible(true);
             m_gameOverPanel.SetContentVisible(false);
             m_mine_unchecked.SetActive(false);
             m_mine_mine.SetActive(true);
+            m_gameplayManager.GameState = GameplayManager.eGameState.Off;
         }
         else
         {
@@ -64,11 +64,10 @@ public class MineObject : MonoBehaviour
     {
         if (m_type == e_MineType.Mine)
         {
-            Time.timeScale = 1.0f;
             m_gameOverPanel.SetPanelVisible(false);
             m_mine_unchecked.SetActive(true);
             m_mine_mine.SetActive(false);
-
+            m_gameplayManager.GameState = GameplayManager.eGameState.On;
         }
         else
         {

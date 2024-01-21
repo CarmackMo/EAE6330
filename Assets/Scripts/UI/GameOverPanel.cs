@@ -5,7 +5,7 @@ using UnityEngine.UI;
 public class GameOverPanel : Singleton<GameOverPanel>
 {
     [SerializeField] private Button m_exitButton = null;
-    [SerializeField] private Button m_restartButton = null;
+    [SerializeField] private Button m_undoButton = null;
     [SerializeField] private GameObject m_winPanel = null;
     [SerializeField] private GameObject m_losePanel = null;
 
@@ -17,7 +17,7 @@ public class GameOverPanel : Singleton<GameOverPanel>
         base.Start();
 
         m_exitButton.onClick.AddListener(() => { OnClickButton(m_exitButton); });
-        m_restartButton.onClick.AddListener(() => { OnClickButton(m_restartButton); });
+        m_undoButton.onClick.AddListener(() => { OnClickButton(m_undoButton); });
 
         m_gameplayManager = GameplayManager.Instance;
 
@@ -31,9 +31,9 @@ public class GameOverPanel : Singleton<GameOverPanel>
         {
             Application.Quit();
         }
-        else if (i_button == m_restartButton)
+        else if (i_button == m_undoButton)
         {
-            m_gameplayManager.ReloadScene();
+            m_gameplayManager.Undo();
         }
     }
 
@@ -48,6 +48,7 @@ public class GameOverPanel : Singleton<GameOverPanel>
     {
         m_winPanel.SetActive(i_isWin);
         m_losePanel.SetActive(!i_isWin);
+        m_undoButton.gameObject.SetActive(!i_isWin);
     }
 
 

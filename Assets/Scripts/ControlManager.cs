@@ -25,55 +25,59 @@ public class ControlManager : Singleton<ControlManager>
     {
         base.Update();
 
-        if (Input.GetMouseButton(0))
+        if (m_gameplayManager.GameState == GameplayManager.eGameState.On)
         {
-            float mousX = Input.GetAxis("Mouse X");
-            float mousY = Input.GetAxis("Mouse Y");
-            m_mineContaimer.transform.Rotate(mousY * m_rotationSpeed, -mousX * m_rotationSpeed, 0, Space.World);
-        }
-        else if (Input.GetMouseButtonUp(1))
-        {
-            Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-
-            RaycastHit hit;
-            if (Physics.Raycast(ray, out hit, 1000) )
+            if (Input.GetMouseButton(0))
             {
-                MineObject mineObj = hit.collider.gameObject.GetComponent<MineObject>();
-                if (mineObj != null) 
+                float mousX = Input.GetAxis("Mouse X");
+                float mousY = Input.GetAxis("Mouse Y");
+                m_mineContaimer.transform.Rotate(mousY * m_rotationSpeed, -mousX * m_rotationSpeed, 0, Space.World);
+            }
+            else if (Input.GetMouseButtonUp(1))
+            {
+                Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+
+                RaycastHit hit;
+                if (Physics.Raycast(ray, out hit, 1000) )
                 {
-                    mineObj.OnRightMouseClick();
-                    m_gameplayManager.ResetRedoStack();
+                    MineObject mineObj = hit.collider.gameObject.GetComponent<MineObject>();
+                    if (mineObj != null) 
+                    {
+                        mineObj.OnRightMouseClick();
+                        m_gameplayManager.ResetRedoStack();
+                    }
                 }
             }
-        }
-        else if (Input.GetMouseButtonUp(2)) 
-        {
-            Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-
-            RaycastHit hit;
-            if (Physics.Raycast(ray, out hit, 1000))
+            else if (Input.GetMouseButtonUp(2)) 
             {
-                MineObject mineObj = hit.collider.gameObject.GetComponent<MineObject>();
-                if (mineObj != null)
+                Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+
+                RaycastHit hit;
+                if (Physics.Raycast(ray, out hit, 1000))
                 {
-                    mineObj.OnScrollMouseClick();
-                    m_gameplayManager.ResetRedoStack();
+                    MineObject mineObj = hit.collider.gameObject.GetComponent<MineObject>();
+                    if (mineObj != null)
+                    {
+                        mineObj.OnScrollMouseClick();
+                        m_gameplayManager.ResetRedoStack();
+                    }
                 }
             }
+
+
+            if (Input.GetKeyUp(KeyCode.Z))
+                m_gameplayManager.Undo();
+            else if (Input.GetKeyUp(KeyCode.Y))
+                m_gameplayManager.Redo();
+
+            //if (Input.GetKeyDown(KeyCode.LeftAlt) || Input.GetKeyDown(KeyCode.RightAlt)) 
+            //{
+            //    if (Input.GetKeyUp(KeyCode.Z))
+            //        m_gameplayManager.Undo();
+            //    else if (Input.GetKeyUp(KeyCode.Y))
+            //        m_gameplayManager.Redo();
+            //}
         }
 
-
-        if (Input.GetKeyUp(KeyCode.Z))
-            m_gameplayManager.Undo();
-        else if (Input.GetKeyUp(KeyCode.Y))
-            m_gameplayManager.Redo();
-
-        //if (Input.GetKeyDown(KeyCode.LeftAlt) || Input.GetKeyDown(KeyCode.RightAlt)) 
-        //{
-        //    if (Input.GetKeyUp(KeyCode.Z))
-        //        m_gameplayManager.Undo();
-        //    else if (Input.GetKeyUp(KeyCode.Y))
-        //        m_gameplayManager.Redo();
-        //}
     }
 }

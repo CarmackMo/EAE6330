@@ -1,6 +1,5 @@
 using System;
 using System.Collections.Generic;
-using System.Xml;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -8,6 +7,8 @@ using UnityEngine.SceneManagement;
 
 public class GameplayManager : Singleton<GameplayManager>
 {
+    public enum eGameState { On, Off };
+
 
     [SerializeField] private int m_mineNum = 3;
     public int MineNum { get { return m_mineNum; } }
@@ -17,7 +18,11 @@ public class GameplayManager : Singleton<GameplayManager>
     private Stack<Command<MineObject>> m_undoCmdStack = new Stack<Command<MineObject>>();
     private Stack<Command<MineObject>> m_redoCmdStack = new Stack<Command<MineObject>>();
 
+    private eGameState m_gameState = eGameState.On;
+    public eGameState GameState { get { return m_gameState; } set { m_gameState = value; } }
+
     private GameOverPanel m_gameOverPanel = null;
+
 
 
     protected override void Start()

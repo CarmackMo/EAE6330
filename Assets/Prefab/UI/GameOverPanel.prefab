@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 4190265480186493909}
   - component: {fileID: 1578708636398253734}
   m_Layer: 5
-  m_Name: RestarButton
+  m_Name: UndoButton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -331,7 +331,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_exitButton: {fileID: 8671917595888297370}
-  m_restartButton: {fileID: 1578708636398253734}
+  m_undoButton: {fileID: 1578708636398253734}
   m_winPanel: {fileID: 4489037927841933271}
   m_losePanel: {fileID: 7028439335078158735}
 --- !u!1 &4489037927841933271
@@ -743,7 +743,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Restart
+  m_text: Undo
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
