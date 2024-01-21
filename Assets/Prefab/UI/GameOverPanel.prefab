@@ -332,6 +332,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_exitButton: {fileID: 8671917595888297370}
   m_restartButton: {fileID: 1578708636398253734}
+  m_winPanel: {fileID: 4489037927841933271}
+  m_losePanel: {fileID: 7028439335078158735}
 --- !u!1 &4489037927841933271
 GameObject:
   m_ObjectHideFlags: 0

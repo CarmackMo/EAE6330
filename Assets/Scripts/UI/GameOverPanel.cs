@@ -6,9 +6,10 @@ public class GameOverPanel : Singleton<GameOverPanel>
 {
     [SerializeField] private Button m_exitButton = null;
     [SerializeField] private Button m_restartButton = null;
+    [SerializeField] private GameObject m_winPanel = null;
+    [SerializeField] private GameObject m_losePanel = null;
 
     private GameplayManager m_gameplayManager = null;
-
 
 
     protected override void Start()
@@ -42,6 +43,12 @@ public class GameOverPanel : Singleton<GameOverPanel>
         gameObject.SetActive(i_visible);
     }
 
+
+    public void SetContentVisible(bool i_isWin)
+    {
+        m_winPanel.SetActive(i_isWin);
+        m_losePanel.SetActive(!i_isWin);
+    }
 
 
 }

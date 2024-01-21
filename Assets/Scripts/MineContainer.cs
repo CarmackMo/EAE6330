@@ -12,21 +12,22 @@ public class MineContainer : MonoBehaviour
     private int m_length = 3;
     private int m_height = 1;
 
+    private int m_mineNum = 0;
 
-    private int m_mineNum = 3;
-
-
+    private GameplayManager m_gameplayManager = null;
 
 
     private void Start()
     {
+        m_gameplayManager = GameplayManager.Instance;
+        m_mineNum = m_gameplayManager.MineNum;
+
         InitializeMineContainer();
     }
 
 
     private void InitializeMineContainer()
     {
-
         GenerateMines();
 
         for (int y = 0; y < m_height; y++)
@@ -82,5 +83,4 @@ public class MineContainer : MonoBehaviour
     {
         return (i_y * 9) + (i_z * 3) + i_x;
     }
-
 }

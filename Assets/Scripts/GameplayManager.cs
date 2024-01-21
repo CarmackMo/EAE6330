@@ -6,6 +6,22 @@ using UnityEngine.SceneManagement;
 public class GameplayManager : Singleton<GameplayManager>
 {
 
+    [SerializeField] private int m_mineNum = 3;
+    public int MineNum { get { return m_mineNum; } }
+
+    private int m_labeledMineNum = 0;
+
+    private GameOverPanel m_gameOverPanel = null;
+
+
+
+    protected override void Start()
+    {
+        base.Start();
+
+        m_gameOverPanel = GameOverPanel.Instance;
+    }
+
 
     public void ReloadScene()
     {
@@ -13,6 +29,23 @@ public class GameplayManager : Singleton<GameplayManager>
         SceneManager.LoadScene(currScene.name, LoadSceneMode.Single);
     }
 
+
+    public void LabelMine()
+    {
+        m_labeledMineNum++;
+
+        if (m_labeledMineNum == m_mineNum)
+        {
+            m_gameOverPanel.SetPanelVisible(true);
+            m_gameOverPanel.SetContentVisible(true);
+        }
+    }
+
+
+    public void UnlabelMine()
+    {
+        m_labeledMineNum--;
+    }
 
 
 }

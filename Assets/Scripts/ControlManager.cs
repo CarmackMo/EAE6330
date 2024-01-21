@@ -26,7 +26,7 @@ public class ControlManager : Singleton<ControlManager>
             Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
 
             RaycastHit hit;
-            if (Physics.Raycast(ray, out hit, 500) )
+            if (Physics.Raycast(ray, out hit, 1000) )
             {
                 MineObject mineObj = hit.collider.gameObject.GetComponent<MineObject>();
                 if (mineObj != null) 
@@ -40,7 +40,7 @@ public class ControlManager : Singleton<ControlManager>
             Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
 
             RaycastHit hit;
-            if (Physics.Raycast(ray, out hit, 500))
+            if (Physics.Raycast(ray, out hit, 1000))
             {
                 MineObject mineObj = hit.collider.gameObject.GetComponent<MineObject>();
                 if (mineObj != null)
