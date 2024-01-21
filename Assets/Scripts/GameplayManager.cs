@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Xml;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -68,6 +69,52 @@ public class GameplayManager : Singleton<GameplayManager>
 
     public void Undo()
     {
+        Command<MineObject> undoCmd = null;
+        if (m_undoCmdStack.TryPeek(out undoCmd))
+        {
+            Action<MineObject> action_revRightMouse = r => r.ReverseRightMouseClick();
+            Action<MineObject> action_revScrollMouse = r => r.ReverseScrollMouseClick();
 
+            if (undoCmd.action == action_revRightMouse)
+            {
+                Action<MineObject> action = r => r.OnRightMouseClick();
+                RegisterRedoCmd(undoCmd.receiver, action);
+            }
+            else if (undoCmd.action == action_revScrollMouse)
+            {
+                Action<MineObject> action = r => r.OnScrollMouseClick();
+                RegisterRedoCmd(undoCmd.receiver, action);
+            }
+        }
+        else
+        {
+            Debug.Log("Cannot undo as there is no undo command");
+        }
+    }
+
+
+    public void Redo()
+    {
+        Command<MineObject> redoCmd = null;
+        if (m_redoCmdStack.TryPeek(out redoCmd))
+        {
+            Action<MineObject> action_rightMouse = r => r.OnRightMouseClick();
+            Action<MineObject> action_scrollMouse = r => r.OnScrollMouseClick();
+
+            if (redoCmd.action == action_rightMouse)
+            {
+                Action<MineObject> action = r => r.ReverseRightMouseClick();
+                RegisterUndoCmd(redoCmd.receiver, action);
+            }
+            else if (redoCmd.action == action_scrollMouse)
+            {
+                Action<MineObject> action = r => r.OnScrollMouseClick();
+                RegisterUndoCmd(redoCmd.receiver, action);
+            }
+        }
+        else
+        {
+            Debug.Log("Cannot redo as there is no redo command");
+        }
     }
 }
