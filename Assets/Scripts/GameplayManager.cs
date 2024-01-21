@@ -10,10 +10,11 @@ public class GameplayManager : Singleton<GameplayManager>
     public enum eGameState { On, Off };
 
 
-    [SerializeField] private int m_mineNum = 3;
+    [SerializeField] private int m_mineNum = 0;
     public int MineNum { get { return m_mineNum; } }
 
     private int m_labeledMineNum = 0;
+    private int m_labeledNum = 0;
 
     private Stack<Command<MineObject>> m_undoCmdStack = new Stack<Command<MineObject>>();
     private Stack<Command<MineObject>> m_redoCmdStack = new Stack<Command<MineObject>>();
@@ -33,6 +34,18 @@ public class GameplayManager : Singleton<GameplayManager>
     }
 
 
+    protected override void Update()
+    {
+        base.Update();
+
+        if (m_labeledMineNum == m_mineNum && m_labeledNum == m_labeledMineNum)
+        {
+            m_gameOverPanel.SetPanelVisible(true);
+            m_gameOverPanel.SetContentVisible(true);
+        }
+    }
+
+
     public void ReloadScene()
     {
         Scene currScene = SceneManager.GetActiveScene();
@@ -43,12 +56,6 @@ public class GameplayManager : Singleton<GameplayManager>
     public void LabelMine()
     {
         m_labeledMineNum++;
-
-        if (m_labeledMineNum == m_mineNum)
-        {
-            m_gameOverPanel.SetPanelVisible(true);
-            m_gameOverPanel.SetContentVisible(true);
-        }
     }
 
 
@@ -56,6 +63,19 @@ public class GameplayManager : Singleton<GameplayManager>
     {
         m_labeledMineNum--;
     }
+
+
+    public void Lable()
+    {
+        m_labeledNum++;
+    }
+
+
+    public void Unlabel()
+    {
+        m_labeledNum--;
+    }
+
 
 
     public void RegisterUndoCmd(MineObject i_mineObject, Action<MineObject> i_undoAction, ECmdType i_type)

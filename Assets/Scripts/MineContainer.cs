@@ -10,7 +10,7 @@ public class MineContainer : MonoBehaviour
 
     private int m_width = 3;
     private int m_length = 3;
-    private int m_height = 1;
+    private int m_height = 3;
 
     private int m_mineNum = 0;
 
@@ -51,7 +51,7 @@ public class MineContainer : MonoBehaviour
             if (z - 1 >= 0 && m_mineList[CoordToIdx(x, y, z - 1)].Type == MineObject.e_MineType.Mine)
                 mineNear++;
 
-
+            m_mineList[CoordToIdx(x, y, z)].MineContainer = this;
             m_mineList[CoordToIdx(x, y, z)].InitialzieIndicator(mineNear);
         }
         }
@@ -82,5 +82,38 @@ public class MineContainer : MonoBehaviour
     private int CoordToIdx(int i_x, int i_y, int i_z)
     {
         return (i_y * 9) + (i_z * 3) + i_x;
+    }
+
+
+    public void RefreshMineIndicator()
+    {
+        for (int y = 0; y < m_height; y++)
+        {
+        for (int z = 0; z < m_length; z++)
+        {
+        for (int x = 0; x < m_width; x++)
+        {
+            MineObject mineObj = m_mineList[CoordToIdx(x, y, z)];
+
+            MineObject rightMine = (x + 1 < m_width) ? m_mineList[CoordToIdx(x + 1, y, z)] : null;
+            MineObject leftMine = (x - 1 >= 0) ? m_mineList[CoordToIdx(x - 1, y, z)] : null;
+            MineObject upMine = (y + 1 < m_height) ? m_mineList[CoordToIdx(x, y + 1, z)] : null;
+            MineObject downMine = (y - 1 >= 0) ? m_mineList[CoordToIdx(x, y - 1, z)] : null;
+            MineObject frontMine = (z + 1 < m_length) ? m_mineList[CoordToIdx(x, y, z + 1)] : null;
+            MineObject backMine = (z - 1 >= 0) ? m_mineList[CoordToIdx(x, y, z - 1)] : null;
+
+            bool shouldHide =
+                (rightMine == null || (rightMine?.Type == MineObject.e_MineType.Normal && rightMine?.State == MineObject.e_MineState.Checked)) &&
+                (leftMine == null || (leftMine?.Type == MineObject.e_MineType.Normal && leftMine?.State == MineObject.e_MineState.Checked)) &&
+                (upMine == null || (upMine?.Type == MineObject.e_MineType.Normal && upMine?.State == MineObject.e_MineState.Checked)) &&
+                (downMine == null || (downMine?.Type == MineObject.e_MineType.Normal && downMine?.State == MineObject.e_MineState.Checked)) &&
+                (frontMine == null || (frontMine?.Type == MineObject.e_MineType.Normal && frontMine?.State == MineObject.e_MineState.Checked)) &&
+                (backMine == null || (backMine?.Type == MineObject.e_MineType.Normal && backMine?.State == MineObject.e_MineState.Checked));
+
+            if (shouldHide)
+                mineObj.HideIndicator();
+        }
+        }
+        }
     }
 }

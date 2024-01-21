@@ -11,7 +11,6 @@ public class MineObject : MonoBehaviour
     [SerializeField] private Canvas m_canvas = null;
     [SerializeField] private TextMeshProUGUI m_text = null;
 
-
     public enum e_MineType { Mine, Normal };
     public enum e_MineState { UnChecked, Checked, Labeled  };
 
@@ -22,7 +21,8 @@ public class MineObject : MonoBehaviour
 
     private GameOverPanel m_gameOverPanel = null;
     private GameplayManager m_gameplayManager = null;
-
+    private MineContainer m_mineContainer = null;
+    public MineContainer MineContainer { set { m_mineContainer = value; } }
 
 
     private void Start()
@@ -54,6 +54,7 @@ public class MineObject : MonoBehaviour
             m_state = e_MineState.Checked;
             m_mine_unchecked.SetActive(false);
             m_mine_indicator.SetActive(true);
+            m_mineContainer.RefreshMineIndicator();
         }
 
         m_gameplayManager.RegisterUndoCmd(this, r => r.ReverseRightMouseClick(), ECmdType.RightMouse);
@@ -90,6 +91,7 @@ public class MineObject : MonoBehaviour
             {
                 m_gameplayManager.LabelMine();
             }
+            m_gameplayManager.Lable();
         }
         else if (m_state == e_MineState.Labeled)
         {
@@ -101,6 +103,7 @@ public class MineObject : MonoBehaviour
             {
                 m_gameplayManager.UnlabelMine();
             }
+            m_gameplayManager.Unlabel();
         }
 
         m_gameplayManager.RegisterUndoCmd(this, r => r.ReverseScrollMouseClick(), ECmdType.ScrollMouse);
@@ -116,6 +119,11 @@ public class MineObject : MonoBehaviour
     public void InitialzieIndicator(int i_mineNear)
     {
         m_text.text = i_mineNear.ToString();
+    }
+
+    public void HideIndicator()
+    {
+        m_mine_indicator.SetActive(false);
     }
 
 }
