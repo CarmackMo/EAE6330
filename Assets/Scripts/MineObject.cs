@@ -8,6 +8,8 @@ public class MineObject : MonoBehaviour
     [SerializeField] private GameObject m_mine_indicator = null;
     [SerializeField] private GameObject m_mine_mine = null;
 
+    [SerializeField] private Collider m_collider = null;
+
     [SerializeField] private Canvas m_canvas = null;
     [SerializeField] private TextMeshProUGUI m_text = null;
 
@@ -57,6 +59,7 @@ public class MineObject : MonoBehaviour
             m_mineContainer.RefreshMineIndicator();
         }
 
+        m_collider.enabled = false;
         m_gameplayManager.RegisterUndoCmd(this, r => r.ReverseRightMouseClick(), ECmdType.RightMouse);
     }
 
@@ -76,6 +79,8 @@ public class MineObject : MonoBehaviour
             m_mine_unchecked.SetActive(true);
             m_mine_indicator.SetActive(false);
         }
+
+        m_collider.enabled = true;
     }
 
 
