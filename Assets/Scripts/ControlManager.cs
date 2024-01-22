@@ -10,6 +10,7 @@ public class ControlManager : Singleton<ControlManager>
     [SerializeField] private GameObject m_mineContaimer = null;
 
     private GameplayManager m_gameplayManager = null;
+    private SoundManager m_soundManager = null;
 
 
 
@@ -18,6 +19,7 @@ public class ControlManager : Singleton<ControlManager>
         base.Start();
 
         m_gameplayManager = GameplayManager.Instance;
+        m_soundManager = SoundManager.Instance;
     }
 
 
@@ -45,6 +47,7 @@ public class ControlManager : Singleton<ControlManager>
                     {
                         mineObj.OnRightMouseClick();
                         m_gameplayManager.ResetRedoStack();
+                        m_soundManager.PlayClickSound();
                     }
                 }
             }
@@ -60,6 +63,7 @@ public class ControlManager : Singleton<ControlManager>
                     {
                         mineObj.OnScrollMouseClick();
                         m_gameplayManager.ResetRedoStack();
+                        m_soundManager.PlayClickSound();
                     }
                 }
             }

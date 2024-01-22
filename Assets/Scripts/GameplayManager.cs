@@ -23,6 +23,7 @@ public class GameplayManager : Singleton<GameplayManager>
     public eGameState GameState { get { return m_gameState; } set { m_gameState = value; } }
 
     private GameOverPanel m_gameOverPanel = null;
+    private SoundManager m_soundManager = null;
 
 
 
@@ -31,18 +32,13 @@ public class GameplayManager : Singleton<GameplayManager>
         base.Start();
 
         m_gameOverPanel = GameOverPanel.Instance;
+        m_soundManager = SoundManager.Instance;
     }
 
 
     protected override void Update()
     {
         base.Update();
-
-        if (m_labeledMineNum == m_mineNum && m_labeledNum == m_labeledMineNum)
-        {
-            m_gameOverPanel.SetPanelVisible(true);
-            m_gameOverPanel.SetContentVisible(true);
-        }
     }
 
 
@@ -56,6 +52,14 @@ public class GameplayManager : Singleton<GameplayManager>
     public void LabelMine()
     {
         m_labeledMineNum++;
+
+        if (m_labeledMineNum == m_mineNum && m_labeledNum == m_labeledMineNum)
+        {
+            m_gameState = eGameState.Off;
+            m_gameOverPanel.SetPanelVisible(true);
+            m_gameOverPanel.SetContentVisible(true);
+            m_soundManager.PlayWinSound();
+        }
     }
 
 

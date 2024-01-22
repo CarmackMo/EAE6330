@@ -341,7 +341,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_mine_unchecked: {fileID: 3942090333677923712}
-  m_mine_labled: {fileID: 0}
+  m_mine_labled: {fileID: 8481015940414726434}
   m_mine_indicator: {fileID: 5949629795486591830}
   m_mine_mine: {fileID: 3787564801400745309}
   m_collider: {fileID: 8996917328103483042}
@@ -594,6 +594,11 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c37f0f7c13f795b47a7d5de3234369d6, type: 3}
+--- !u!1 &8481015940414726434 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: c37f0f7c13f795b47a7d5de3234369d6, type: 3}
+  m_PrefabInstance: {fileID: 8751609813371542643}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &9149431789610613656 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: c37f0f7c13f795b47a7d5de3234369d6, type: 3}

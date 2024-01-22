@@ -23,6 +23,7 @@ public class MineObject : MonoBehaviour
 
     private GameOverPanel m_gameOverPanel = null;
     private GameplayManager m_gameplayManager = null;
+    private SoundManager m_soundManager = null;
     private MineContainer m_mineContainer = null;
     public MineContainer MineContainer { set { m_mineContainer = value; } }
 
@@ -32,6 +33,7 @@ public class MineObject : MonoBehaviour
         m_canvas.worldCamera = Camera.main;
         m_gameOverPanel = GameOverPanel.Instance;
         m_gameplayManager = GameplayManager.Instance;
+        m_soundManager = SoundManager.Instance;
     }
 
 
@@ -50,6 +52,7 @@ public class MineObject : MonoBehaviour
             m_mine_unchecked.SetActive(false);
             m_mine_mine.SetActive(true);
             m_gameplayManager.GameState = GameplayManager.eGameState.Off;
+            m_soundManager.PlayBoomSound();
         }
         else
         {
@@ -92,11 +95,11 @@ public class MineObject : MonoBehaviour
             m_mine_unchecked.SetActive(false);
             m_mine_labled.SetActive(true);
 
+            m_gameplayManager.Lable();
             if (m_type == e_MineType.Mine)
             {
                 m_gameplayManager.LabelMine();
             }
-            m_gameplayManager.Lable();
         }
         else if (m_state == e_MineState.Labeled)
         {
@@ -104,11 +107,11 @@ public class MineObject : MonoBehaviour
             m_mine_unchecked.SetActive(true);
             m_mine_labled.SetActive(false);
             
+            m_gameplayManager.Unlabel();
             if (m_type == e_MineType.Mine)
             {
                 m_gameplayManager.UnlabelMine();
             }
-            m_gameplayManager.Unlabel();
         }
 
         m_gameplayManager.RegisterUndoCmd(this, r => r.ReverseScrollMouseClick(), ECmdType.ScrollMouse);

@@ -17,6 +17,7 @@ public class MineContainer : MonoBehaviour
     private GameplayManager m_gameplayManager = null;
 
 
+
     private void Start()
     {
         m_gameplayManager = GameplayManager.Instance;
