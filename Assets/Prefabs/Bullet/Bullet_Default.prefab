@@ -99,7 +99,7 @@ GameObject:
   - component: {fileID: 6359589783759089652}
   - component: {fileID: 2804296804207660936}
   m_Layer: 0
-  m_Name: Bullet_Player
+  m_Name: Bullet_Default
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

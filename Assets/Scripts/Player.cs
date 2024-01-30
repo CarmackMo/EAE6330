@@ -19,6 +19,11 @@ public class Player : Singleton<Player>
     [SerializeField] private Bullet m_prefab_bullet = null;
     [SerializeField] private Bullet_Laser m_prefab_laser = null;
 
+
+    [SerializeField] private Weapon_Default m_weapon_default = null;
+
+
+
     private GameController s_gameController;
 
 
@@ -123,10 +128,7 @@ public class Player : Singleton<Player>
     {
         if (Input.GetKeyUp(KeyCode.Space)) 
         {
-            Bullet newBullet = Instantiate(m_prefab_bullet, transform.position, transform.rotation);
-            newBullet.Speed = new Vector2(0, 5);
-
-            m_audioSource.Play();
+            m_weapon_default.Fire();
         }   
     }
 
