@@ -113,7 +113,7 @@ public class EnemyGenerator : MonoBehaviour
             if (sign > 50.0f)
                 enemy = Instantiate(m_enemy_bonus, bonusPos, transform.rotation);
             else
-                enemy = Instantiate(m_enemy_laser, bonusPos, transform.rotation);
+                enemy = Instantiate(m_enemy_bonus, bonusPos, transform.rotation);
             enemy.Speed = bounsSpeed;
 
 

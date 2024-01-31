@@ -1,7 +1,28 @@
+using System;
 using UnityEngine;
 
 
-abstract public class Weapon_Base : MonoBehaviour
+public class Command_OutOfAmmo<TReceiver> : Command_Base<TReceiver> where TReceiver : class
+{
+
+    private Action<TReceiver, Weapon_Base> m_action_outOfAmmo = null;
+
+    public Command_OutOfAmmo(TReceiver i_receiver, Action<TReceiver, Weapon_Base> i_action) 
+        : base(i_receiver, null)
+    {
+        m_action_outOfAmmo = i_action;
+    }
+
+
+    public void Execute(Weapon_Base weapon)
+    {
+        m_action_outOfAmmo.Invoke(m_receiver, weapon);
+    }
+}
+
+
+
+public abstract class Weapon_Base : MonoBehaviour
 {
 
     [SerializeField] protected float m_ammo = 0.0f;
@@ -12,17 +33,15 @@ abstract public class Weapon_Base : MonoBehaviour
 
     [SerializeField] protected AudioSource m_audioSource = null;
 
-    protected float m_lastFireTime = 0.0f;
+    protected float m_lastFireTime = 0;
+
+    protected Command_OutOfAmmo<Player> m_cmd_outOfAmmo = null;
 
 
+    // Interface
+    //------------
 
     public abstract void Init();
-
-
-    protected abstract void ShootBullets();
-
-
-    protected abstract void UpdateAmmo();
 
 
     public virtual void Fire()
@@ -35,11 +54,28 @@ abstract public class Weapon_Base : MonoBehaviour
 
             m_audioSource.Play();
             m_lastFireTime = currTime;
-            m_ammo--;
         }
     }
 
 
+    public void InitCmd_OnOutOfAmmo(Command_OutOfAmmo<Player> i_cmd)
+    {
+        m_cmd_outOfAmmo = i_cmd;
+    }
 
+
+    // Implementation
+    //------------
+
+    protected abstract void ShootBullets();
+
+
+    protected abstract void UpdateAmmo();
+
+
+    protected void OnOutOfAmmo()
+    {
+        m_cmd_outOfAmmo.Execute(this);        
+    }
 
 }

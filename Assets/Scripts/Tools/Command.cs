@@ -7,22 +7,28 @@ public interface ICommand
 }
 
 
-class Command<TReceiver> : ICommand where TReceiver : class
+public class Command_Base<TReceiver> : ICommand where TReceiver : class
 {
-    private TReceiver m_receiver = null;
-    public TReceiver Receiver { get { return m_receiver; } }
 
-    private Action<TReceiver> m_action = null;
+    protected TReceiver m_receiver = null;
+
+    protected Action<TReceiver> m_action = null;
 
 
-    public Command(TReceiver i_receiver, Action<TReceiver> i_action)
+    public Command_Base(TReceiver i_receiver, Action<TReceiver> i_action)
     {
         m_receiver = i_receiver;
         m_action = i_action;
     }
 
 
-    public void Execute()
+    public TReceiver Receiver() 
+    {  
+        return m_receiver; 
+    }
+
+
+    public virtual void Execute()
     {
         m_action.Invoke(m_receiver);
     }

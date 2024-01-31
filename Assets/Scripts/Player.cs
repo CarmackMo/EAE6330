@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 public class Player : Singleton<Player>
@@ -20,17 +21,23 @@ public class Player : Singleton<Player>
     [SerializeField] private Bullet_Laser m_prefab_laser = null;
 
 
-    [SerializeField] private Weapon_Default m_weapon_default = null;
+    [SerializeField] private Weapon_Default m_prefab_weapon_default = null;
+    [SerializeField] private Weapon_ShotGun m_prefab_weapon_shotGun = null;
 
+    private Weapon_Base[] m_weaponArr = new Weapon_Base[5];
+    private Weapon_Base m_currWeapon = null;    
 
-
-    private GameController s_gameController;
+    private GameController s_gameController = null;
+    private InventoryPanel s_inventoryPanel = null;
 
 
 
     protected override void Start()
     {
         s_gameController = GameController.Instance;
+        s_inventoryPanel = InventoryPanel.Instance;
+        m_weaponArr[0] = m_prefab_weapon_default;
+        m_currWeapon = m_prefab_weapon_default;
     }
 
 
@@ -69,12 +76,16 @@ public class Player : Singleton<Player>
         double currentTime = Time.time;
         if (bonus != null)
         {
-            if (currentTime - m_lastBonusTime >= m_bonusCooldown)
-            {
-                m_isLaserState = false;
-                m_isBonusState = true;
-                m_lastBonusTime = currentTime;
-            }
+            //if (currentTime - m_lastBonusTime >= m_bonusCooldown)
+            //{
+            //    m_isLaserState = false;
+            //    m_isBonusState = true;
+            //    m_lastBonusTime = currentTime;
+            //}
+
+            OnPickShotGun();
+
+
         }
         else if (laser != null)
         {
@@ -90,27 +101,30 @@ public class Player : Singleton<Player>
 
     private void PlayerControl()
     {
-        Vector2 direction = Vector2.zero;
+        if (s_gameController.m_isSelectingWeapon == false)
+        {
+            Vector2 direction = Vector2.zero;
 
-        if (Input.GetKey(KeyCode.A))
-        {
-            direction.x = -1;
-        }
-        else if (Input.GetKey(KeyCode.D))
-        {
-            direction.x = 1;
-        }
+            if (Input.GetKey(KeyCode.A))
+            {
+                direction.x = -1;
+            }
+            else if (Input.GetKey(KeyCode.D))
+            {
+                direction.x = 1;
+            }
 
-        if (Input.GetKey(KeyCode.W)) 
-        {
-            direction.y = 1;
-        }
-        else if (Input.GetKey(KeyCode.S))
-        {
-            direction.y = -1;
-        }
+            if (Input.GetKey(KeyCode.W)) 
+            {
+                direction.y = 1;
+            }
+            else if (Input.GetKey(KeyCode.S))
+            {
+                direction.y = -1;
+            }
 
-        transform.Translate(direction * m_speed * Time.deltaTime);
+            transform.Translate(direction * m_speed * Time.deltaTime);
+        }
 
         if (transform.position.x < -1 * s_gameController.Boundary_H)
             transform.position = new Vector3(s_gameController.Boundary_H - 0.5f, transform.position.y, 0);
@@ -128,7 +142,7 @@ public class Player : Singleton<Player>
     {
         if (Input.GetKeyUp(KeyCode.Space)) 
         {
-            m_weapon_default.Fire();
+             m_prefab_weapon_default.Fire();
         }   
     }
 
@@ -162,4 +176,40 @@ public class Player : Singleton<Player>
             m_prefab_laser.gameObject.SetActive(false);
         }
     }
+
+
+    private void OnPickShotGun()
+    {
+        for (int i = 1; i < m_weaponArr.Length; i++)
+        {
+            if (m_weaponArr[i] == null)
+            {
+                Command_OutOfAmmo<Player> cmd = new Command_OutOfAmmo<Player>(this, (r, v) => r.OnOutOfAmmo(v));
+                Weapon_ShotGun shotGun = Instantiate(m_prefab_weapon_shotGun, transform.position, transform.rotation);
+                shotGun.InitCmd_OnOutOfAmmo(cmd);
+                m_weaponArr[i] = shotGun;
+                s_inventoryPanel.UpdateContent(i, typeof(Weapon_ShotGun));
+                return;
+            }
+        }
+    }
+
+
+    private void OnOutOfAmmo(Weapon_Base i_weapon)
+    {
+        for (int i  = 1; i < m_weaponArr.Length; i++) 
+        {
+            Weapon_Base weapon = m_weaponArr[i];
+            if (i_weapon == weapon)
+            {
+                Destroy(weapon);
+                m_weaponArr[i] = null;
+                break;
+            }
+        }
+
+        m_currWeapon = m_prefab_weapon_default;
+    }
+
+
 }

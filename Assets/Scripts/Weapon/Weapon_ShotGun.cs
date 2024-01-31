@@ -23,6 +23,15 @@ public class Weapon_ShotGun : Weapon_Base
     protected override void UpdateAmmo()
     {
         m_ammo--;
+
+
+        Debug.Log("Ammo: " + m_ammo);
+
+
+        if (m_ammo == 0)
+        {
+            OnOutOfAmmo();
+        }
     }
 
 }
