@@ -49,7 +49,7 @@ public class Enemy_Alien : Enemy
         {
             m_speed.x *= -1;
         }
-        else if (player != null || bullet != null) 
+        else if (bullet != null) 
         {
             m_HP -= 1;
             if (m_HP == 0)
@@ -59,7 +59,7 @@ public class Enemy_Alien : Enemy
                 Destroy(gameObject);
             }
         }
-        else if (laser != null)
+        else if (player != null || laser != null)
         {
             s_audioManager.PlayOneShot(m_audioClipList[0]);
             Destroy(gameObject);

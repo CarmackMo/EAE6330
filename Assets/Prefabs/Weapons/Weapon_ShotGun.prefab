@@ -142,7 +142,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5cae2a3501388d841958ec2de7aed3ea, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_ammo: 5
+  m_ammo: 15
   m_cooldown: 0.5
   m_bulletPrefab: {fileID: 2804296804207660936, guid: 92abe57914c10f0419f77e2a15e42eff, type: 3}
   m_audioSource: {fileID: 5650642356059270017}

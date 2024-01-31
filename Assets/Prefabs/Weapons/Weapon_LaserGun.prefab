@@ -143,12 +143,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2c3682bafe2353445a18f6566ee63368, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_ammo: 10
+  m_ammo: 35
   m_cooldown: 0
   m_bulletPrefab: {fileID: 7433260322592692685}
   m_audioSource: {fileID: 5650642356059270017}
-  m_ammoCooldown: 0.5
-  m_lastUpdateAmmoTime: 0
+  m_ammoCooldown: 0.15
 --- !u!1001 &2260123261558061257
 PrefabInstance:
   m_ObjectHideFlags: 0

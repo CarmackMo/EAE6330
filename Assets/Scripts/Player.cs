@@ -149,6 +149,8 @@ public class Player : Singleton<Player>
         }
 
         m_currWeapon = m_prefab_weapon_default;
+        s_gameplayPanel.UpdateWeaponTypeInfo(m_currWeapon.GetType());
+        s_gameplayPanel.UpdateAmmoInfo(m_currWeapon.GetAmmo());
     }
 
 
