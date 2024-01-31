@@ -4,25 +4,12 @@ using UnityEngine;
 public class Player : Singleton<Player>
 {
     [SerializeField] private float m_speed = 0.0f;
-    //[SerializeField] private double m_lastBonusTime = 0.0f;
-    //[SerializeField] private double m_bonusCooldown = 0.0f;
-    //[SerializeField] private double m_bonusDuration = 0.0f;
-    //[SerializeField] private bool m_isBonusState = false;
-
-    //[SerializeField] private double m_lastLaserTime = 0.0f;
-    //[SerializeField] private double m_laserCooldown = 0.0f;
-    //[SerializeField] private double m_laserDuration = 0.0f;
-    //[SerializeField] private bool m_isLaserState = false;
-
 
     [SerializeField] private AudioSource m_audioSource = null;
 
-    //[SerializeField] private Bullet m_prefab_bullet = null;
-    //[SerializeField] private Bullet_Laser m_prefab_laser = null;
-
-
     [SerializeField] private Weapon_Default m_prefab_weapon_default = null;
     [SerializeField] private Weapon_ShotGun m_prefab_weapon_shotGun = null;
+    [SerializeField] private Weapon_LaserGun m_prefab_weapon_laserGun = null;
 
     private Weapon_Base[] m_weaponArr = new Weapon_Base[5];
     private Weapon_Base m_currWeapon = null;    
@@ -56,24 +43,6 @@ public class Player : Singleton<Player>
         PlayerControl();
 
         ShootBullet();
-
-        //if (m_isBonusState == false && m_isLaserState == false)
-        //    ShootBullet();
-        //else if (m_isBonusState == true)
-        //{
-        //    ShootThreeBullets();
-        //    if (Time.time - m_lastBonusTime >= m_bonusDuration)
-        //        m_isBonusState = false;
-        //}
-        //else if (m_isLaserState == true)
-        //{
-        //    ShootLaser();
-        //    if (Time.time - m_lastLaserTime >= m_laserDuration)
-        //    {
-        //        m_prefab_laser.gameObject.SetActive(false);
-        //        m_isLaserState = false;
-        //    }
-        //}
     }
 
 
@@ -88,17 +57,11 @@ public class Player : Singleton<Player>
         double currentTime = Time.time;
         if (bonus != null)
         {
-
             OnPickShotGun();
         }
         else if (laser != null)
         {
-            //if (currentTime - m_lastLaserTime >= m_laserCooldown)
-            //{
-            //    m_isBonusState = false;
-            //    m_isLaserState = true;
-            //    m_lastLaserTime = currentTime;
-            //}
+            OnPickLaserGun();
         }
     }
 
@@ -153,37 +116,6 @@ public class Player : Singleton<Player>
     }
 
 
-    //private void ShootThreeBullets()
-    //{
-    //    if (Input.GetKeyUp(KeyCode.Space))
-    //    {
-    //        Bullet newBullet_1 = Instantiate(m_prefab_bullet, transform.position, transform.rotation);
-    //        newBullet_1.Speed = new Vector2(0, 5);
-
-    //        Bullet newBullet_2 = Instantiate(m_prefab_bullet, transform.position, transform.rotation);
-    //        newBullet_2.Speed = new Vector2(4, 3);
-
-    //        Bullet newBullet_3 = Instantiate(m_prefab_bullet, transform.position, transform.rotation);
-    //        newBullet_3.Speed = new Vector2(-4, 3);
-
-    //        m_audioSource.Play();
-    //    }
-    //}
-
-
-    //private void ShootLaser()
-    //{
-    //    if (Input.GetKeyDown(KeyCode.Space)) 
-    //    {
-    //        m_prefab_laser.gameObject.SetActive(true);
-    //    }
-    //    else if (Input.GetKeyUp(KeyCode.Space))
-    //    {
-    //        m_prefab_laser.gameObject.SetActive(false);
-    //    }
-    //}
-
-
     private void OnPickShotGun()
     {
         for (int i = 1; i < m_weaponArr.Length; i++)
@@ -201,6 +133,23 @@ public class Player : Singleton<Player>
     }
 
 
+    private void OnPickLaserGun()
+    {
+        for (int i = 1; i < m_weaponArr.Length; i++)
+        {
+            if (m_weaponArr[i] == null)
+            {
+                Command_OutOfAmmo<Player> cmd = new Command_OutOfAmmo<Player>(this, (r, v) => r.OnOutOfAmmo(v));
+                Weapon_LaserGun laserGun = Instantiate(m_prefab_weapon_laserGun, transform.position, transform.rotation, transform);
+                laserGun.InitCmd_OnOutOfAmmo(cmd);
+                m_weaponArr[i] = laserGun;
+                s_inventoryPanel.UpdateContent(i, typeof(Weapon_LaserGun));
+                return;
+            }
+        }
+    }
+
+
     private void OnOutOfAmmo(Weapon_Base i_weapon)
     {
         for (int i  = 1; i < m_weaponArr.Length; i++) 
@@ -209,7 +158,7 @@ public class Player : Singleton<Player>
             if (i_weapon == weapon)
             {
                 s_inventoryPanel.UpdateContent(i, null);
-                Destroy(weapon);
+                Destroy(weapon.gameObject);
                 m_weaponArr[i] = null;
                 break;
             }

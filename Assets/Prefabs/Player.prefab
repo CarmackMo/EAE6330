@@ -221,19 +221,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_speed: 4
-  m_lastBonusTime: 0
-  m_bonusCooldown: 12
-  m_bonusDuration: 7
-  m_isBonusState: 0
-  m_lastLaserTime: 0
-  m_laserCooldown: 12
-  m_laserDuration: 5
-  m_isLaserState: 0
   m_audioSource: {fileID: 7844597670353704910}
-  m_prefab_bullet: {fileID: 2804296804207660936, guid: 92abe57914c10f0419f77e2a15e42eff, type: 3}
-  m_prefab_laser: {fileID: 8093509197975924537}
   m_prefab_weapon_default: {fileID: 1236209937020033067}
   m_prefab_weapon_shotGun: {fileID: 5481197501878841313, guid: 8ff82334359e32c44b31e32a368bded3, type: 3}
+  m_prefab_weapon_laserGun: {fileID: 1092067369698099978, guid: 160fe58b53f7af84fa177efa36a567f8, type: 3}
 --- !u!1 &3917306522796975619
 GameObject:
   m_ObjectHideFlags: 0
@@ -386,17 +377,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 247489252368001632, guid: ada2e8984c5999f429f401e3084e7a61, type: 3}
   m_PrefabInstance: {fileID: 586672445496315453}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &8093509197975924537 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 8680033801267011844, guid: ada2e8984c5999f429f401e3084e7a61, type: 3}
-  m_PrefabInstance: {fileID: 586672445496315453}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1f8e5a20cca0ba741870f1293768c8e2, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1001 &6203345045878276992
 PrefabInstance:
   m_ObjectHideFlags: 0

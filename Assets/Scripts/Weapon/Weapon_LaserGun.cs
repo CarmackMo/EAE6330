@@ -19,7 +19,7 @@ public class Weapon_LaserGun : Weapon_Base
 
     private void LateUpdate()
     {
-        if (m_bulletPrefab.gameObject.activeSelf)
+        if (Input.GetKeyUp(KeyCode.Space))
             m_bulletPrefab.gameObject.SetActive(false);
     }
 
