@@ -21,7 +21,6 @@ public class Player : Singleton<Player>
 
 
 
-
     protected override void Start()
     {
         m_weaponArr[0] = m_prefab_weapon_default;
@@ -42,27 +41,19 @@ public class Player : Singleton<Player>
     {
         PlayerControl();
 
-        ShootBullet();
+        Shoot();
     }
 
 
     protected void OnTriggerEnter2D(Collider2D i_collider)
     {
-        if (i_collider == null)
-            return;
-
         Enemy_Bonus bonus = i_collider.GetComponent<Enemy_Bonus>();
         Enemy_Laser laser = i_collider.GetComponent<Enemy_Laser>();
 
-        double currentTime = Time.time;
         if (bonus != null)
-        {
-            OnPickShotGun();
-        }
+            OnPickWeapon(true);
         else if (laser != null)
-        {
-            OnPickLaserGun();
-        }
+            OnPickWeapon(false);
     }
 
 
@@ -105,45 +96,38 @@ public class Player : Singleton<Player>
     }
 
 
-    private void ShootBullet()
+    private void Shoot()
     {
         if (Input.GetKey(KeyCode.Space)) 
         {
-            //m_prefab_weapon_default.Fire();
             m_currWeapon.Fire();
             s_gameplayPanel.UpdateAmmoInfo(m_currWeapon.GetAmmo());
         }   
     }
 
 
-    private void OnPickShotGun()
+    private void OnPickWeapon(bool i_isShotGun)
     {
         for (int i = 1; i < m_weaponArr.Length; i++)
         {
             if (m_weaponArr[i] == null)
             {
-                Command_OutOfAmmo<Player> cmd = new Command_OutOfAmmo<Player>(this, (r, v) => r.OnOutOfAmmo(v));
-                Weapon_ShotGun shotGun = Instantiate(m_prefab_weapon_shotGun, transform.position, transform.rotation, transform);
-                shotGun.InitCmd_OnOutOfAmmo(cmd);
-                m_weaponArr[i] = shotGun;
-                s_inventoryPanel.UpdateContent(i, typeof(Weapon_ShotGun));
-                return;
-            }
-        }
-    }
+                Weapon_Base weapon = null;
+                if (i_isShotGun == true)
+                {
+                    weapon = Instantiate(m_prefab_weapon_shotGun, transform.position, transform.rotation, transform);
+                    s_inventoryPanel.UpdateContent(i, typeof(Weapon_ShotGun));
+                }
+                else
+                {
+                    weapon = Instantiate(m_prefab_weapon_laserGun, transform.position, transform.rotation, transform);
+                    s_inventoryPanel.UpdateContent(i, typeof(Weapon_LaserGun));
 
+                }
 
-    private void OnPickLaserGun()
-    {
-        for (int i = 1; i < m_weaponArr.Length; i++)
-        {
-            if (m_weaponArr[i] == null)
-            {
                 Command_OutOfAmmo<Player> cmd = new Command_OutOfAmmo<Player>(this, (r, v) => r.OnOutOfAmmo(v));
-                Weapon_LaserGun laserGun = Instantiate(m_prefab_weapon_laserGun, transform.position, transform.rotation, transform);
-                laserGun.InitCmd_OnOutOfAmmo(cmd);
-                m_weaponArr[i] = laserGun;
-                s_inventoryPanel.UpdateContent(i, typeof(Weapon_LaserGun));
+                weapon.InitCmd_OnOutOfAmmo(cmd);
+                m_weaponArr[i] = weapon;
                 return;
             }
         }
