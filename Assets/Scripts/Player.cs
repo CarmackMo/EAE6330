@@ -4,21 +4,21 @@ using UnityEngine;
 public class Player : Singleton<Player>
 {
     [SerializeField] private float m_speed = 0.0f;
-    [SerializeField] private double m_lastBonusTime = 0.0f;
-    [SerializeField] private double m_bonusCooldown = 0.0f;
-    [SerializeField] private double m_bonusDuration = 0.0f;
-    [SerializeField] private bool m_isBonusState = false;
+    //[SerializeField] private double m_lastBonusTime = 0.0f;
+    //[SerializeField] private double m_bonusCooldown = 0.0f;
+    //[SerializeField] private double m_bonusDuration = 0.0f;
+    //[SerializeField] private bool m_isBonusState = false;
 
-    [SerializeField] private double m_lastLaserTime = 0.0f;
-    [SerializeField] private double m_laserCooldown = 0.0f;
-    [SerializeField] private double m_laserDuration = 0.0f;
-    [SerializeField] private bool m_isLaserState = false;
+    //[SerializeField] private double m_lastLaserTime = 0.0f;
+    //[SerializeField] private double m_laserCooldown = 0.0f;
+    //[SerializeField] private double m_laserDuration = 0.0f;
+    //[SerializeField] private bool m_isLaserState = false;
 
 
     [SerializeField] private AudioSource m_audioSource = null;
 
-    [SerializeField] private Bullet m_prefab_bullet = null;
-    [SerializeField] private Bullet_Laser m_prefab_laser = null;
+    //[SerializeField] private Bullet m_prefab_bullet = null;
+    //[SerializeField] private Bullet_Laser m_prefab_laser = null;
 
 
     [SerializeField] private Weapon_Default m_prefab_weapon_default = null;
@@ -29,15 +29,25 @@ public class Player : Singleton<Player>
 
     private GameController s_gameController = null;
     private InventoryPanel s_inventoryPanel = null;
+    private GameplayPanel s_gameplayPanel = null;
+
+
 
 
 
     protected override void Start()
     {
-        s_gameController = GameController.Instance;
-        s_inventoryPanel = InventoryPanel.Instance;
         m_weaponArr[0] = m_prefab_weapon_default;
         m_currWeapon = m_prefab_weapon_default;
+
+        s_gameController = GameController.Instance;
+
+        s_gameplayPanel = GameplayPanel.Instance;
+        s_gameplayPanel.UpdateWeaponTypeInfo(m_prefab_weapon_default.GetType());
+
+        s_inventoryPanel = InventoryPanel.Instance;
+        s_inventoryPanel.InitCmd_SelectWeapon(new Command_SelectWeapon<Player>(this, (r,v)=> r.SelectWeapon(v)));
+        s_inventoryPanel.Hide();
     }
 
 
@@ -45,23 +55,25 @@ public class Player : Singleton<Player>
     {
         PlayerControl();
 
-        if (m_isBonusState == false && m_isLaserState == false)
-            ShootBullet();
-        else if (m_isBonusState == true)
-        {
-            ShootThreeBullets();
-            if (Time.time - m_lastBonusTime >= m_bonusDuration)
-                m_isBonusState = false;
-        }
-        else if (m_isLaserState == true)
-        {
-            ShootLaser();
-            if (Time.time - m_lastLaserTime >= m_laserDuration)
-            {
-                m_prefab_laser.gameObject.SetActive(false);
-                m_isLaserState = false;
-            }
-        }
+        ShootBullet();
+
+        //if (m_isBonusState == false && m_isLaserState == false)
+        //    ShootBullet();
+        //else if (m_isBonusState == true)
+        //{
+        //    ShootThreeBullets();
+        //    if (Time.time - m_lastBonusTime >= m_bonusDuration)
+        //        m_isBonusState = false;
+        //}
+        //else if (m_isLaserState == true)
+        //{
+        //    ShootLaser();
+        //    if (Time.time - m_lastLaserTime >= m_laserDuration)
+        //    {
+        //        m_prefab_laser.gameObject.SetActive(false);
+        //        m_isLaserState = false;
+        //    }
+        //}
     }
 
 
@@ -76,25 +88,17 @@ public class Player : Singleton<Player>
         double currentTime = Time.time;
         if (bonus != null)
         {
-            //if (currentTime - m_lastBonusTime >= m_bonusCooldown)
-            //{
-            //    m_isLaserState = false;
-            //    m_isBonusState = true;
-            //    m_lastBonusTime = currentTime;
-            //}
 
             OnPickShotGun();
-
-
         }
         else if (laser != null)
         {
-            if (currentTime - m_lastLaserTime >= m_laserCooldown)
-            {
-                m_isBonusState = false;
-                m_isLaserState = true;
-                m_lastLaserTime = currentTime;
-            }
+            //if (currentTime - m_lastLaserTime >= m_laserCooldown)
+            //{
+            //    m_isBonusState = false;
+            //    m_isLaserState = true;
+            //    m_lastLaserTime = currentTime;
+            //}
         }
     }
 
@@ -140,42 +144,44 @@ public class Player : Singleton<Player>
 
     private void ShootBullet()
     {
-        if (Input.GetKeyUp(KeyCode.Space)) 
+        if (Input.GetKey(KeyCode.Space)) 
         {
-             m_prefab_weapon_default.Fire();
+            //m_prefab_weapon_default.Fire();
+            m_currWeapon.Fire();
+            s_gameplayPanel.UpdateAmmoInfo(m_currWeapon.GetAmmo());
         }   
     }
 
 
-    private void ShootThreeBullets()
-    {
-        if (Input.GetKeyUp(KeyCode.Space))
-        {
-            Bullet newBullet_1 = Instantiate(m_prefab_bullet, transform.position, transform.rotation);
-            newBullet_1.Speed = new Vector2(0, 5);
+    //private void ShootThreeBullets()
+    //{
+    //    if (Input.GetKeyUp(KeyCode.Space))
+    //    {
+    //        Bullet newBullet_1 = Instantiate(m_prefab_bullet, transform.position, transform.rotation);
+    //        newBullet_1.Speed = new Vector2(0, 5);
 
-            Bullet newBullet_2 = Instantiate(m_prefab_bullet, transform.position, transform.rotation);
-            newBullet_2.Speed = new Vector2(4, 3);
+    //        Bullet newBullet_2 = Instantiate(m_prefab_bullet, transform.position, transform.rotation);
+    //        newBullet_2.Speed = new Vector2(4, 3);
 
-            Bullet newBullet_3 = Instantiate(m_prefab_bullet, transform.position, transform.rotation);
-            newBullet_3.Speed = new Vector2(-4, 3);
+    //        Bullet newBullet_3 = Instantiate(m_prefab_bullet, transform.position, transform.rotation);
+    //        newBullet_3.Speed = new Vector2(-4, 3);
 
-            m_audioSource.Play();
-        }
-    }
+    //        m_audioSource.Play();
+    //    }
+    //}
 
 
-    private void ShootLaser()
-    {
-        if (Input.GetKeyDown(KeyCode.Space)) 
-        {
-            m_prefab_laser.gameObject.SetActive(true);
-        }
-        else if (Input.GetKeyUp(KeyCode.Space))
-        {
-            m_prefab_laser.gameObject.SetActive(false);
-        }
-    }
+    //private void ShootLaser()
+    //{
+    //    if (Input.GetKeyDown(KeyCode.Space)) 
+    //    {
+    //        m_prefab_laser.gameObject.SetActive(true);
+    //    }
+    //    else if (Input.GetKeyUp(KeyCode.Space))
+    //    {
+    //        m_prefab_laser.gameObject.SetActive(false);
+    //    }
+    //}
 
 
     private void OnPickShotGun()
@@ -185,7 +191,7 @@ public class Player : Singleton<Player>
             if (m_weaponArr[i] == null)
             {
                 Command_OutOfAmmo<Player> cmd = new Command_OutOfAmmo<Player>(this, (r, v) => r.OnOutOfAmmo(v));
-                Weapon_ShotGun shotGun = Instantiate(m_prefab_weapon_shotGun, transform.position, transform.rotation);
+                Weapon_ShotGun shotGun = Instantiate(m_prefab_weapon_shotGun, transform.position, transform.rotation, transform);
                 shotGun.InitCmd_OnOutOfAmmo(cmd);
                 m_weaponArr[i] = shotGun;
                 s_inventoryPanel.UpdateContent(i, typeof(Weapon_ShotGun));
@@ -202,6 +208,7 @@ public class Player : Singleton<Player>
             Weapon_Base weapon = m_weaponArr[i];
             if (i_weapon == weapon)
             {
+                s_inventoryPanel.UpdateContent(i, null);
                 Destroy(weapon);
                 m_weaponArr[i] = null;
                 break;
@@ -212,4 +219,13 @@ public class Player : Singleton<Player>
     }
 
 
+    private void SelectWeapon(int i_idx)
+    {
+        m_currWeapon = m_weaponArr[i_idx];
+        if (m_currWeapon == null)
+            m_currWeapon = m_prefab_weapon_default;
+
+        s_gameplayPanel.UpdateWeaponTypeInfo(m_currWeapon.GetType());
+        s_gameplayPanel.UpdateAmmoInfo(m_currWeapon.GetAmmo());
+    }
 }

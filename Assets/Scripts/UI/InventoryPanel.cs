@@ -15,6 +15,25 @@ public struct WeaponSlot
 }
 
 
+public class Command_SelectWeapon<TReceiver> : Command_Base<TReceiver> where TReceiver : class
+{
+
+    private Action<TReceiver, int> m_action_selectWeapon = null;
+
+    public Command_SelectWeapon(TReceiver i_receiver, Action<TReceiver, int> i_action)
+        : base(i_receiver, null)
+    {
+        m_action_selectWeapon = i_action;
+    }
+
+
+    public void Execute(int i_idx)
+    {
+        m_action_selectWeapon.Invoke(m_receiver, i_idx);
+    }
+}
+
+
 
 public class InventoryPanel : Singleton<InventoryPanel>
 {
@@ -25,7 +44,11 @@ public class InventoryPanel : Singleton<InventoryPanel>
 
     private Vector2 m_index = Vector2.zero;
 
+    private Command_SelectWeapon<Player> m_cmd_selectWeapon = null;
+
     private GameController s_gameController = null;
+
+
 
 
 
@@ -33,7 +56,6 @@ public class InventoryPanel : Singleton<InventoryPanel>
     {
         base.Start();
         s_gameController = GameController.Instance;
-        Hide();
     }
 
 
@@ -64,7 +86,14 @@ public class InventoryPanel : Singleton<InventoryPanel>
 
     public void Hide()
     {
+        m_cmd_selectWeapon.Execute(GetWeaponIndex());
         gameObject.SetActive(false);
+    }
+
+
+    public void InitCmd_SelectWeapon(Command_SelectWeapon<Player> i_cmd)
+    {
+        m_cmd_selectWeapon = i_cmd;
     }
 
 
@@ -72,6 +101,10 @@ public class InventoryPanel : Singleton<InventoryPanel>
     {
         if (i_weaponType == typeof(Weapon_ShotGun))
             m_weaponSlots[i_idx].m_img_weapon.sprite = m_sprite_shotGun;
+        else if (i_weaponType == typeof(Weapon_LaserGun))
+            m_weaponSlots[i_idx].m_img_weapon.sprite = m_sprite_laserGun;
+        else if (i_weaponType == null)
+            m_weaponSlots[i_idx].m_img_weapon.sprite = null;
     }
 
 

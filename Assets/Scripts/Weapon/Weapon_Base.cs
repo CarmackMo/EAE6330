@@ -25,7 +25,7 @@ public class Command_OutOfAmmo<TReceiver> : Command_Base<TReceiver> where TRecei
 public abstract class Weapon_Base : MonoBehaviour
 {
 
-    [SerializeField] protected float m_ammo = 0.0f;
+    [SerializeField] protected int m_ammo = 0;
 
     [SerializeField] protected float m_cooldown = 0.0f;
 
@@ -63,6 +63,10 @@ public abstract class Weapon_Base : MonoBehaviour
         m_cmd_outOfAmmo = i_cmd;
     }
 
+    public int GetAmmo()
+    {
+        return m_ammo;
+    }
 
     // Implementation
     //------------
