@@ -84,15 +84,15 @@ public class Player : Singleton<Player>
             transform.Translate(direction * m_speed * Time.deltaTime);
         }
 
-        if (transform.position.x < -1 * s_gameController.Boundary_H)
-            transform.position = new Vector3(s_gameController.Boundary_H - 0.5f, transform.position.y, 0);
-        else if (transform.position.x > s_gameController.Boundary_H)
-            transform.position = new Vector3(-1 * s_gameController.Boundary_H + 0.5f, transform.position.y, 0);
+        if (transform.position.x < s_gameController.DownLeft.x)
+            transform.position = new Vector3(s_gameController.TopRight.x - 0.5f, transform.position.y, 0);
+        else if (transform.position.x > s_gameController.TopRight.x)
+            transform.position = new Vector3(s_gameController.DownLeft.x + 0.5f, transform.position.y, 0);
 
-        if (transform.position.y < -1 * s_gameController.Boundary_V)
-            transform.position = new Vector3(transform.position.x, s_gameController.Boundary_V - 0.5f, 0);
-        else if (transform.position.y > s_gameController.Boundary_V)
-            transform.position = new Vector3(transform.position.x, -1 * s_gameController.Boundary_V + 0.5f, 0);
+        if (transform.position.y < s_gameController.DownLeft.y)
+            transform.position = new Vector3(transform.position.x, s_gameController.TopRight.y - 0.5f, 0);
+        else if (transform.position.y > s_gameController.TopRight.y)
+            transform.position = new Vector3(transform.position.x, s_gameController.DownLeft.y + 0.5f, 0);
     }
 
 

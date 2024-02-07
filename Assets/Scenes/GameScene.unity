@@ -748,6 +748,26 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 328531912820159074, guid: a06bc5ef112b03a42a051f60917445ff, type: 3}
+      propertyPath: Loop
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 328531912820159074, guid: a06bc5ef112b03a42a051f60917445ff, type: 3}
+      propertyPath: m_PlayOnAwake
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3039391786845963264, guid: a06bc5ef112b03a42a051f60917445ff, type: 3}
+      propertyPath: m_width
+      value: 1080
+      objectReference: {fileID: 0}
+    - target: {fileID: 3039391786845963264, guid: a06bc5ef112b03a42a051f60917445ff, type: 3}
+      propertyPath: m_height
+      value: 720
+      objectReference: {fileID: 0}
+    - target: {fileID: 3039391786845963264, guid: a06bc5ef112b03a42a051f60917445ff, type: 3}
+      propertyPath: m_audioSource
+      value: 
+      objectReference: {fileID: 0}
     - target: {fileID: 4353416493388876010, guid: a06bc5ef112b03a42a051f60917445ff, type: 3}
       propertyPath: m_Name
       value: Singletons

@@ -51,7 +51,7 @@ public class EnemyGenerator : MonoBehaviour
         if (currentTime - m_lastSpawnTime_rock >= m_spawnCoolDown_rock)
         {
             Vector3 rockPos = Vector3.zero;
-            rockPos.x = Random.Range(-1 * s_gameController.Boundary_H + 0.5f, s_gameController.Boundary_H - 0.5f);
+            rockPos.x = Random.Range(s_gameController.DownLeft.x + 0.5f, s_gameController.TopRight.x - 0.5f);
             rockPos.y = transform.position.y;
 
             Vector2 rockSpeed = Vector2.zero;
@@ -74,7 +74,7 @@ public class EnemyGenerator : MonoBehaviour
         if (currentTime - m_lastSpawnTime_alien >= m_spawnCoolDown_alien)
         {
             Vector3 alienPos = Vector3.zero;
-            alienPos.x = Random.Range(-1 * s_gameController.Boundary_H + 0.5f, s_gameController.Boundary_H - 0.5f);
+            alienPos.x = Random.Range(s_gameController.DownLeft.x + 0.5f, s_gameController.TopRight.x - 0.5f);
             alienPos.y = transform.position.y;
 
             Vector2 alienSpeed = Vector2.zero;
@@ -98,7 +98,7 @@ public class EnemyGenerator : MonoBehaviour
         if (currentTime - m_lastSpawnTime_bonus >= m_spawnCoolDown_bonus)
         {
             Vector3 bonusPos = Vector3.zero;
-            bonusPos.x = Random.Range(-1 * s_gameController.Boundary_H + 0.5f, s_gameController.Boundary_H - 0.5f);
+            bonusPos.x = Random.Range(s_gameController.DownLeft.x + 0.5f, s_gameController.TopRight.x - 0.5f);
             bonusPos.y = transform.position.y;
 
             float sign = Random.Range(-1.0f, 1.0f);

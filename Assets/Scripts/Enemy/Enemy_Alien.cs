@@ -71,8 +71,8 @@ public class Enemy_Alien : Enemy
     {
         transform.Translate(m_speed * Time.deltaTime);
 
-        if (transform.position.x > s_gameController.Boundary_H ||
-            transform.position.x < s_gameController.Boundary_H * -1)
+        if (transform.position.x > s_gameController.TopRight.x ||
+            transform.position.x < s_gameController.DownLeft.x )
             m_speed.x *= -1;
     }
 
