@@ -16,7 +16,7 @@ public abstract class Enemy: MonoBehaviour
 
     protected virtual void Start()
     {
-
+        Init();
     }
 
 
@@ -26,6 +26,9 @@ public abstract class Enemy: MonoBehaviour
 
         CleanUp();
     }
+
+
+    protected abstract void Init();
 
 
     protected abstract void OnTriggerEnter2D(Collider2D i_collider);

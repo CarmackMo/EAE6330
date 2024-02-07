@@ -10,10 +10,9 @@ public class Enemy_Laser : Enemy
     private AudioManager s_audioManager = null;
 
 
-    protected override void Start()
-    {
-        base.Start();
 
+    protected override void Init()
+    {
         s_gameController = GameController.Instance;
         s_audioManager = AudioManager.Instance;
     }

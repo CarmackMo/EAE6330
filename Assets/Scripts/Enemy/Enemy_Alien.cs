@@ -17,21 +17,21 @@ public class Enemy_Alien : Enemy
 
 
 
-    protected override void Start()
+    protected override void Update()
+    {
+        base.Update();
+
+        ShootBullet();   
+    }
+
+
+    protected override void Init()
     {
         s_gameController = GameController.Instance;
         s_audioManager = AudioManager.Instance;
         s_player = Player.Instance;
 
         m_shootCooldown = Random.Range(m_shootCooldownRange.x, m_shootCooldownRange.y);
-    }
-
-
-    protected override void Update()
-    {
-        base.Update();
-
-        ShootBullet();   
     }
 
 
