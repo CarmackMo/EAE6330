@@ -47,10 +47,10 @@ public class Player : Singleton<Player>
 
     protected void OnTriggerEnter2D(Collider2D i_collider)
     {
-        Enemy_Bonus bonus = i_collider.GetComponent<Enemy_Bonus>();
-        Enemy_Laser laser = i_collider.GetComponent<Enemy_Laser>();
+        Bonus_Shotgun shotgun = i_collider.GetComponent<Bonus_Shotgun>();
+        Bonus_Laser laser = i_collider.GetComponent<Bonus_Laser>();
 
-        if (bonus != null)
+        if (shotgun != null)
             OnPickWeapon(true);
         else if (laser != null)
             OnPickWeapon(false);

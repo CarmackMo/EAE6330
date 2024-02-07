@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Bonus_ShotGun : Bonus_Base
+public class Bonus_Shotgun : Bonus_Base
 {
 
     private GameController s_gameController;
