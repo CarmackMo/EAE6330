@@ -176,4 +176,17 @@ public class Player : Singleton<Player>
         s_gameplayPanel.UpdateWeaponTypeInfo(m_currWeapon.GetType());
         s_gameplayPanel.UpdateAmmoInfo(m_currWeapon.GetAmmo());
     }
+
+
+    public void RegisterBullet(Bullet i_bullet)
+    {
+        m_bulletList.Add(i_bullet);
+    }
+
+
+    public void DeregisterBullet(Bullet i_bullet)
+    {
+        m_bulletList.Remove(i_bullet);
+    }
+
 }

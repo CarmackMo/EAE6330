@@ -4,13 +4,19 @@ using UnityEngine;
 public class State_Boss_Defend : IState
 {
 
-    private float temp_time_enter = 0.0f;
+    private float m_time_onEnter = 0.0f;
+    private float m_time_duration = 0.0f;
 
     private Cmd_ChangeState<SM_Boss> m_cmd_changeState_idle = null;
 
+    private Enemy_Boss m_Boss = null;
 
-    public State_Boss_Defend(Cmd_ChangeState<SM_Boss> i_cmd)
+
+    public State_Boss_Defend(Enemy_Boss i_boss, Cmd_ChangeState<SM_Boss> i_cmd)
     {
+        m_time_duration = 5.0f;
+
+        m_Boss = i_boss;
         m_cmd_changeState_idle = i_cmd;
     }
     
@@ -22,26 +28,29 @@ public class State_Boss_Defend : IState
 
 
     public void Update() 
-    {
-        if (Time.time - temp_time_enter > 3)
+    {        
+        float currTime = Time.time;
+        if (currTime - m_time_onEnter >= m_time_duration)
         {
             m_cmd_changeState_idle.Execute();
         }
-
-        Debug.Log("Boss_Defend: update");
     }
 
 
     public void Enter()
     {
-        temp_time_enter = Time.time;
-        Debug.Log("Boss_Defend: Update");
+        Debug.Log("Boss_Defend: Enter");
+
+        m_time_onEnter = Time.time;
+        m_Boss.EnableDefence(true);
     }
 
 
     public void Exit()
     {
         Debug.Log("Boss_Defend: Exit");
+
+        m_Boss.EnableDefence(false);
     }
 
 }

@@ -38,9 +38,9 @@ public class EnemyGenerator : MonoBehaviour
 
     private void Update()
     {
-        SpawnEnemy_Rock();
-        SpawnEnemy_Alien();
-        SpawnEnemy_Bonus();
+        //SpawnEnemy_Rock();
+        //SpawnEnemy_Alien();
+        //SpawnEnemy_Bonus();
     }
 
 

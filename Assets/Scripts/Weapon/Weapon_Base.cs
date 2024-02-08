@@ -35,6 +35,8 @@ public abstract class Weapon_Base : MonoBehaviour
 
     protected float m_lastFireTime = 0;
 
+    protected Player m_player = null;
+
     protected Command_OutOfAmmo<Player> m_cmd_outOfAmmo = null;
 
 
@@ -63,13 +65,21 @@ public abstract class Weapon_Base : MonoBehaviour
         m_cmd_outOfAmmo = i_cmd;
     }
 
+
     public int GetAmmo()
     {
         return m_ammo;
     }
 
+
     // Implementation
     //------------
+
+    protected virtual void Start()
+    {
+        m_player = Player.Instance;
+    }
+
 
     protected abstract void ShootBullets();
 
