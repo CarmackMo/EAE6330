@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Enemy_Rock : Enemy
+public class Enemy_Rock : Enemy_Base
 {
     [SerializeField] private float m_angularSpeed = 0.0f;
 

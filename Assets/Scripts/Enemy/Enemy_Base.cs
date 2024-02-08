@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public abstract class Enemy: MonoBehaviour
+public abstract class Enemy_Base: MonoBehaviour
 {
     [SerializeField] protected int m_HP = 0;
 

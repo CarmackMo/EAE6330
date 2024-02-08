@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Enemy_Alien : Enemy
+public class Enemy_Alien : Enemy_Base
 {
 
     [SerializeField] Bullet_Enemy m_bullet_enemy = null;

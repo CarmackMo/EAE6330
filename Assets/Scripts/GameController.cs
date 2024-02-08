@@ -1,13 +1,10 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
+
 
 public class GameController : Singleton<GameController>
 {
-    [SerializeField]
-    private int m_width = 1920;
-    [SerializeField]
-    private int m_height = 1080;
+    [SerializeField] private int m_width = 1920;
+    [SerializeField] private int m_height = 1080;
 
 
     Vector2 m_downLeft = Vector2.zero;
@@ -27,8 +24,11 @@ public class GameController : Singleton<GameController>
     {
         Screen.SetResolution(m_width, m_height, false);
 
-        m_downLeft = Camera.main.ScreenToWorldPoint(new Vector3(0, 0, -0));
-        m_topRight = Camera.main.ScreenToWorldPoint(new Vector3(Screen.width, Screen.height, -0));
+        float camDistance = Camera.main.transform.position.z;
+
+
+        m_topRight = Camera.main.ScreenToWorldPoint(new Vector3(0, 0, camDistance));
+        m_downLeft = Camera.main.ScreenToWorldPoint(new Vector3(Screen.width, Screen.height, camDistance));
 
         s_inventoryPanel = InventoryPanel.Instance;
     }
