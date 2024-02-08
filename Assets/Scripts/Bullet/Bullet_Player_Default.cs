@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Bullet_Player : Bullet
+public class Bullet_Player_Default : Bullet
 {
     protected override void CleanUp()
     {

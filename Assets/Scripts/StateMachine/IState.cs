@@ -2,9 +2,9 @@
 using System;
 
 
-public class Cmd_OnStateExit<TReciver> : Command_Base<TReciver> where TReciver : IStateMachine
+public class Cmd_ChangeState<TReciver> : Command_Base<TReciver> where TReciver : IStateMachine
 {
-    public Cmd_OnStateExit(TReciver i_receiver, Action<TReciver> i_action)
+    public Cmd_ChangeState(TReciver i_receiver, Action<TReciver> i_action)
         : base(i_receiver, i_action)
     { }
 }

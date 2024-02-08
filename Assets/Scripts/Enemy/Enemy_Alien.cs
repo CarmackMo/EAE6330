@@ -42,8 +42,8 @@ public class Enemy_Alien : Enemy_Base
 
         Enemy_Rock rock = i_collider.GetComponent<Enemy_Rock>();
         Player player = i_collider.GetComponent<Player>();
-        Bullet_Player bullet = i_collider.GetComponent<Bullet_Player>();
-        Bullet_Laser laser = i_collider.GetComponent<Bullet_Laser>();
+        Bullet_Player_Default bullet = i_collider.GetComponent<Bullet_Player_Default>();
+        Bullet_Player_Laser laser = i_collider.GetComponent<Bullet_Player_Laser>();
 
         if (rock != null)
         {

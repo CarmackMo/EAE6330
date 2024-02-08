@@ -32,8 +32,8 @@ public class Bullet_Enemy : Bullet
             return;
 
         Player player = i_collider.GetComponent<Player>();
-        Bullet_Player bullet = i_collider.GetComponent<Bullet_Player>();
-        Bullet_Laser laser = i_collider.GetComponent<Bullet_Laser>();
+        Bullet_Player_Default bullet = i_collider.GetComponent<Bullet_Player_Default>();
+        Bullet_Player_Laser laser = i_collider.GetComponent<Bullet_Player_Laser>();
 
         if (player != null || bullet != null)
         {

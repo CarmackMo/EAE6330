@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Singleton<T> : MonoBehaviour where T : MonoBehaviour
+public abstract class Singleton<T> : MonoBehaviour where T : MonoBehaviour
 {
     private static T instance;
     public static T Instance => instance;
@@ -17,9 +17,9 @@ public class Singleton<T> : MonoBehaviour where T : MonoBehaviour
             Destroy(gameObject);
     }
 
-    protected virtual void Start() { }
+    protected abstract void Start();
 
-    protected virtual void Update() { }
+    protected abstract void Update();
 
-    protected virtual void OnDestroy() { }
+    protected abstract void OnDestroy();
 }

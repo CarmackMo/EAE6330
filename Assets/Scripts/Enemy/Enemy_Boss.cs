@@ -30,8 +30,8 @@ public class Enemy_Boss : Enemy_Base
     
         Dictionary<string, IState> states = new Dictionary<string, IState>
         {
-            {nameof(State_Boss_Idle), new State_Boss_Idle(new Cmd_OnStateExit<SM_Boss>(m_stateMachine, r => r.ChangeState_ToDefend())) },
-            {nameof(State_Boss_Defend), new State_Boss_Defend(new Cmd_OnStateExit<SM_Boss>(m_stateMachine, r => r.ChangeState_ToIdel())) },
+            {nameof(State_Boss_Idle), new State_Boss_Idle(new Cmd_ChangeState<SM_Boss>(m_stateMachine, r => r.ChangeState_ToDefend())) },
+            {nameof(State_Boss_Defend), new State_Boss_Defend(new Cmd_ChangeState<SM_Boss>(m_stateMachine, r => r.ChangeState_ToIdel())) },
         };
 
         m_stateMachine.Init(states, nameof(State_Boss_Idle));

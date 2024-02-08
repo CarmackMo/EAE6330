@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Bullet_Laser : Bullet
+public class Bullet_Player_Laser : Bullet
 {
 
     [SerializeField] AudioSource m_audioSource = null;

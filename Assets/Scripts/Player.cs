@@ -1,5 +1,6 @@
-using System;
+using System.Collections.Generic;
 using UnityEngine;
+
 
 public class Player : Singleton<Player>
 {
@@ -14,26 +15,19 @@ public class Player : Singleton<Player>
     private Weapon_Base[] m_weaponArr = new Weapon_Base[5];
     private Weapon_Base m_currWeapon = null;    
 
+    private List<Bullet> m_bulletList = new List<Bullet>();
+
     private GameController s_gameController = null;
     private InventoryPanel s_inventoryPanel = null;
     private GameplayPanel s_gameplayPanel = null;
 
 
+    public List<Bullet> PlayerBullets {  get { return m_bulletList; } }
 
 
     protected override void Start()
     {
-        m_weaponArr[0] = m_prefab_weapon_default;
-        m_currWeapon = m_prefab_weapon_default;
-
-        s_gameController = GameController.Instance;
-
-        s_gameplayPanel = GameplayPanel.Instance;
-        s_gameplayPanel.UpdateWeaponTypeInfo(m_prefab_weapon_default.GetType());
-
-        s_inventoryPanel = InventoryPanel.Instance;
-        s_inventoryPanel.InitCmd_SelectWeapon(new Command_SelectWeapon<Player>(this, (r,v)=> r.SelectWeapon(v)));
-        s_inventoryPanel.Hide();
+        Init();
     }
 
 
@@ -45,15 +39,34 @@ public class Player : Singleton<Player>
     }
 
 
+    protected override void OnDestroy() { }
+
+
     protected void OnTriggerEnter2D(Collider2D i_collider)
     {
         Bonus_Shotgun shotgun = i_collider.GetComponent<Bonus_Shotgun>();
         Bonus_Laser laser = i_collider.GetComponent<Bonus_Laser>();
 
         if (shotgun != null)
-            OnPickWeapon(true);
+            OnPickWeapon(typeof(Weapon_ShotGun));
         else if (laser != null)
-            OnPickWeapon(false);
+            OnPickWeapon(typeof(Weapon_LaserGun));
+    }
+
+
+    private void Init()
+    {
+        m_weaponArr[0] = m_prefab_weapon_default;
+        m_currWeapon = m_prefab_weapon_default;
+
+        s_gameController = GameController.Instance;
+
+        s_gameplayPanel = GameplayPanel.Instance;
+        s_gameplayPanel.UpdateWeaponTypeInfo(m_prefab_weapon_default.GetType());
+
+        s_inventoryPanel = InventoryPanel.Instance;
+        s_inventoryPanel.InitCmd_SelectWeapon(new Command_SelectWeapon<Player>(this, (r, v) => r.SelectWeapon(v)));
+        s_inventoryPanel.Hide();
     }
 
 
@@ -106,19 +119,19 @@ public class Player : Singleton<Player>
     }
 
 
-    private void OnPickWeapon(bool i_isShotGun)
+    private void OnPickWeapon(System.Type i_weaponType)
     {
         for (int i = 1; i < m_weaponArr.Length; i++)
         {
             if (m_weaponArr[i] == null)
             {
                 Weapon_Base weapon = null;
-                if (i_isShotGun == true)
+                if (i_weaponType == typeof(Weapon_LaserGun))
                 {
                     weapon = Instantiate(m_prefab_weapon_shotGun, transform.position, transform.rotation, transform);
                     s_inventoryPanel.UpdateContent(i, typeof(Weapon_ShotGun));
                 }
-                else
+                else if (i_weaponType == typeof(Weapon_ShotGun))
                 {
                     weapon = Instantiate(m_prefab_weapon_laserGun, transform.position, transform.rotation, transform);
                     s_inventoryPanel.UpdateContent(i, typeof(Weapon_LaserGun));

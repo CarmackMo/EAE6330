@@ -36,8 +36,6 @@ public class GameController : Singleton<GameController>
 
     protected override void Update()
     {
-        base.Update();
-
         if (Input.GetKeyUp(KeyCode.Escape)) 
         {
             Application.Quit();
@@ -53,4 +51,8 @@ public class GameController : Singleton<GameController>
             m_isSelectingWeapon=false;
         }
     }
+
+
+    protected override void OnDestroy() { }
+
 }

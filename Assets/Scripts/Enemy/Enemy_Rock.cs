@@ -34,7 +34,7 @@ public class Enemy_Rock : Enemy_Base
         if (i_collider == null)
             return;
 
-        Bullet_Laser laser = i_collider.GetComponent<Bullet_Laser>();
+        Bullet_Player_Laser laser = i_collider.GetComponent<Bullet_Player_Laser>();
         if (laser != null)
         {
             s_audioManager.PlayOneShot(m_audioClipList[0]);

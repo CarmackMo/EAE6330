@@ -48,11 +48,8 @@ public class InventoryPanel : Singleton<InventoryPanel>
 
 
 
-
-
     protected override void Start()
     {
-        base.Start();
         s_gameController = GameController.Instance;
     }
 
@@ -73,6 +70,9 @@ public class InventoryPanel : Singleton<InventoryPanel>
             UpdateContentVisitability();                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              
         }
     }
+
+
+    protected override void OnDestroy() { }
 
 
     public void Show()

@@ -9,6 +9,14 @@ public class GameplayPanel : Singleton<GameplayPanel>
     [SerializeField] private TextMeshProUGUI m_text_ammoInfo = null;
 
 
+    protected override void Start() { }
+
+
+    protected override void Update() { }
+
+
+    protected override void OnDestroy() { }
+
 
     public void UpdateWeaponTypeInfo(Type i_weaponType)
     {

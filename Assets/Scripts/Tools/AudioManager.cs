@@ -8,9 +8,20 @@ public class AudioManager : Singleton<AudioManager>
     [SerializeField] private AudioSource m_AudioSource2 = null;
 
 
+    protected override void Start() { }
+
+
+    protected override void Update() { }
+
+
+    protected override void OnDestroy() { }
+
+
     public void PlayOneShot(AudioClip i_audio)
     {
         m_AudioSource2.PlayOneShot(i_audio);
     }
+
+
 
 }
