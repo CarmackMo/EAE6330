@@ -34,20 +34,33 @@ public class Enemy_Boss : Enemy_Base
 
     protected override void Init()
     {
-        s_player = Player.Instance;
-
-        m_stateMachine = new SM_Boss();
-
-        State_Boss_Idle state_idle = new State_Boss_Idle(this, new Cmd_ChangeState<SM_Boss>(m_stateMachine, r => r.ChangeState_ToDefend()));
-        State_Boss_Defend state_defend = new State_Boss_Defend(this, new Cmd_ChangeState<SM_Boss>(m_stateMachine, r => r.ChangeState_ToIdel()));
-
-        Dictionary<string, IState> states = new Dictionary<string, IState>
+        // Init member variable
         {
-            {nameof(State_Boss_Idle), state_idle },
-            {nameof(State_Boss_Defend), state_defend },
-        };
+            s_player = Player.Instance;
+        }
 
-        m_stateMachine.Init(states, nameof(State_Boss_Idle));
+        // Init state machine
+        {
+            m_stateMachine = new SM_Boss();
+
+            var cmd_defend = new Cmd_ChangeState<SM_Boss>(m_stateMachine, r => r.ChangeState_ToDefend());
+            var cmd_idle = new Cmd_ChangeState<SM_Boss>(m_stateMachine, r => r.ChangeState_ToIdel());
+            var cmd_boid = new Cmd_ChangeState<SM_Boss>(m_stateMachine, r => r.ChangeState_ToBoid());
+
+            State_Boss_Idle state_idle = new State_Boss_Idle(this, cmd_defend, cmd_boid);
+            State_Boss_Defend state_defend = new State_Boss_Defend(this, cmd_idle);
+            State_Boss_Boid state_boid = new State_Boss_Boid(this, cmd_idle);
+
+            Dictionary<string, IState> states = new Dictionary<string, IState>
+            {
+                {nameof(State_Boss_Idle), state_idle },
+                {nameof(State_Boss_Defend), state_defend },
+                {nameof(State_Boss_Boid), state_boid },
+            };
+
+            m_stateMachine.Init(states, nameof(State_Boss_Idle));
+        }
+
     }
 
 
