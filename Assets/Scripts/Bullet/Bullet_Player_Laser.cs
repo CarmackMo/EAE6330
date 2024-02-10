@@ -20,13 +20,8 @@ public class Bullet_Player_Laser : Bullet
     }
 
 
-    protected override void CleanUp()
-    {
+    protected override void CleanUp() { }
 
-    }
 
-    protected override void OnTriggerEnter2D(Collider2D i_collider)
-    {
-
-    }
+    protected override void OnTriggerEnter2D(Collider2D i_collider) { }
 }

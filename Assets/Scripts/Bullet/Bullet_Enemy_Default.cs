@@ -1,8 +1,7 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Bullet_Enemy : Bullet
+public class Bullet_Enemy_Default : Bullet
 {
 
     [SerializeField] private List<AudioClip> m_audioClipList = new List<AudioClip>();
@@ -17,14 +16,6 @@ public class Bullet_Enemy : Bullet
         s_audioManager = AudioManager.Instance;
     }
 
-
-    protected override void CleanUp()
-    {
-        if (transform.position.y < m_cleanUpThreshold)
-        {
-            Destroy(gameObject);
-        }
-    }
 
     protected override void OnTriggerEnter2D(Collider2D i_collider)
     {

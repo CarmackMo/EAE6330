@@ -14,6 +14,7 @@ public class Enemy_Boss : Enemy_Base
 
     private SM_Boss m_stateMachine = null;
 
+    private List<Bullet_Enemy_Boid> m_boidList = new List<Bullet_Enemy_Boid>(); 
 
 
 
@@ -68,9 +69,6 @@ public class Enemy_Boss : Enemy_Base
 
 
     protected override void Movement() { }
-
-
-    private void ShootBullet() { }
 
 
     // Interface

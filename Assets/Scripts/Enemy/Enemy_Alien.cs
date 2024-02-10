@@ -5,7 +5,7 @@ using UnityEngine;
 public class Enemy_Alien : Enemy_Base
 {
 
-    [SerializeField] Bullet_Enemy m_bullet_enemy = null;
+    [SerializeField] Bullet_Enemy_Default m_bullet_enemy = null;
 
     float m_lastShootTime = 0.0f;
     float m_shootCooldown = 0.0f;
@@ -88,8 +88,8 @@ public class Enemy_Alien : Enemy_Base
 
             Vector3 velocity = (playerPos - selfPos).normalized * 1.5f;
 
-            Bullet_Enemy newBullet = Instantiate(m_bullet_enemy, selfPos, transform.rotation);
-            newBullet.Speed = velocity;
+            Bullet_Enemy_Default newBullet = Instantiate(m_bullet_enemy, selfPos, transform.rotation);
+            newBullet.Velocity = velocity;
 
 
             m_lastShootTime = currentTime;

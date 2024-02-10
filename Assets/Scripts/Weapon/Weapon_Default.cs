@@ -10,7 +10,7 @@ public class Weapon_Default : Weapon_Base
     protected override void ShootBullets()
     {
         Bullet newBullet = Instantiate(m_bulletPrefab, transform.position, transform.rotation);
-        newBullet.Speed = new Vector2(0, 5);
+        newBullet.Velocity = new Vector2(0, 5);
 
         m_player.RegisterBullet(newBullet);
     }
