@@ -15,9 +15,6 @@ public class GameplayPanel : Singleton<GameplayPanel>
     protected override void Update() { }
 
 
-    protected override void OnDestroy() { }
-
-
     public void UpdateWeaponTypeInfo(Type i_weaponType)
     {
         if (i_weaponType == typeof(Weapon_Default))

@@ -46,8 +46,8 @@ public abstract class Enemy_Base: MonoBehaviour
     protected virtual void CleanUp()
     {
         Vector2 pos = transform.position;
-        if (pos.x < m_downLeft.x - 2.0f || pos.x > m_topRight.x + 2.0f ||
-            pos.y < m_downLeft.y - 2.0f || pos.y > m_topRight.y + 2.0f)
+        if (pos.x < m_downLeft.x - 0.25f || pos.x > m_topRight.x + 0.25f ||
+            pos.y < m_downLeft.y - 0.25f || pos.y > m_topRight.y + 0.25f)
         {
             Destroy(gameObject);
         }

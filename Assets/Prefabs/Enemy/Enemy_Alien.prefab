@@ -296,9 +296,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_HP: 2
   m_cleanUpBoundary: -6
-  m_audioSource: {fileID: 2087443663380750748}
   m_audioClipList:
   - {fileID: 8300000, guid: e7fa26b6d5ca49546a04b6b168fd2ec5, type: 3}
   - {fileID: 8300000, guid: 41a9818d03c59f84181cec937434812d, type: 3}
+  m_radius_evade: 2.5
   m_bullet_enemy: {fileID: -1932619126544523933, guid: dc1b77a28285d544ebf8dc73b8db6051, type: 3}
   m_shootCooldownRange: {x: 3, y: 6.5}

@@ -27,9 +27,9 @@ public class State_Boss_Idle : IState
     {
         m_time_lastDefend = -5.0f;
         m_time_defendCooldown = 10.0f;
-        m_time_lastShoot = -5.0f;
+        m_time_lastShoot = -9.0f;
         m_time_shootCoolDown = 13.0f;
-        m_rate_shootRock = 100.0f;
+        m_rate_shootRock = 60;  //60
 
         m_Boss = i_boss;
         m_cmd_changeState_defend = i_cmd_defend;

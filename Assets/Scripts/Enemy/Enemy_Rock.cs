@@ -1,6 +1,5 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
+
 
 public class Enemy_Rock : Enemy_Base
 {
@@ -40,6 +39,7 @@ public class Enemy_Rock : Enemy_Base
         if (laser != null)
         {
             s_audioManager.PlayOneShot(m_audioClipList[0]);
+            EnemyGenerator.Instance.DeregisterRock(this);
             Destroy(gameObject);
         }
     }
@@ -50,7 +50,19 @@ public class Enemy_Rock : Enemy_Base
         transform.Translate(m_speed * Time.deltaTime, Space.World);
     }
 
-    
+
+    protected override void CleanUp()
+    {
+        Vector2 pos = transform.position;
+        if (pos.x < m_downLeft.x - 0.25f || pos.x > m_topRight.x + 0.25f ||
+            pos.y < m_downLeft.y - 0.25f || pos.y > m_topRight.y + 0.25f)
+        {
+            EnemyGenerator.Instance.DeregisterRock(this);
+            Destroy(gameObject);
+        }
+    }
+
+
     private void Rotate()
     {
         transform.Rotate(m_rotationAxis, m_angularSpeed * Time.deltaTime, Space.Self);

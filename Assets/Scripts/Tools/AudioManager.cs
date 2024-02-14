@@ -14,9 +14,6 @@ public class AudioManager : Singleton<AudioManager>
     protected override void Update() { }
 
 
-    protected override void OnDestroy() { }
-
-
     public void PlayOneShot(AudioClip i_audio)
     {
         m_AudioSource2.PlayOneShot(i_audio);

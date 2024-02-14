@@ -14,8 +14,8 @@ public abstract class Bullet : MonoBehaviour
 
     protected virtual void Start() 
     {
-        m_downLeft = GameController.Instance.DownLeft;
-        m_topRight = GameController.Instance.TopRight;
+        m_topRight = Camera.main.ScreenToWorldPoint(new Vector3(0, 0, -15));
+        m_downLeft = Camera.main.ScreenToWorldPoint(new Vector3(Screen.width, Screen.height, -15));
     }
 
 
@@ -32,8 +32,8 @@ public abstract class Bullet : MonoBehaviour
     protected virtual void CleanUp()
     {
         Vector2 pos = transform.position;
-        if (pos.x < m_downLeft.x - 2.0f || pos.x > m_topRight.x + 2.0f ||
-            pos.y < m_downLeft.y - 2.0f || pos.y > m_topRight.y + 2.0f)
+        if (pos.x < m_downLeft.x - 0.25f || pos.x > m_topRight.x + 0.25f ||
+            pos.y < m_downLeft.y - 0.25f || pos.y > m_topRight.y + 0.25f)
         {
             Destroy(gameObject);
         }

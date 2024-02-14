@@ -52,7 +52,4 @@ public class GameController : Singleton<GameController>
         }
     }
 
-
-    protected override void OnDestroy() { }
-
 }

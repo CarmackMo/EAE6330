@@ -21,5 +21,4 @@ public abstract class Singleton<T> : MonoBehaviour where T : MonoBehaviour
 
     protected abstract void Update();
 
-    protected abstract void OnDestroy();
 }

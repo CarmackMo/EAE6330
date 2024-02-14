@@ -3,18 +3,30 @@ using System.Collections.Generic;
 using UnityEngine;
 
 
-public class EnemyGenerator : MonoBehaviour
+public class EnemyGenerator : Singleton<EnemyGenerator>
 {
     private double m_lastSpawnTime_rock = 0.0;
     private double m_lastSpawnTime_alien = 0.0;
+    private double m_lastSpawnTime_boss = -20.0;
     private double m_lastSpawnTime_bonus = 0.0;
     private double m_spawnCoolDown_rock = 0.0;
+    private double m_spawnCoolDown_boss = 0.0;
     private double m_spawnCoolDown_alien = 0.0;
     private double m_spawnCoolDown_bonus = 0.0;
+
+    private bool isBossExist = false;
+
+    private List<Enemy_Rock> m_rockList = new List<Enemy_Rock>();
+
     private GameController s_gameController = null;
+
+    public List<Enemy_Rock> RockList { get { return m_rockList; } }
+
+
 
     [SerializeField] private Vector2 m_spawnCoolDownRange_rock = Vector2.zero;
     [SerializeField] private Vector2 m_spawnCoolDownRange_alien = Vector2.zero;
+    [SerializeField] private Vector2 m_spawnCoolDownRange_boss = Vector2.zero;
     [SerializeField] private Vector2 m_spawnCoolDownRange_bonus = Vector2.zero;
 
     [SerializeField] private Vector2 m_enemySpeedRange_rock = Vector2.zero;
@@ -23,24 +35,27 @@ public class EnemyGenerator : MonoBehaviour
 
     [SerializeField] private Enemy_Rock m_enemy_rock = null;
     [SerializeField] private Enemy_Alien m_enemy_alien = null;
+    [SerializeField] private Enemy_Boss m_enemy_boss = null;    
     [SerializeField] private Bonus_Shotgun m_bonus_shotgun = null;
     [SerializeField] private Bonus_Laser m_bonus_laser = null;
 
 
-    private void Start()
+    protected override void Start()
     {
         s_gameController = GameController.Instance;
         m_spawnCoolDown_rock = Random.Range(m_spawnCoolDownRange_rock.x, m_spawnCoolDownRange_rock.y);
         m_spawnCoolDown_alien = Random.Range(m_spawnCoolDownRange_alien.x, m_spawnCoolDownRange_alien.y);
+        m_spawnCoolDown_boss = Random.Range(m_spawnCoolDownRange_boss.x, m_spawnCoolDownRange_boss.y);
         m_spawnCoolDown_bonus = Random.Range(m_spawnCoolDownRange_bonus.x, m_spawnCoolDownRange_bonus.y);
     }
 
 
-    private void Update()
+    protected override void Update()
     {
-        //SpawnEnemy_Rock();
-        //SpawnEnemy_Alien();
-        //SpawnEnemy_Bonus();
+        SpawnEnemy_Rock();
+        SpawnEnemy_Alien();
+        SpawnEnemy_Bonus();
+        SpawnEnemy_Boss();
     }
 
 
@@ -63,6 +78,7 @@ public class EnemyGenerator : MonoBehaviour
 
             m_lastSpawnTime_rock = currentTime;
             m_spawnCoolDown_rock = Random.Range(m_spawnCoolDownRange_rock.x, m_spawnCoolDownRange_rock.y);
+            RegisterRock(newRock);
         }
     }
 
@@ -87,6 +103,24 @@ public class EnemyGenerator : MonoBehaviour
 
             m_lastSpawnTime_alien = currentTime;
             m_spawnCoolDown_alien = Random.Range(m_spawnCoolDownRange_alien.x, m_spawnCoolDownRange_alien.y);
+        }
+    }
+
+    private void SpawnEnemy_Boss()
+    {
+        float currentTime = Time.time;
+
+        if (isBossExist == false && currentTime - m_lastSpawnTime_boss >= m_spawnCoolDown_boss)
+        {
+            Vector3 bossPos = Vector3.zero;
+            bossPos.x = Random.Range(s_gameController.DownLeft.x + 0.5f, s_gameController.TopRight.x - 0.5f);
+            bossPos.y = transform.position.y - 3.5f;
+
+            Enemy_Boss newboss = Instantiate(m_enemy_boss, bossPos, transform.rotation);
+
+            isBossExist = true;
+            m_lastSpawnTime_boss = currentTime;
+            m_spawnCoolDown_boss = Random.Range(m_spawnCoolDownRange_boss.x, m_spawnCoolDownRange_boss.y);
         }
     }
 
@@ -121,6 +155,24 @@ public class EnemyGenerator : MonoBehaviour
             m_lastSpawnTime_bonus = currentTime;
             m_spawnCoolDown_bonus = Random.Range(m_spawnCoolDownRange_bonus.x, m_spawnCoolDownRange_bonus.y);
         }
+    }
+
+
+    public void RegisterRock(Enemy_Rock i_rock)
+    {
+        m_rockList.Add (i_rock);
+    }
+
+
+    public void DeregisterRock(Enemy_Rock i_rock)
+    {
+        m_rockList.Remove(i_rock);
+    }
+
+
+    public void DeregisterBoss()
+    {
+        isBossExist = false;
     }
 
 }

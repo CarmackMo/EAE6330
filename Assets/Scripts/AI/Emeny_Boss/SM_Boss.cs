@@ -9,7 +9,6 @@ public class SM_Boss : IStateMachine
         ChangeState(m_states[nameof(State_Boss_Idle)]);
     }
 
-
     public void ChangeState_ToDefend()
     {
         ChangeState(m_states[nameof(State_Boss_Defend)]);

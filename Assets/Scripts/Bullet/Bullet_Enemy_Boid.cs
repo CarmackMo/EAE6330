@@ -8,21 +8,33 @@ public class Bullet_Enemy_Boid : Bullet
     private Vector2 m_pos = Vector2.zero;
     private Vector2 m_acc = Vector2.zero;
 
-    private float m_raidus_flock = 7.0f;
-    private float m_radius_cohere = 6.5f;
-    private float m_radius_separate = 8.5f;
+    private bool m_isLead = false;
+
+    private float m_raidus_flock = 5.5f;
+    private float m_radius_cohere = 4.0f;
+    private float m_radius_separate = 1.0f;
+    private float m_radius_evad = 2.5f;
     private float m_mass = 1.0f;
-    private float m_speed = 25.0f;
+    private float m_speed = 17.0f;
     private float m_speed_angular = 1.5f;
-    private float m_maxForce = 15.0f;
+    private float m_maxForce = 20.0f;
+    
+    private float m_lifeTime = 12.0f;
+    private float m_bornTime = 0.0f;
+
+    private Player s_player = null;
     private List<Bullet_Enemy_Boid> m_boids = new List<Bullet_Enemy_Boid>();
+
 
 
     protected override void Update()
     {
-        CleanUp();
+        if (Time.time - m_bornTime < m_lifeTime)
+            Reposition();
+        else
+            CleanUp();
+
         Flock(m_boids);
-        Reposition();
         RotateTowards(m_vel);
 
         m_pos = transform.position;
@@ -38,15 +50,18 @@ public class Bullet_Enemy_Boid : Bullet
 
     protected override void OnTriggerEnter2D(Collider2D i_collider)
     {
-        throw new System.NotImplementedException();
-    }
+        if (i_collider == null)
+            return;
 
+        Bullet_Player_Default bullet = i_collider.GetComponent<Bullet_Player_Default>();
+        Bullet_Player_Laser laser = i_collider.GetComponent<Bullet_Player_Laser>();
 
-    protected override void CleanUp()
-    {
-        Vector3 pos = transform.position;
-        if (pos.y < m_downLeft.y - 2.0f)
+        if (bullet != null || laser != null)
+        {
             Destroy(gameObject);
+        }
+        else
+            return;
     }
 
 
@@ -58,6 +73,10 @@ public class Bullet_Enemy_Boid : Bullet
             transform.position = new Vector3(m_topRight.x, currPos.y, 0);
         else if (currPos.x > m_topRight.x)
             transform.position = new Vector3(m_downLeft.x, currPos.y, 0);
+        else if (currPos.y < m_downLeft.y)
+            transform.position = new Vector3(currPos.x, m_topRight.y, 0);
+        else if (currPos.y > m_topRight.y)
+            transform.position = new Vector3(currPos.x, m_downLeft.y, 0);
     }
 
 
@@ -112,6 +131,8 @@ public class Bullet_Enemy_Boid : Bullet
 
         if (flockMates > 0)
         {
+            Vector2 target = (s_player.transform.position - transform.position);
+
             steering.Normalize();
             steering *= m_speed;
             steering -= m_vel;
@@ -190,6 +211,35 @@ public class Bullet_Enemy_Boid : Bullet
         return steering;
     }
 
+    
+    private Vector2 EvadePlayer()
+    {
+        Vector2 steering = Vector2.zero;
+        if (Vector2.Distance(s_player.transform.position, m_pos) <= m_radius_evad)
+        {
+            steering = -1 * (s_player.transform.position - transform.position);
+            steering.Normalize();
+            steering *= m_speed * 3;
+            steering = Vector2.ClampMagnitude(steering, m_maxForce);
+        }
+
+        return steering;
+    }
+
+
+    private Vector2 SeekPlayer()
+    {
+        Vector2 steering = Vector2.zero;
+
+        steering = (s_player.transform.position - transform.position);
+        steering.Normalize();
+        steering *= m_speed;
+        steering = Vector2.ClampMagnitude(steering, m_maxForce);
+
+        return steering;
+    }
+
+
 
     private void Flock(List<Bullet_Enemy_Boid> i_boidList)
     {
@@ -201,16 +251,29 @@ public class Bullet_Enemy_Boid : Bullet
 
         Vector2 separation = Separation(i_boidList);
         ApplyForce(separation);
+
+        Vector2 evade = EvadePlayer();
+        ApplyForce(evade);
+
+        if (m_isLead)
+        {
+            Vector2 seek = SeekPlayer();
+            ApplyForce(seek);
+        }    
     }
 
 
     // Interface 
 
-    public void Init(Vector2 i_pos, Vector2 i_vel, List<Bullet_Enemy_Boid> i_boids)
+    public void Init(Vector2 i_pos, Vector2 i_vel, bool i_isLead, List<Bullet_Enemy_Boid> i_boids)
     {
         m_pos = i_pos;
         m_vel = i_vel;
         m_boids = i_boids;
+        m_isLead = i_isLead;
+        m_bornTime = Time.time;
+
+        s_player = Player.Instance;
 
         transform.position = m_pos;
     }

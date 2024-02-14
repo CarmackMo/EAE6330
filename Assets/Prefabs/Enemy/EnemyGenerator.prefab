@@ -101,11 +101,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_spawnCoolDownRange_rock: {x: 4, y: 7}
   m_spawnCoolDownRange_alien: {x: 1.5, y: 4}
+  m_spawnCoolDownRange_boss: {x: 18, y: 22}
   m_spawnCoolDownRange_bonus: {x: 12, y: 18}
   m_enemySpeedRange_rock: {x: -2.5, y: -1}
   m_enemySpeedRange_alien: {x: 1.5, y: 2.5}
   m_enemySpeedRange_bonus: {x: 1.5, y: 2.5}
   m_enemy_rock: {fileID: 742432110137525935, guid: 4f1f5c96d1b6b61478219b11012c1ce5, type: 3}
   m_enemy_alien: {fileID: 5406024447763677937, guid: b9ffe4a2f13ab5f4ba3824c88d65a2e0, type: 3}
+  m_enemy_boss: {fileID: 4008538003877267080, guid: f4cb46929d6cdf84abc7593056c7354c, type: 3}
   m_bonus_shotgun: {fileID: 953662472113794000, guid: fa6b0c44523405b4dab1b624238617a8, type: 3}
   m_bonus_laser: {fileID: -1780509627360639807, guid: e1c738b98e61a004b875db1d1c698246, type: 3}

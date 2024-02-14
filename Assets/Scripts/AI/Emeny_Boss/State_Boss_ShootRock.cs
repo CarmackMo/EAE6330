@@ -16,9 +16,9 @@ public class State_Boss_ShootRock : IState
 
     public State_Boss_ShootRock( Enemy_Boss i_boss, Cmd_ChangeState<SM_Boss> i_cmd_idle)
     {
-        m_time_duration = 7.0f;
+        m_time_duration = 8.0f;
         m_time_lastShoot = float.MinValue;
-        m_time_shootCooldown = 1.5f;
+        m_time_shootCooldown = 1.7f;
 
         m_Boss = i_boss;
         m_cmd_changeState_idle = i_cmd_idle;

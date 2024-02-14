@@ -72,9 +72,6 @@ public class InventoryPanel : Singleton<InventoryPanel>
     }
 
 
-    protected override void OnDestroy() { }
-
-
     public void Show()
     {
         gameObject.SetActive(true);

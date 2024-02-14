@@ -39,9 +39,6 @@ public class Player : Singleton<Player>
     }
 
 
-    protected override void OnDestroy() { }
-
-
     protected void OnTriggerEnter2D(Collider2D i_collider)
     {
         Bonus_Shotgun shotgun = i_collider.GetComponent<Bonus_Shotgun>();
