@@ -27,6 +27,8 @@ public class Enemy_Alien : Enemy_Base
 
     protected override void Init()
     {
+        base.Init();
+
         s_gameController = GameController.Instance;
         s_audioManager = AudioManager.Instance;
         s_player = Player.Instance;

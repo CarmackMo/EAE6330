@@ -21,4 +21,9 @@ public class SM_Boss : IStateMachine
         ChangeState(m_states[nameof(State_Boss_Boid)]);
     }
 
+    public void ChangeState_ToShootRock()
+    {
+        ChangeState(m_states[nameof(State_Boss_ShootRock)]);
+    }
+
 }

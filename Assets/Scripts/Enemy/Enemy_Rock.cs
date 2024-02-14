@@ -14,6 +14,8 @@ public class Enemy_Rock : Enemy_Base
 
     protected override void Init()
     {
+        base.Init();    
+
         s_audioManager = AudioManager.Instance;
 
         float sign = Random.Range(-1.0f, 1.0f);

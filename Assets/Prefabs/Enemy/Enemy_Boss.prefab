@@ -436,3 +436,4 @@ MonoBehaviour:
   m_audioClipList: []
   m_defnedRaidus: 2.5
   m_shield: {fileID: 3876443794564296586}
+  m_rock: {fileID: 742432110137525935, guid: 4f1f5c96d1b6b61478219b11012c1ce5, type: 3}
