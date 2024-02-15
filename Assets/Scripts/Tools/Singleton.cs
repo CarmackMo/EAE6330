@@ -1,6 +1,8 @@
+using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 
-public class Singleton<T> : MonoBehaviour where T : MonoBehaviour
+public abstract class Singleton<T> : MonoBehaviour where T : MonoBehaviour
 {
     private static T instance;
     public static T Instance => instance;
@@ -9,15 +11,14 @@ public class Singleton<T> : MonoBehaviour where T : MonoBehaviour
     protected virtual void Awake()
     {
         if (instance == null)
-            instance = GameObject.FindFirstObjectByType<T>();
+            instance = GameObject.FindAnyObjectByType<T>();
 
         if (instance != null && instance.GetInstanceID() != this.GetInstanceID())
             Destroy(gameObject);
     }
 
-    protected virtual void Start() { }
+    protected abstract void Start();
 
-    protected virtual void Update() { }
+    protected abstract void Update();
 
-    protected virtual void OnDestroy() { }
 }
