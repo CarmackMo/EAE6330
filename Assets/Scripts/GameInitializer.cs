@@ -1,5 +1,5 @@
-using System.Collections.Generic;
 using System;
+using System.Collections.Generic;
 using UnityEngine;
 
 
@@ -27,6 +27,10 @@ public class GameInitializer : Singleton<GameInitializer>
     [SerializeField] private List<MapRow> m_tileMap = new List<MapRow>();
 
 
+    GameController s_gameController = null;
+
+
+
     // Implementations
     //=================
 
@@ -40,23 +44,23 @@ public class GameInitializer : Singleton<GameInitializer>
 
     private void Init()
     {
-        // Calculate the pixel-to-Unity-unit scale
+        // Initialize static variable
         {
-            float camDistance = Camera.main.transform.position.z;
-            Vector3 topDown = Camera.main.ScreenToWorldPoint(new Vector3(0, 0, camDistance));
-            Vector3 downLeft = Camera.main.ScreenToWorldPoint(new Vector3(Screen.width, Screen.height, camDistance));
-            float unit = Mathf.Abs(topDown.x) + Mathf.Abs(downLeft.x);
+            s_gameController = GameController.Instance;
+            s_gameController.MapWidth = m_width;
+            s_gameController.MapHeight = m_height;
         }
 
         // Initialize tile map
         {
-            for (int i  = 0; i < m_height; i++) 
+            for (int row = 0; row < m_height; row++) 
             {
-                for (int j = 0; j < m_width; j++) 
+                for (int col = 0; col < m_width; col++) 
                 {
-                    TileConfig config = m_tileMap[i].m_rowUnits[j];
+                    TileConfig config = m_tileMap[row].m_rowUnits[col];
 
-                    InstantiateTile(config, i, j);          
+                    Tile_Base newTile = InstantiateTile(config, row, col);
+                    s_gameController.AddTile(newTile);
                 }
             }
 
@@ -65,7 +69,7 @@ public class GameInitializer : Singleton<GameInitializer>
     }
 
 
-    private void InstantiateTile(TileConfig i_config, int i_row, int i_col)
+    private Tile_Base InstantiateTile(TileConfig i_config, int i_row, int i_col)
     {
         Tile_Base prefab = null;
         if (i_config.m_tileType == TileType.Start)
@@ -75,10 +79,11 @@ public class GameInitializer : Singleton<GameInitializer>
         else if (i_config.m_tileType == TileType.Normal)
             prefab = m_prefab_normTile;
 
-
         Tile_Base newTile = Instantiate(prefab);
         Vector2 tilePos = new Vector2(i_col * (newTile.Width + 0.25f), i_row * (newTile.Height + 0.25f));
         newTile.Init_Public(tilePos);
+
+        return newTile;
     }
 
 

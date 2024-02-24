@@ -37,7 +37,7 @@ public class InputController : Singleton<InputController>
 
     private void Init()
     {
-        // initialize static variable
+        // Initialize static variable
         {
             s_gameController = GameController.Instance;
         }
@@ -49,12 +49,19 @@ public class InputController : Singleton<InputController>
             m_action_moveUp = m_inputAction.FindActionMap(m_name_actionMap_Cursor).FindAction(m_name_moveUp);
             m_action_moveDown = m_inputAction.FindActionMap(m_name_actionMap_Cursor).FindAction(m_name_moveDown);
 
-            m_action_moveLeft.performed += context => s_gameController.MoveCursor(m_action_moveLeft);
-            m_action_moveRight.performed += context => s_gameController.MoveCursor(m_action_moveRight);
-            m_action_moveUp.performed += context => s_gameController.MoveCursor(m_action_moveUp);
-            m_action_moveDown.performed += context => s_gameController.MoveCursor(m_action_moveDown);
+            m_action_moveLeft.performed += context => s_gameController.MoveCursor(new Vector2(-1, 0));
+            m_action_moveRight.performed += context => s_gameController.MoveCursor(new Vector2(1, 0));
+            m_action_moveUp.performed += context => s_gameController.MoveCursor(new Vector2(0, 1));
+            m_action_moveDown.performed += context => s_gameController.MoveCursor(new Vector2(0, -1));
         }
 
+        // Enable input actions
+        {
+            m_action_moveLeft.Enable();
+            m_action_moveRight.Enable();
+            m_action_moveUp.Enable();
+            m_action_moveDown.Enable();
+        }
 
     }
 
