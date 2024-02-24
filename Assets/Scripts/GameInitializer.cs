@@ -1,7 +1,8 @@
 using System.Collections.Generic;
 using System;
 using UnityEngine;
-using Unity.VisualScripting;
+
+
 
 [Serializable]
 struct MapRow
@@ -13,6 +14,9 @@ struct MapRow
 
 public class GameInitializer : Singleton<GameInitializer>
 {
+    // Data
+    //=================
+
     [SerializeField] private int m_width = 0;
     [SerializeField] private int m_height = 0;
 
@@ -22,6 +26,9 @@ public class GameInitializer : Singleton<GameInitializer>
 
     [SerializeField] private List<MapRow> m_tileMap = new List<MapRow>();
 
+
+    // Implementations
+    //=================
 
     protected override void Start()
     {
