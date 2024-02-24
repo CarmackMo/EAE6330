@@ -6,7 +6,7 @@ using UnityEngine;
 
 enum TileType
 {
-    None, Start, Normal, FireWall, 
+    None, Start, End, Normal, FireWall, 
 }
 
 
@@ -20,20 +20,35 @@ struct TileConfig
 
 public class Tile_Base : MonoBehaviour
 {
-    [SerializeField]
-    private SpriteRenderer m_render = null;
+    private Sprite m_sprite = null;
 
-    public float Width { get { return m_render.sprite.rect.width / m_render.sprite.pixelsPerUnit; } }
-    public float Height { get { return m_render.sprite.rect.height / m_render.sprite.pixelsPerUnit; } }
-
+    public float Width { get { return m_sprite.rect.width / m_sprite.pixelsPerUnit; } }
+    public float Height { get { return m_sprite.rect.height / m_sprite.pixelsPerUnit; } }
 
 
 
-    virtual public void Init(Vector2 i_pos)
+
+
+    private void Awake()
     {
-        transform.position = i_pos;
+        Init_Self();
+    }
 
 
+    private void Init_Self()
+    {
+        {
+            Transform render = transform.Find("Sprite");
+            m_sprite = render.GetComponent<SpriteRenderer>().sprite;
+        }
+    }
+
+
+    virtual public void Init_Public(Vector2 i_pos)
+    {
+        {
+            transform.position = i_pos;
+        }
     }
 
 }
