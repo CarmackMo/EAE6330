@@ -62,13 +62,22 @@ public class Tile_Base : MonoBehaviour
 
     public float Width { get { return m_sprite_rect.rect.width / m_sprite_rect.pixelsPerUnit; } }
     public float Height { get { return m_sprite_rect.rect.height / m_sprite_rect.pixelsPerUnit; } }
+    public TileState State { get { return m_tileState; } }
 
 
-    virtual public void Init_Public(Vector2 i_pos)
+    public void SetTilePos(Vector2 i_pos)
     {
-        {
-            transform.position = i_pos;
-        }
+        transform.position = i_pos;
     }
+
+
+    public void Reveal()
+    {
+        m_sprite_covered.SetActive(false);
+        m_sprite_revealed.SetActive(true);
+
+        m_tileState = TileState.Revealed;
+    }
+
 
 }

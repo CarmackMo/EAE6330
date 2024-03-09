@@ -58,9 +58,7 @@ public class GameController : Singleton<GameController>
 
         m_cursor = newPos;
 
-
-        Tile_Base currTile = m_tileMap[CoorToIdx(m_cursor.y, m_cursor.x)];
-        s_gameplayPanel.UpdateCursorUI(currTile.transform.position);
+        s_gameplayPanel.UpdateCursorUI(GetCurrTile().transform.position);
 
 
         //===Temp===
@@ -74,7 +72,11 @@ public class GameController : Singleton<GameController>
     {
         Debug.Log("Probe tile");
 
-
+        Tile_Base target = GetCurrTile();
+        if (target.State == TileState.Covered)
+        {
+            target.Reveal();
+        }
 
     }
 
@@ -91,6 +93,12 @@ public class GameController : Singleton<GameController>
         }
         else if (i_tile.GetType() == typeof(Tile_End))
             m_endPoint = IdxToCoor(m_tileMap.Count - 1);
+    }
+
+
+    public Tile_Base GetCurrTile()
+    {
+        return m_tileMap[CoorToIdx(m_cursor.y, m_cursor.x)];
     }
 
 

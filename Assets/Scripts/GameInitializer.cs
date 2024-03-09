@@ -81,7 +81,7 @@ public class GameInitializer : Singleton<GameInitializer>
 
         Tile_Base newTile = Instantiate(prefab);
         Vector2 tilePos = new Vector2(i_col * (newTile.Width + 0.25f), i_row * (newTile.Height + 0.25f));
-        newTile.Init_Public(tilePos);
+        newTile.SetTilePos(tilePos);
 
         return newTile;
     }
