@@ -11,6 +11,6 @@ public class Tile_Start : Tile_Base
     {
         base.Init();
 
-        m_tileState = TileState.Revealed;
+        m_tileState = TileState.Visited;
     }
 }

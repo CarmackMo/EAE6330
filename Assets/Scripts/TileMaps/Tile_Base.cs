@@ -9,7 +9,7 @@ public enum TileType
 
 public enum TileState
 {
-    Covered, Revealed,
+    Covered, Revealed, Visited
 }
 
 [Serializable]
@@ -30,6 +30,7 @@ public class Tile_Base : MonoBehaviour
     
     [SerializeField] protected GameObject m_sprite_covered = null;
     [SerializeField] protected GameObject m_sprite_revealed = null;
+    [SerializeField] protected GameObject m_sprite_visited = null;
 
 
     // Implementations
@@ -53,6 +54,7 @@ public class Tile_Base : MonoBehaviour
         {
             m_sprite_covered.SetActive(true);
             m_sprite_revealed.SetActive(false);
+            m_sprite_visited.SetActive(false);
         }
     }
 
@@ -79,5 +81,9 @@ public class Tile_Base : MonoBehaviour
         m_tileState = TileState.Revealed;
     }
 
-
+    public void Visit()
+    {
+        m_sprite_visited.SetActive(true);
+        m_tileState = TileState.Visited;
+    }
 }

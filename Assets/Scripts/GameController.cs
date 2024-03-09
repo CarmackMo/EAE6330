@@ -56,10 +56,14 @@ public class GameController : Singleton<GameController>
         newPos.x = Math.Clamp(newPos.x, 0, m_mapWidth - 1);
         newPos.y = Math.Clamp(newPos.y, 0, m_mapHeight - 1);
 
-        m_cursor = newPos;
-
-        s_gameplayPanel.UpdateCursorUI(GetCurrTile().transform.position);
-
+        // Cursor can only move to other pos from a visited tile
+        // Or move back to a visited tile
+        if (GetCurrTile().State == TileState.Visited ||
+            m_tileMap[CoorToIdx(newPos.y, newPos.x)].State == TileState.Visited)
+        {
+            m_cursor = newPos;
+            s_gameplayPanel.UpdateCursorUI(GetCurrTile().transform.position);
+        }
 
         //===Temp===
         // 
@@ -76,6 +80,10 @@ public class GameController : Singleton<GameController>
         if (target.State == TileState.Covered)
         {
             target.Reveal();
+        }
+        else if (target.State == TileState.Revealed)
+        {
+            target.Visit();
         }
 
     }
