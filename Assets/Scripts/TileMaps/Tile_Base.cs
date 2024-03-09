@@ -1,14 +1,16 @@
 using System;
-using System.Runtime.InteropServices.WindowsRuntime;
-using Unity.VisualScripting;
 using UnityEngine;
 
 
-enum TileType
+public enum TileType
 {
     None, Start, End, Normal, FireWall, 
 }
 
+public enum TileState
+{
+    Covered, Revealed,
+}
 
 [Serializable]
 struct TileConfig
@@ -20,28 +22,46 @@ struct TileConfig
 
 public class Tile_Base : MonoBehaviour
 {
-    private Sprite m_sprite = null;
+    // Data
+    //=================
 
-    public float Width { get { return m_sprite.rect.width / m_sprite.pixelsPerUnit; } }
-    public float Height { get { return m_sprite.rect.height / m_sprite.pixelsPerUnit; } }
+    protected Sprite m_sprite_rect = null;
+    protected TileState m_tileState = TileState.Covered;
+    
+    [SerializeField] protected GameObject m_sprite_covered = null;
+    [SerializeField] protected GameObject m_sprite_revealed = null;
 
 
-
-
+    // Implementations
+    //=================
 
     private void Awake()
     {
-        Init_Self();
+        Init();
     }
 
 
-    private void Init_Self()
+    virtual protected void Init()
     {
+        // Initialize rect sprite 
         {
-            Transform render = transform.Find("Sprite");
-            m_sprite = render.GetComponent<SpriteRenderer>().sprite;
+            Transform render = transform.Find("Sprite_Rect");
+            m_sprite_rect = render.GetComponent<SpriteRenderer>().sprite;
+        }
+
+        // Initialize covered and revealed sprite
+        {
+            m_sprite_covered.SetActive(true);
+            m_sprite_revealed.SetActive(false);
         }
     }
+
+
+    // Interfaces
+    //=================
+
+    public float Width { get { return m_sprite_rect.rect.width / m_sprite_rect.pixelsPerUnit; } }
+    public float Height { get { return m_sprite_rect.rect.height / m_sprite_rect.pixelsPerUnit; } }
 
 
     virtual public void Init_Public(Vector2 i_pos)

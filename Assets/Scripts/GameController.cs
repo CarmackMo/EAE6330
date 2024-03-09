@@ -70,6 +70,15 @@ public class GameController : Singleton<GameController>
     }
 
 
+    public void ProbTile()
+    {
+        Debug.Log("Probe tile");
+
+
+
+    }
+
+
     public void AddTile(Tile_Base i_tile)
     {
         m_tileMap.Add(i_tile);

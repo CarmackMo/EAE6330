@@ -15,11 +15,13 @@ public class InputController : Singleton<InputController>
     [SerializeField] private string m_name_moveRight = null;
     [SerializeField] private string m_name_moveUp = null;
     [SerializeField] private string m_name_moveDown = null;
+    [SerializeField] private string m_name_probing = null;
 
     private InputAction m_action_moveLeft = null;
     private InputAction m_action_moveRight = null;
     private InputAction m_action_moveUp = null;
     private InputAction m_action_moveDown = null;
+    private InputAction m_action_probing = null;
 
     private GameController s_gameController = null;
 
@@ -48,11 +50,13 @@ public class InputController : Singleton<InputController>
             m_action_moveRight = m_inputAction.FindActionMap(m_name_actionMap_Cursor).FindAction(m_name_moveRight);
             m_action_moveUp = m_inputAction.FindActionMap(m_name_actionMap_Cursor).FindAction(m_name_moveUp);
             m_action_moveDown = m_inputAction.FindActionMap(m_name_actionMap_Cursor).FindAction(m_name_moveDown);
+            m_action_probing = m_inputAction.FindActionMap(m_name_actionMap_Cursor).FindAction(m_name_probing);
 
             m_action_moveLeft.performed += context => s_gameController.MoveCursor(new Vector2Int(-1, 0));
             m_action_moveRight.performed += context => s_gameController.MoveCursor(new Vector2Int(1, 0));
             m_action_moveUp.performed += context => s_gameController.MoveCursor(new Vector2Int(0, 1));
             m_action_moveDown.performed += context => s_gameController.MoveCursor(new Vector2Int(0, -1));
+            m_action_probing.performed += context => s_gameController.ProbTile();
         }
 
         // Enable input actions
@@ -61,6 +65,7 @@ public class InputController : Singleton<InputController>
             m_action_moveRight.Enable();
             m_action_moveUp.Enable();
             m_action_moveDown.Enable();
+            m_action_probing.Enable();
         }
 
     }
