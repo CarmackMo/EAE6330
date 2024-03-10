@@ -19,6 +19,7 @@ public class GameInitializer : Singleton<GameInitializer>
 
     [SerializeField] private int m_width = 0;
     [SerializeField] private int m_height = 0;
+    [SerializeField] private int m_stepCount = 0;
 
     [SerializeField] private Tile_Start m_prefab_startTile = null;
     [SerializeField] private Tile_End m_prefab_endTile = null;
@@ -47,8 +48,6 @@ public class GameInitializer : Singleton<GameInitializer>
         // Initialize static variable
         {
             s_gameController = GameController.Instance;
-            s_gameController.MapWidth = m_width;
-            s_gameController.MapHeight = m_height;
         }
 
         // Initialize tile map
@@ -63,7 +62,6 @@ public class GameInitializer : Singleton<GameInitializer>
                     s_gameController.AddTile(newTile);
                 }
             }
-
         }
 
     }
@@ -87,5 +85,11 @@ public class GameInitializer : Singleton<GameInitializer>
     }
 
 
+    // Interfaces
+    //=================
+
+    public int MapWidth { get { return m_width; } private set { } }
+    public int MapHeight { get { return m_height; } private set { } }
+    public int StepCount { get { return m_stepCount; } private set { } }
 
 }

@@ -1,8 +1,5 @@
 using UnityEngine;
-
-
-
-
+using TMPro;
 
 
 public class GameplayPanel : Singleton<GameplayPanel>
@@ -12,6 +9,11 @@ public class GameplayPanel : Singleton<GameplayPanel>
 
     [SerializeField] private GameObject m_cursor = null;
 
+    [SerializeField] private TextMeshProUGUI m_text_stepCount = null;
+
+
+    // Implementations
+    //=================
 
 
 
@@ -26,4 +28,8 @@ public class GameplayPanel : Singleton<GameplayPanel>
     }
 
 
+    public void UpdateStepCountUI(int i_currStepCount)
+    {
+        m_text_stepCount.text = i_currStepCount.ToString();
+    }
 }

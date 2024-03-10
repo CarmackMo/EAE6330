@@ -10,11 +10,13 @@ public class GameController : Singleton<GameController>
 
     private int m_mapWidth = 0;
     private int m_mapHeight = 0;
+    private int m_stepCount = 0;
 
     private Vector2Int m_endPoint = Vector2Int.zero;
     private Vector2Int m_cursor = Vector2Int.zero;
     private List<Tile_Base> m_tileMap = new List<Tile_Base>();
 
+    private GameInitializer s_gameInitializer = null;
     private GameplayPanel s_gameplayPanel = null;
 
 
@@ -39,16 +41,28 @@ public class GameController : Singleton<GameController>
 
     private void Init()
     {
-        s_gameplayPanel = GameplayPanel.Instance;
+        // Initialize static variables
+        {
+            s_gameplayPanel = GameplayPanel.Instance;
+            s_gameInitializer = GameInitializer.Instance;
+        }
+
+        // Initialize member variables
+        {
+            m_mapWidth = s_gameInitializer.MapWidth;
+            m_mapHeight = s_gameInitializer.MapHeight;
+            m_stepCount = s_gameInitializer.StepCount;
+        }
+
+        // Initialize UI
+        {
+            s_gameplayPanel.UpdateStepCountUI(m_stepCount);
+        }
     }
 
 
     // Interfaces
     //=================
-
-    public int MapWidth { get { return m_mapWidth; } set { m_mapWidth = value; } }
-    public int MapHeight { get { return m_mapHeight; } set { m_mapHeight = value; } }
-
 
     public void MoveCursor(Vector2Int i_delta)
     {
@@ -81,9 +95,12 @@ public class GameController : Singleton<GameController>
         {
             target.Reveal();
         }
-        else if (target.State == TileState.Revealed)
+        else if (target.State == TileState.Revealed &&
+                 m_stepCount > 0)
         {
             target.Visit();
+            m_stepCount--;
+            s_gameplayPanel.UpdateStepCountUI(m_stepCount);
         }
 
     }
