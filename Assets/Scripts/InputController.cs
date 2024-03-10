@@ -19,6 +19,7 @@ public class InputController : Singleton<InputController>
     [SerializeField] private string m_name_moveDown = null;
     [SerializeField] private string m_name_probing = null;
     [SerializeField] private string m_name_undo = null;
+    [SerializeField] private string m_name_exit = null;
 
     private InputAction m_action_moveLeft = null;
     private InputAction m_action_moveRight = null;
@@ -26,8 +27,11 @@ public class InputController : Singleton<InputController>
     private InputAction m_action_moveDown = null;
     private InputAction m_action_probing = null;
     private InputAction m_action_undo = null;
+    private InputAction m_action_exit = null;
+
 
     private GameController s_gameController = null;
+    private GameplayPanel s_gameplayPanel = null;   
 
 
     // Implementations
@@ -46,6 +50,7 @@ public class InputController : Singleton<InputController>
         // Initialize static variable
         {
             s_gameController = GameController.Instance;
+            s_gameplayPanel = GameplayPanel.Instance;
         }
 
         // Initialzie input actions
@@ -57,6 +62,7 @@ public class InputController : Singleton<InputController>
 
             m_action_probing = m_inputAction.FindActionMap(m_name_actionMap_Gameplay).FindAction(m_name_probing);
             m_action_undo = m_inputAction.FindActionMap(m_name_actionMap_Gameplay).FindAction(m_name_undo);
+            m_action_exit = m_inputAction.FindActionMap(m_name_actionMap_Gameplay).FindAction(m_name_exit);
         }
 
         // Register action callback
@@ -67,6 +73,7 @@ public class InputController : Singleton<InputController>
             m_action_moveDown.performed += context => s_gameController.MoveCursor(new Vector2Int(0, -1));
             m_action_probing.performed += context => s_gameController.ProbTile();
             m_action_undo.performed += context => s_gameController.Undo();
+            m_action_exit.performed += context => s_gameplayPanel.ShowExitPanel();
         }
 
         // Enable input actions
@@ -77,6 +84,7 @@ public class InputController : Singleton<InputController>
             m_action_moveDown.Enable();
             m_action_probing.Enable();
             m_action_undo.Enable();
+            m_action_exit.Enable(); 
         }
     }
 

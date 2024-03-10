@@ -194,3 +194,4 @@ MonoBehaviour:
   m_name_moveDown: MoveDown
   m_name_probing: Probing
   m_name_undo: Undo
+  m_name_exit: Exit
