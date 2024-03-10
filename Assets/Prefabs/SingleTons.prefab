@@ -125,10 +125,12 @@ MonoBehaviour:
   m_width: 5
   m_height: 3
   m_stepCount: 10
+  m_keyCount: 0
   m_prefab_startTile: {fileID: 7878062939777035965, guid: 7280fa803ecf50d488990e5f5945f9f4, type: 3}
   m_prefab_endTile: {fileID: 5911043345497494241, guid: 39c1faeb0e9bf3e4987d934e63afa038, type: 3}
   m_prefab_normTile: {fileID: -4892360538219862263, guid: 3026b804af9c0d24d80e8a585d6e750c, type: 3}
   m_prefab_firewallTile: {fileID: 7233702322703811779, guid: dfe533d2c66eaac4ebbdb0468f35be4d, type: 3}
+  m_prefab_key: {fileID: 4281324243797116580, guid: 86638ad7e6b29f94c9cbbbd1be5eca5d, type: 3}
   m_tileMap:
   - m_rowUnits:
     - m_tileType: 3
@@ -145,7 +147,7 @@ MonoBehaviour:
   - m_rowUnits:
     - m_tileType: 1
     - m_tileType: 3
-    - m_tileType: 3
+    - m_tileType: 5
     - m_tileType: 3
     - m_tileType: 3
 --- !u!1 &7224938694323886997

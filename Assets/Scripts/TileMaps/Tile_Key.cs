@@ -16,6 +16,7 @@ public class Tile_Key : Tile_Base
             Action<GameController> action;
             action = i => i.DecreaseStepCount();
             action += i => i.RegisterUndoCmd();
+            action += i => i.IncreaseKeyCount();
             m_cmd_onVisit = new Command_OnVisit<GameController>(GameController.Instance, action);
         }
     }
