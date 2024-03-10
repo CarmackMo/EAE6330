@@ -24,6 +24,7 @@ public class GameInitializer : Singleton<GameInitializer>
     [SerializeField] private Tile_Start m_prefab_startTile = null;
     [SerializeField] private Tile_End m_prefab_endTile = null;
     [SerializeField] private Tile_Norm m_prefab_normTile = null;
+    [SerializeField] private Tile_Firewall m_prefab_firewallTile = null;
 
     [SerializeField] private List<MapRow> m_tileMap = new List<MapRow>();
 
@@ -76,6 +77,8 @@ public class GameInitializer : Singleton<GameInitializer>
             prefab = m_prefab_endTile;
         else if (i_config.m_tileType == TileType.Normal)
             prefab = m_prefab_normTile;
+        else if (i_config.m_tileType == TileType.FireWall)
+            prefab = m_prefab_firewallTile;
 
         Tile_Base newTile = Instantiate(prefab);
         Vector2 tilePos = new Vector2(i_col * (newTile.Width + 0.25f), i_row * (newTile.Height + 0.25f));

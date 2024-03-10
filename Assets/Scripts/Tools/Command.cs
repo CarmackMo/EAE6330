@@ -30,6 +30,6 @@ public class Command_Base<TReceiver> : ICommand where TReceiver : class
 
     public virtual void Execute()
     {
-        m_action.Invoke(m_receiver);
+        m_action?.Invoke(m_receiver);
     }
 }

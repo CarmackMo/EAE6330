@@ -21,7 +21,7 @@ public class Command_Undo<TReceiver> : Command_Base<TReceiver> where TReceiver :
 
     public override void Execute()
     {
-        m_action_unvisit.Invoke(m_receiver, m_origin, m_curr);
+        m_action_unvisit?.Invoke(m_receiver, m_origin, m_curr);
     }
 }
 
