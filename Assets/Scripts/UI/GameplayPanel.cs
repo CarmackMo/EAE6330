@@ -12,6 +12,7 @@ public class GameplayPanel : Singleton<GameplayPanel>
     [SerializeField] private GameObject m_panel_exit = null;
 
     [SerializeField] private TextMeshProUGUI m_text_stepCount = null;
+    [SerializeField] private TextMeshProUGUI m_text_keyCount = null;
 
     [SerializeField] private Button m_btn_exit = null;
     [SerializeField] private Button m_btn_restart = null;
@@ -75,6 +76,12 @@ public class GameplayPanel : Singleton<GameplayPanel>
     public void UpdateStepCountUI(int i_currStepCount)
     {
         m_text_stepCount.text = i_currStepCount.ToString();
+    }
+
+
+    public void UpdateKeyCountUI(int i_currKeyCount)
+    {
+        m_text_keyCount.text = i_currKeyCount.ToString();
     }
 
 

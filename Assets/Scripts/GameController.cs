@@ -35,6 +35,7 @@ public class GameController : Singleton<GameController>
     private int m_mapWidth = 0;
     private int m_mapHeight = 0;
     private int m_stepCount = 0;
+    private int m_keyCount = 0;
 
     private Vector2Int m_endPoint = Vector2Int.zero;
     private Vector2Int m_cursor = Vector2Int.zero;
@@ -78,11 +79,13 @@ public class GameController : Singleton<GameController>
             m_mapWidth = s_gameInitializer.MapWidth;
             m_mapHeight = s_gameInitializer.MapHeight;
             m_stepCount = s_gameInitializer.StepCount;
+            m_keyCount = s_gameInitializer.KeyCount;
         }
 
         // Initialize UI
         {
             s_gameplayPanel.UpdateStepCountUI(m_stepCount);
+            s_gameplayPanel.UpdateKeyCountUI(m_keyCount);
         }
     }
 
@@ -192,6 +195,13 @@ public class GameController : Singleton<GameController>
     {
         m_stepCount--;
         s_gameplayPanel.UpdateStepCountUI(m_stepCount);
+    }
+
+
+    public void IncreaseKeyCount()
+    {
+        m_keyCount++;
+        s_gameplayPanel.UpdateKeyCountUI(m_keyCount);
     }
 
 

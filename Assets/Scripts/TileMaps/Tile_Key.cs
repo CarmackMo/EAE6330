@@ -1,7 +1,7 @@
 using System;
 
 
-public class Tile_Norm : Tile_Base
+public class Tile_Key : Tile_Base
 {
 
     // Implementations
