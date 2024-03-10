@@ -186,6 +186,12 @@ public class GameController : Singleton<GameController>
     }
 
 
+    public void ExitGame()
+    {
+        Application.Quit();
+    }
+
+
     public Tile_Base GetCurrTile()
     {
         return m_tileMap[CoorToIdx(m_cursor.y, m_cursor.x)];

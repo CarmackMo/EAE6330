@@ -20,6 +20,9 @@ public class GameplayPanel : Singleton<GameplayPanel>
     [SerializeField] private Button m_btn_exitCancel = null;
 
 
+    private GameController s_gameController = null;
+
+
 
     // Implementations
     //=================
@@ -34,8 +37,23 @@ public class GameplayPanel : Singleton<GameplayPanel>
 
     private void Init()
     {
-        m_panel_gameover.SetActive(false);
-        m_panel_exit.SetActive(false);
+        // Initialize static variable
+        {
+            s_gameController = GameController.Instance;
+        }
+
+        // Initialize buttons
+        {
+            m_btn_exit.onClick.AddListener(s_gameController.ExitGame);
+            m_btn_exitConfirm.onClick.AddListener(s_gameController.ExitGame);
+            m_btn_exitCancel.onClick.AddListener(ShowExitPanel);
+        }
+
+        // Initialize UI components
+        {
+            m_panel_gameover.SetActive(false);
+            m_panel_exit.SetActive(false);
+        }
     }
 
 
@@ -57,7 +75,7 @@ public class GameplayPanel : Singleton<GameplayPanel>
     }
 
 
-    public void ShowGameOverPanel()
+    public void ShowGameOverPanel() 
     {
 
     }
