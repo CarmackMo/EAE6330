@@ -19,6 +19,15 @@ struct TileConfig
 };
 
 
+public class Command_OnVisit<TReceiver> : Command_Base<TReceiver> where TReceiver : class
+{
+    public Command_OnVisit(TReceiver i_receiver, Action<TReceiver> i_action) :
+        base(i_receiver, i_action)
+    { }
+}
+
+
+
 
 public class Tile_Base : MonoBehaviour
 {
@@ -90,6 +99,8 @@ public class Tile_Base : MonoBehaviour
 
         m_tileState = TileState.Covered;
     }
+
+
 
 
     public void Visit()

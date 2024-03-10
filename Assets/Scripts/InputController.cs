@@ -89,5 +89,28 @@ public class InputController : Singleton<InputController>
     }
 
 
+    // Interfaces
+    //=================
+
+    public void EnableGameplayInput(bool i_active)
+    {
+        if (i_active) 
+        {
+            m_action_moveLeft.Enable();
+            m_action_moveRight.Enable();
+            m_action_moveUp.Enable();
+            m_action_moveDown.Enable();
+            m_action_probing.Enable();
+        }
+        else
+        {
+            m_action_moveLeft.Disable();
+            m_action_moveRight.Disable();
+            m_action_moveUp.Disable();
+            m_action_moveDown.Disable();
+            m_action_probing.Disable();
+        }
+    }
+
 
 }

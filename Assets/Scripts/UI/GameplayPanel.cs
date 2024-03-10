@@ -21,6 +21,7 @@ public class GameplayPanel : Singleton<GameplayPanel>
 
 
     private GameController s_gameController = null;
+    private InputController s_inputController = null;
 
 
 
@@ -40,11 +41,13 @@ public class GameplayPanel : Singleton<GameplayPanel>
         // Initialize static variable
         {
             s_gameController = GameController.Instance;
+            s_inputController  = InputController.Instance;
         }
 
         // Initialize buttons
         {
             m_btn_exit.onClick.AddListener(s_gameController.ExitGame);
+            m_btn_restart.onClick.AddListener(s_gameController.ReloadCurrScene);
             m_btn_exitConfirm.onClick.AddListener(s_gameController.ExitGame);
             m_btn_exitCancel.onClick.AddListener(ShowExitPanel);
         }
@@ -77,12 +80,14 @@ public class GameplayPanel : Singleton<GameplayPanel>
 
     public void ShowGameOverPanel() 
     {
-
+        m_panel_gameover.SetActive(true);
+        s_inputController.EnableGameplayInput(false);
     }
 
 
     public void ShowExitPanel()
     {
         m_panel_exit.SetActive(!m_panel_exit.activeSelf);
+        s_inputController.EnableGameplayInput(!m_panel_exit.activeSelf);
     }
 }

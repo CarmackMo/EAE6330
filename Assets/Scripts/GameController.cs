@@ -1,7 +1,7 @@
 using System;
 using System.Collections.Generic;
 using UnityEngine;
-
+using UnityEngine.SceneManagement;
 
 
 public class Command_Undo<TReceiver> : Command_Base<TReceiver> where TReceiver : class
@@ -87,13 +87,7 @@ public class GameController : Singleton<GameController>
     }
 
 
-    private void RegisterUndoCmd()
-    {
-        Action<GameController, Vector2Int, Vector2Int> action = (i, j, k) => i.UnVisit(j, k);
-        Command_Undo<GameController> undoCmd = new Command_Undo<GameController>(this, action, m_prevCursor, m_cursor);
 
-        m_undoCmdStack.Push(undoCmd);
-    }
 
 
     private void UnVisit(Vector2Int i_origin, Vector2Int i_curr)
@@ -131,10 +125,8 @@ public class GameController : Singleton<GameController>
             s_gameplayPanel.UpdateCursorUI(GetCurrTile().transform.position);
         }
 
-        //===Temp===
-        // 
         if (m_cursor == m_endPoint)
-            Debug.Log("You Win!");
+            s_gameplayPanel.ShowGameOverPanel();
     }
 
 
@@ -151,8 +143,7 @@ public class GameController : Singleton<GameController>
                  m_stepCount > 0)
         {
             target.Visit();
-            m_stepCount--;
-            s_gameplayPanel.UpdateStepCountUI(m_stepCount);
+            DecreaseStepCount();
 
             // Register undo command
             RegisterUndoCmd();
@@ -189,6 +180,28 @@ public class GameController : Singleton<GameController>
     public void ExitGame()
     {
         Application.Quit();
+    }
+
+
+    public void ReloadCurrScene()
+    {
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+    }
+
+
+    public void DecreaseStepCount()
+    {
+        m_stepCount--;
+        s_gameplayPanel.UpdateStepCountUI(m_stepCount);
+    }
+
+
+    private void RegisterUndoCmd()
+    {
+        Action<GameController, Vector2Int, Vector2Int> action = (i, j, k) => i.UnVisit(j, k);
+        Command_Undo<GameController> undoCmd = new Command_Undo<GameController>(this, action, m_prevCursor, m_cursor);
+
+        m_undoCmdStack.Push(undoCmd);
     }
 
 
