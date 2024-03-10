@@ -29,17 +29,18 @@ public class Command_OnVisit<TReceiver> : Command_Base<TReceiver> where TReceive
 
 
 
-public class Tile_Base : MonoBehaviour
+abstract public class Tile_Base : MonoBehaviour
 {
     // Data
     //=================
-
-    protected Sprite m_sprite_rect = null;
-    protected TileState m_tileState = TileState.Covered;
     
     [SerializeField] protected GameObject m_sprite_covered = null;
     [SerializeField] protected GameObject m_sprite_revealed = null;
     [SerializeField] protected GameObject m_sprite_visited = null;
+
+    protected Sprite m_sprite_rect = null;
+    protected TileState m_tileState = TileState.Covered;
+    protected Command_OnVisit<GameController> m_cmd_onVisit = null;
 
 
     // Implementations
@@ -82,6 +83,9 @@ public class Tile_Base : MonoBehaviour
     }
 
 
+    abstract public void Visit();
+
+
     public void Reveal()
     {
         m_sprite_covered.SetActive(false);
@@ -100,12 +104,4 @@ public class Tile_Base : MonoBehaviour
         m_tileState = TileState.Covered;
     }
 
-
-
-
-    public void Visit()
-    {
-        m_sprite_visited.SetActive(true);
-        m_tileState = TileState.Visited;
-    }
 }

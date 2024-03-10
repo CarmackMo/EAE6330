@@ -13,4 +13,14 @@ public class Tile_Start : Tile_Base
 
         m_tileState = TileState.Visited;
     }
+
+
+    // Interfaces
+    //=================
+
+    public override void Visit()
+    {
+        
+    }
+
 }

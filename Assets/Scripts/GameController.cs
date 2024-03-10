@@ -87,13 +87,16 @@ public class GameController : Singleton<GameController>
     }
 
 
-
-
-
     private void UnVisit(Vector2Int i_origin, Vector2Int i_curr)
     {
-        Tile_Base cursor = GetCurrTile();
-        cursor.Unreveal();
+        if (i_curr.y - 1 >= 0 && m_tileMap[CoorToIdx(i_curr.y - 1, i_curr.x)].State != TileState.Visited)
+            m_tileMap[CoorToIdx(i_curr.y - 1, i_curr.x)].Unreveal();
+        if (i_curr.y + 1 < m_mapHeight && m_tileMap[CoorToIdx(i_curr.y + 1, i_curr.x)].State != TileState.Visited)
+            m_tileMap[CoorToIdx(i_curr.y + 1, i_curr.x)].Unreveal();
+        if (i_curr.x - 1 >= 0 && m_tileMap[CoorToIdx(i_curr.y, i_curr.x - 1)].State != TileState.Visited)
+            m_tileMap[CoorToIdx(i_curr.y, i_curr.x - 1)].Unreveal();
+        if (i_curr.x + 1 < m_mapWidth && m_tileMap[CoorToIdx(i_curr.y, i_curr.x + 1)].State != TileState.Visited)
+            m_tileMap[CoorToIdx(i_curr.y, i_curr.x + 1)].Unreveal();
 
         Tile_Base currTile = m_tileMap[CoorToIdx(i_curr.y, i_curr.x)];
         currTile.Unreveal();
@@ -143,10 +146,6 @@ public class GameController : Singleton<GameController>
                  m_stepCount > 0)
         {
             target.Visit();
-            DecreaseStepCount();
-
-            // Register undo command
-            RegisterUndoCmd();
         }
     }
 
@@ -196,7 +195,7 @@ public class GameController : Singleton<GameController>
     }
 
 
-    private void RegisterUndoCmd()
+    public void RegisterUndoCmd()
     {
         Action<GameController, Vector2Int, Vector2Int> action = (i, j, k) => i.UnVisit(j, k);
         Command_Undo<GameController> undoCmd = new Command_Undo<GameController>(this, action, m_prevCursor, m_cursor);

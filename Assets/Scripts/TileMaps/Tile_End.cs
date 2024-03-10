@@ -15,4 +15,12 @@ public class Tile_End : Tile_Base
         m_tileState = TileState.Revealed;
     }
 
+
+    // Interfaces
+    //=================
+
+    public override void Visit()
+    {
+
+    }
 }
