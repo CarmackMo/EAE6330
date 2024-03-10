@@ -4,7 +4,7 @@ using UnityEngine;
 
 public enum TileType
 {
-    None, Start, End, Normal, FireWall, Key
+    None, Start, End, Normal, FireWall, Key, Lock
 }
 
 public enum TileState

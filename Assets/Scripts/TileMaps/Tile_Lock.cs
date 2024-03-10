@@ -1,7 +1,7 @@
 using System;
 
 
-public class Tile_Key : Tile_Base
+public class Tile_Lock : Tile_Base
 {
 
     // Implementations
@@ -15,7 +15,7 @@ public class Tile_Key : Tile_Base
         {
             Action<GameController> action;
             action = i => i.DecreaseStepCount();
-            action += i => i.IncreaseKeyCount();
+            action += i => i.DecreaseKeyCount();
             action += i => i.RegisterUndoCmd();
             m_cmd_onVisit = new Command_OnVisit<GameController>(GameController.Instance, action);
         }
@@ -27,15 +27,18 @@ public class Tile_Key : Tile_Base
 
     public override void Visit()
     {
-        // Update self status 
+        if (GameController.Instance.KeyCount>0)
         {
-            m_sprite_visited.SetActive(true);
-            m_tileState = TileState.Visited;
-        }
+            // Update self status 
+            {
+                m_sprite_visited.SetActive(true);
+                m_tileState = TileState.Visited;
+            }
 
-        // Execute command
-        {
-            m_cmd_onVisit.Execute();
+            // Execute command
+            {
+                m_cmd_onVisit.Execute();
+            }
         }
     }
 }

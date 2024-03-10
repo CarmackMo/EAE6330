@@ -102,6 +102,8 @@ public class GameController : Singleton<GameController>
             m_tileMap[CoorToIdx(i_curr.y, i_curr.x + 1)].Unreveal();
 
         Tile_Base currTile = m_tileMap[CoorToIdx(i_curr.y, i_curr.x)];
+        if (currTile.GetType() == typeof(Tile_Lock)) { IncreaseKeyCount(); }
+        if (currTile.GetType() == typeof(Tile_Key)) { DecreaseKeyCount(); }
         currTile.Unreveal();
 
         m_stepCount++;
@@ -114,6 +116,9 @@ public class GameController : Singleton<GameController>
 
     // Interfaces
     //=================
+
+    public int KeyCount { get { return m_keyCount; } private set { } }
+
 
     public void MoveCursor(Vector2Int i_delta)
     {
@@ -201,6 +206,13 @@ public class GameController : Singleton<GameController>
     public void IncreaseKeyCount()
     {
         m_keyCount++;
+        s_gameplayPanel.UpdateKeyCountUI(m_keyCount);
+    }
+
+
+    public void DecreaseKeyCount()
+    {
+        m_keyCount--;
         s_gameplayPanel.UpdateKeyCountUI(m_keyCount);
     }
 
