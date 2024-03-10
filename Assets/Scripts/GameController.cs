@@ -3,6 +3,30 @@ using System.Collections.Generic;
 using UnityEngine;
 
 
+
+public class Command_Undo<TReceiver> : Command_Base<TReceiver> where TReceiver : class
+{
+    private Vector2Int m_origin = Vector2Int.zero;
+    private Vector2Int m_curr = Vector2Int.zero;
+
+    private Action<TReceiver, Vector2Int, Vector2Int> m_action_unvisit = null;
+
+    public Command_Undo(TReceiver i_receiver, Action<TReceiver, Vector2Int, Vector2Int> i_action, Vector2Int i_origin, Vector2Int i_curr) :
+        base(i_receiver, null)
+    {
+        m_origin = i_origin;
+        m_curr = i_curr;
+        m_action_unvisit = i_action;
+    }
+
+    public override void Execute()
+    {
+        m_action_unvisit.Invoke(m_receiver, m_origin, m_curr);
+    }
+}
+
+
+
 public class GameController : Singleton<GameController>
 {
     // Data
@@ -14,7 +38,9 @@ public class GameController : Singleton<GameController>
 
     private Vector2Int m_endPoint = Vector2Int.zero;
     private Vector2Int m_cursor = Vector2Int.zero;
+    private Vector2Int m_prevCursor = Vector2Int.zero;
     private List<Tile_Base> m_tileMap = new List<Tile_Base>();
+    private Stack<Command_Undo<GameController>> m_undoCmdStack = new Stack<Command_Undo<GameController>>();
 
     private GameInitializer s_gameInitializer = null;
     private GameplayPanel s_gameplayPanel = null;
@@ -61,6 +87,31 @@ public class GameController : Singleton<GameController>
     }
 
 
+    private void RegisterUndoCmd()
+    {
+        Action<GameController, Vector2Int, Vector2Int> action = (i, j, k) => i.UnVisit(j, k);
+        Command_Undo<GameController> undoCmd = new Command_Undo<GameController>(this, action, m_prevCursor, m_cursor);
+
+        m_undoCmdStack.Push(undoCmd);
+    }
+
+
+    private void UnVisit(Vector2Int i_origin, Vector2Int i_curr)
+    {
+        Tile_Base cursor = GetCurrTile();
+        cursor.Unreveal();
+
+        Tile_Base currTile = m_tileMap[CoorToIdx(i_curr.y, i_curr.x)];
+        currTile.Unreveal();
+
+        m_stepCount++;
+        s_gameplayPanel.UpdateStepCountUI(m_stepCount);
+
+        m_cursor = i_origin;
+        s_gameplayPanel.UpdateCursorUI(GetCurrTile().transform.position);
+    }
+
+
     // Interfaces
     //=================
 
@@ -75,6 +126,7 @@ public class GameController : Singleton<GameController>
         if (GetCurrTile().State == TileState.Visited ||
             m_tileMap[CoorToIdx(newPos.y, newPos.x)].State == TileState.Visited)
         {
+            m_prevCursor = m_cursor;
             m_cursor = newPos;
             s_gameplayPanel.UpdateCursorUI(GetCurrTile().transform.position);
         }
@@ -101,8 +153,21 @@ public class GameController : Singleton<GameController>
             target.Visit();
             m_stepCount--;
             s_gameplayPanel.UpdateStepCountUI(m_stepCount);
-        }
 
+            // Register undo command
+            RegisterUndoCmd();
+        }
+    }
+
+
+    public void Undo()
+    {
+        Command_Undo<GameController> undoCmd = null;
+        if (m_undoCmdStack.TryPeek(out undoCmd))
+        {
+            undoCmd.Execute();
+            m_undoCmdStack.Pop();
+        }
     }
 
 

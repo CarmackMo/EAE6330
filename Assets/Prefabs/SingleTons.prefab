@@ -187,8 +187,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_inputAction: {fileID: -944628639613478452, guid: 7992fb198ef7a4047acb60193372f8fa, type: 3}
   m_name_actionMap_Cursor: Cursor
+  m_name_actionMap_Gameplay: GamePlay
   m_name_moveLeft: MoveLeft
   m_name_moveRight: MoveRight
   m_name_moveUp: MoveUp
   m_name_moveDown: MoveDown
   m_name_probing: Probing
+  m_name_undo: Undo

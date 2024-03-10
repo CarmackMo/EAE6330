@@ -40,15 +40,6 @@
                     "processors": "",
                     "interactions": "Press(behavior=1)",
                     "initialStateCheck": false
-                },
-                {
-                    "name": "Probing",
-                    "type": "Button",
-                    "id": "b78c8ffd-3659-437b-846c-1f6f67e929e3",
-                    "expectedControlType": "Button",
-                    "processors": "",
-                    "interactions": "Press(behavior=1)",
-                    "initialStateCheck": false
                 }
             ],
             "bindings": [
@@ -95,10 +86,69 @@
                     "action": "MoveDown",
                     "isComposite": false,
                     "isPartOfComposite": false
+                }
+            ]
+        },
+        {
+            "name": "GamePlay",
+            "id": "049bb1b2-cd2d-49fa-93f5-90e658f633ea",
+            "actions": [
+                {
+                    "name": "Undo",
+                    "type": "Button",
+                    "id": "0148311d-6a6d-4cd3-80bd-ec52b0a3a86d",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "Press(behavior=1)",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "Probing",
+                    "type": "Button",
+                    "id": "b5127605-214b-46ab-a58f-5830932bbf0c",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "One Modifier",
+                    "id": "4b941e1d-fbad-434c-bdab-416061f1a78c",
+                    "path": "OneModifier",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Undo",
+                    "isComposite": true,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "modifier",
+                    "id": "21de94e6-75fa-4d69-9f64-a8fb3a8ae504",
+                    "path": "<Keyboard>/ctrl",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Undo",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "binding",
+                    "id": "c6a58a26-f3fc-45e5-9c7f-6d680483e94c",
+                    "path": "<Keyboard>/z",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Undo",
+                    "isComposite": false,
+                    "isPartOfComposite": true
                 },
                 {
                     "name": "",
-                    "id": "fcc8507f-d76d-4f33-bcf7-e3d887e09ae8",
+                    "id": "eec93dd6-4a92-40bf-9e63-e1abeae762d9",
                     "path": "<Keyboard>/enter",
                     "interactions": "",
                     "processors": "",

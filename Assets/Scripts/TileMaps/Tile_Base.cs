@@ -81,6 +81,17 @@ public class Tile_Base : MonoBehaviour
         m_tileState = TileState.Revealed;
     }
 
+
+    public void Unreveal()
+    {
+        m_sprite_covered.SetActive(true);
+        m_sprite_revealed.SetActive(false);
+        m_sprite_visited.SetActive(false);
+
+        m_tileState = TileState.Covered;
+    }
+
+
     public void Visit()
     {
         m_sprite_visited.SetActive(true);
