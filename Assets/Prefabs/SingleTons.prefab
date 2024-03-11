@@ -122,9 +122,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7d2a650ce0b6ac74f860d6b8b01fc031, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_width: 5
-  m_height: 3
-  m_stepCount: 10
+  m_width: 7
+  m_height: 6
+  m_stepCount: 22
   m_keyCount: 0
   m_prefab_startTile: {fileID: 7878062939777035965, guid: 7280fa803ecf50d488990e5f5945f9f4, type: 3}
   m_prefab_endTile: {fileID: 5911043345497494241, guid: 39c1faeb0e9bf3e4987d934e63afa038, type: 3}
@@ -136,19 +136,49 @@ MonoBehaviour:
   - m_rowUnits:
     - m_tileType: 3
     - m_tileType: 3
+    - m_tileType: 4
+    - m_tileType: 4
     - m_tileType: 3
     - m_tileType: 3
-    - m_tileType: 2
+    - m_tileType: 3
   - m_rowUnits:
+    - m_tileType: 4
+    - m_tileType: 3
+    - m_tileType: 4
     - m_tileType: 3
     - m_tileType: 6
     - m_tileType: 4
+    - m_tileType: 6
+  - m_rowUnits:
     - m_tileType: 4
     - m_tileType: 3
-  - m_rowUnits:
-    - m_tileType: 1
     - m_tileType: 3
+    - m_tileType: 3
+    - m_tileType: 4
+    - m_tileType: 4
+    - m_tileType: 2
+  - m_rowUnits:
+    - m_tileType: 3
+    - m_tileType: 1
+    - m_tileType: 4
+    - m_tileType: 3
+    - m_tileType: 3
+    - m_tileType: 4
+    - m_tileType: 4
+  - m_rowUnits:
+    - m_tileType: 3
+    - m_tileType: 4
     - m_tileType: 5
+    - m_tileType: 4
+    - m_tileType: 3
+    - m_tileType: 4
+    - m_tileType: 5
+  - m_rowUnits:
+    - m_tileType: 3
+    - m_tileType: 3
+    - m_tileType: 3
+    - m_tileType: 4
+    - m_tileType: 3
     - m_tileType: 3
     - m_tileType: 3
 --- !u!1 &7224938694323886997
