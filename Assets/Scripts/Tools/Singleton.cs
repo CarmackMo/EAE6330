@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public abstract class Singleton<T> : MonoBehaviour where T : MonoBehaviour
@@ -17,8 +15,8 @@ public abstract class Singleton<T> : MonoBehaviour where T : MonoBehaviour
             Destroy(gameObject);
     }
 
-    protected abstract void Start();
+    protected virtual void Start() { }
 
-    protected abstract void Update();
+    protected virtual void Update() { }
 
 }
