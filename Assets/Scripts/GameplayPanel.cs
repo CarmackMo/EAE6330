@@ -16,7 +16,7 @@ public class GameplayPanel : Singleton<GameplayPanel>
 
 
 
-    private void AddEvent(string eventText)
+    public void AddEvent(string eventText)
     {
         EventItem eventItem = Instantiate(eventItemPrefab, eventScrollContent.transform);
         eventItem.SetEventText(eventText);
