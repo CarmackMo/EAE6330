@@ -52,6 +52,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 95029b1c418a88744bcb927816996c4c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  text_perperty: {fileID: 1472346497080675282}
+  text_wealth: {fileID: 3825429670153475748}
+  text_strength: {fileID: 5293704349026094310}
+  text_IQ: {fileID: 8996877335678159133}
+  btn_addWealth: {fileID: 7230957276994261384}
+  btn_subWealth: {fileID: 7713340814691959667}
+  btn_addStrength: {fileID: 5886361948036609857}
+  btn_subStrength: {fileID: 346952348452742082}
+  btn_addIQ: {fileID: 8566101695367058037}
+  btn_subIQ: {fileID: 6879622887111026722}
+  btn_start: {fileID: 8788392665340528233}
 --- !u!1 &209925512595415082
 GameObject:
   m_ObjectHideFlags: 0
@@ -64,7 +75,7 @@ GameObject:
   - component: {fileID: 1538775127900269218}
   - component: {fileID: 5293704349026094310}
   m_Layer: 5
-  m_Name: Number
+  m_Name: StrengthNumber
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -553,7 +564,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 327.5, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &526377661285455960
@@ -634,7 +645,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 327.5, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &9204955800084080308
@@ -1660,7 +1671,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 327.5, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &2660075060062721766
@@ -1715,7 +1726,7 @@ GameObject:
   - component: {fileID: 5802116903959543766}
   - component: {fileID: 3825429670153475748}
   m_Layer: 5
-  m_Name: Number
+  m_Name: WealthNumber
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2291,7 +2302,7 @@ GameObject:
   - component: {fileID: 2090134697838293884}
   - component: {fileID: 8996877335678159133}
   m_Layer: 5
-  m_Name: Number
+  m_Name: IQNumber
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2504,7 +2515,7 @@ GameObject:
   - component: {fileID: 4111031546686275600}
   - component: {fileID: 1472346497080675282}
   m_Layer: 5
-  m_Name: Number
+  m_Name: PropertyNum
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
