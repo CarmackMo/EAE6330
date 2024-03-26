@@ -3,6 +3,8 @@ using UnityEngine;
 
 public class EventGenerator : MonoBehaviour
 {
+    // Data
+    //=========================
 
     public NormalEventAsset normalEvent = null;
 
@@ -13,13 +15,15 @@ public class EventGenerator : MonoBehaviour
 
 
 
-    // Start is called before the first frame update
+    // Implementation
+    //=========================
+
     void Start()
     {
         Init();
     }
 
-    // Update is called once per frame
+
     void Update()
     {
         
