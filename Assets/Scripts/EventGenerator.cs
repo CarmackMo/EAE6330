@@ -1,12 +1,12 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
+
 
 public class EventGenerator : MonoBehaviour
 {
 
     public NormalEventAsset normalEvent = null;
 
+    private GameplayPanel gameplayPanel = null;
 
 
 
@@ -33,6 +33,8 @@ public class EventGenerator : MonoBehaviour
         if (pivot < 100.0f)
         {
             playerEvent = normalEvent.GetEvent();
+
+
         }
     }
 }
