@@ -1,9 +1,13 @@
+using System;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class StartPanel : Singleton<StartPanel>
 {
+    // Data
+    //=========================
+
     [SerializeField] private TextMeshProUGUI text_perperty = null;
     [SerializeField] private TextMeshProUGUI text_wealth = null;
     [SerializeField] private TextMeshProUGUI text_strength = null;
@@ -23,6 +27,8 @@ public class StartPanel : Singleton<StartPanel>
 
 
 
+    // Implementation
+    //=========================
 
     private void Start()
     {
@@ -48,34 +54,32 @@ public class StartPanel : Singleton<StartPanel>
     private void OnClickButton(Button i_button)
     {
         if (i_button == btn_addWealth)
-        { }
+            s_gameInitializer.AddWealth();
         else if (i_button == btn_subWealth)
-        { }
+            s_gameInitializer.SubWealth();
         else if (i_button == btn_addStrength)
-        { }
+            s_gameInitializer.AddStrength();
         else if (i_button == btn_subStrength)
-        { }
+            s_gameInitializer.SubStrength();
         else if (i_button == btn_addIQ)
-        { }
+            s_gameInitializer.AddIQ();
         else if (i_button == btn_subIQ)
-        { }
+            s_gameInitializer.SubIQ();
         else if (i_button == btn_start)
-        { }
+        {
+            throw new NotImplementedException();
+        }
+
+        UpdateUI();
     }
 
     
-    public void UpdateUI(int i_property, int i_wealth, int i_strength, int i_IQ)
+    private void UpdateUI()
     {
         text_perperty.text = s_gameInitializer.TotalProperty.ToString();
         text_wealth.text = s_gameInitializer.Wealth.ToString();
         text_strength.text = s_gameInitializer.Strength.ToString();
         text_IQ.text = s_gameInitializer.IQ.ToString();
-
-
-        text_perperty.text = i_property.ToString();
-        text_wealth.text = i_wealth.ToString();
-        text_strength.text = i_strength.ToString();
-        text_IQ.text = i_IQ.ToString();
     }
 
 
