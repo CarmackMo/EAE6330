@@ -1,0 +1,106 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2fd9520cff9687e489bc4cc681962228, type: 3}
+  m_Name: NormalEventAssets
+  m_EditorClassIdentifier: 
+  eventList:
+  - You fell hard.
+  - The complete demise of the Japanese anime industry
+  - 'Some scholars predict that the 22nd century will be the century of biology '
+  - 'Myopia has been easily cured '
+  - 'Stocks Soar, U.S. Stocks Go Straight to 10,000 '
+  - 'Maybe it''s just bad luck. A lot of little things have been bothering you this
+    year. '
+  - 'A local drunk man was assaulted on the side of the road, and the media says
+    the reason was his revealing clothing '
+  - 'Biologists break through with cat-dog hybridization experiment '
+  - 'Single men and women are finding it increasingly difficult to find a partner '
+  - 'The AV industry is getting more and more attention, and the income of industry
+    workers has increased significantly '
+  - 'Africa''s fertility rate falls below 5 per cent '
+  - 'Total global population surpasses 10 billion '
+  - 'It''s nothing special. NOTHING Special. '
+  - 'EU merged into one country '
+  - 'China''s GDP exceeds that of the United States, but your family is still poor '
+  - 'Scientists announce that the human Y chromosome will be extinct in another 500
+    years '
+  - 'State announces middle class standard: $1 million annual household income '
+  - 'An asteroid was about to hit the Earth when it suddenly turned back and left.
+    Experts say someone may have wished for something '
+  - 'Former U.S. CIA director breaks the news: Area 51 rumors are true. Causing a
+    stir '
+  - 'Google''s SpaceY rocket is a big success '
+  - 'You''re feeling senile. You get tired easily. '
+  - 'The Chinese soccer national team won the World Cup that year '
+  - 'Latest research shows that the limit of human lifespan is 500 years old '
+  - 'Humans have almost complete control over the weather '
+  - 'Afghanistan''s accession to the ranks of developed countries '
+  - 'Starting this year, GDC will no longer be held in San Francisco '
+  - 'India becomes the sixth permanent member of the United Nations '
+  - 'In order to protect freedom of expression, the State issued a document prohibiting
+    media outlets from setting up the "Commentary Feature" function. '
+  - 'Cancer has been conquered. '
+  - 'Beijing''s key university acceptance rate exceeds 99% for the first time '
+  - '7G signal coverage in most parts of the world '
+  - 'Dozens of people were killed and injured in a huge traffic accident in the city
+    next door '
+  - 'Government Issues Letter Requiring Schools to Close No Later Than 5pm '
+  - 'The Web 4.0 era is fully upon us '
+  - 'Some studies have shown that all life in history can be counted as part of one
+    individual '
+  - 'You use YouTube a lot. '
+  - 'The college entrance exams were reformed and the English subject was canceled.
+    You''re speechless. How come it wasn''t so good back in your day '
+  - 'You won an iphoneZ with a lottery ticket you found on the ground. '
+  - 'Zombies are said to have been seen deep in the mountains. The official briefing
+    is that it''s a TV series being filmed '
+  - 'China''s unified national household registration system (Hukou) '
+  - 'You have some chronic condition that requires constant medication '
+  - 'Biologists claim that the eyes, ears, hands, feet, etc., that humans are born
+    with have stopped evolving because of their over-reliance on man-made tools '
+  - 'There are holographic projections all over the city. '
+  - 'Scientists think a red supergiant star 32 light-years away will explode in 1
+    million years '
+  - 'Baidu acquires Google '
+  - 'Uber unveils new generation of self-driving vans '
+  - 'Call of Duty 50 has sparked unanimously poor reviews from gamers around the
+    world '
+  - 'Bay Area programmers found a nation, ''ban on changing requirements'' included
+    in constitution '
+  - 'You work out a lot. You''re in good shape. '
+  - 'Manhattan Home Prices Plummet in One Year as Feds Step in to Regulate '
+  - 'You won a fourth prize while shopping: a pack of tissues '
+  - DoorDash acquires Microsoft
+  - 'Dozens of Japanese elementary school students successfully climbed Mt. Everest
+    on a spring trip '
+  - 'A famous foreign star was arrested for animal harassment '
+  - 'California state capital changed from Sacramento to San Francisco '
+  - 'A wild boar ran over a king crab due to climate impacts '
+  - 'KFC''s market capitalization surpasses Apple''s '
+  - 'Half Life 3 Released '
+  - 'Montana hasn''t had snow in an entire year. '
+  - 'Britain and France break off diplomatic relations '
+  - 'A breakthrough in VR technology allows users to consciously enter a virtual
+    space. The technology is not yet available for civilian use '
+  - 'A red and white speckled mushroom found in Florida can get bigger if you eat
+    it '
+  - 'China''s polarization is rapidly decreasing and people''s happiness index is
+    further improving '
+  - 'Los Angeles in Top 5 Safest Cities in the U.S. '
+  - 'Las Vegas Announces Disengagement from Gambling Industry '
+  - 'Nintendo declares bankruptcy '
+  - 'For the first time, scientists have listened to a message from an extraterrestrial
+    intelligence. '
+  - 'North and South Korea sign peace agreement '
+  - 'Maldives declares it will be under sea level flooding within 50 years '
+  - 'Humans have landed on Jupiter. '
+  - 'EA acquires Nintendo '
