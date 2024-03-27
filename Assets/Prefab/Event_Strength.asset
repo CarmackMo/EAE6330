@@ -15,42 +15,42 @@ MonoBehaviour:
   eventList:
   - background: 'You''ve been very sick. '
     badResultList:
-    - 'Because you''ve been in poor health since you were a child, you''ve been sick
-      and in even poorer health '
-    - 'It''s a disease that even human medicine can''t do anything about, and your
-      body isn''t prepared for it, and you''re sick and dying. '
-    - 'Your family spent a lot of money on your medical treatment and you managed
-      to save your life. '
+    - Because you've been in poor health since you were a child, you've been sick
+      and in even poorer health.(0,a)
+    - It's a disease that even human medicine can't do anything about, and your body
+      isn't prepared for it, and you're sick and dying.(0,z)
+    - Your family spent a lot of money on your medical treatment and you managed
+      to save your life.(0,0)
     goodResultList:
-    - 'It''s actually a God-given test for you, and after you''re healed, you become
-      fiercer! Stronger! More dominant! '
-    - 'This is actually the cells in your body awakening to self-awareness and they
+    - It's actually a God-given test for you, and after you're healed, you become
+      fiercer! Stronger! More dominant!(0,2)
+    - This is actually the cells in your body awakening to self-awareness and they
       demand that you grant them cell rights and allow them to unionize. You have
-      no choice but to agree. '
-    - 'You were sick for a whole year, during which time your soul traveled upstream
+      no choice but to agree.(0,0)
+    - You were sick for a whole year, during which time your soul traveled upstream
       to the Nine Heavens and downstream to the underworld, and you even became one
       with the highest heaven in the universe. When you woke up, you were a different
-      person. '
+      person.(0,0)
   - background: 'You''re on your way home, and out of the dark shadows of the lamp
       suddenly jumps a mugger '
     badResultList:
-    - 'You try to overrate yourself and get stabbed to death. '
-    - 'You knew you couldn''t beat him, so you had to hand over your wallet and bank
-      card, and you didn''t even get to keep your panties. '
-    - 'Luckily, you''re as thin as a stick of wood, and the robbers didn''t even
-      notice you in the dark, so you dodged a bullet. '
+    - You try to overrate yourself and get stabbed to death.(0,z)
+    - You knew you couldn't beat him, so you had to hand over your wallet and bank
+      card, and you didn't even get to keep your panties.(a,0)
+    - Luckily, you're as thin as a stick of wood, and the robbers didn't even notice
+      you in the dark, so you dodged a bullet.(0,0)
     goodResultList:
-    - 'Luckily you''re much bigger than him. You''d have knocked him out with one
-      punch. '
-    - 'You were so strong and powerful, you robbed the thugs in turn. '
+    - Luckily you're much bigger than him. You'd have knocked him out with one punch.(0,0)
+    - You were so strong and powerful, you robbed the thugs in turn.(1,0)
   - background: 'You came home and found your girlfriend in bed with another man. '
     badResultList:
-    - 'You''re furious, yet you''re embarrassed to realize that you''re no match
-      for the man, and you''ve even got a broken knee yourself! '
-    - 
-    - 'You joined them in passing, and no one seems to have been harmed in this Shoah '
+    - You're furious, yet you're embarrassed to realize that you're no match for
+      the man, and you've even got a broken knee yourself!(0,0)
+    - Your girlfriend breaks up with you, and you spend months grieving over it,
+      spending countless dollars on alcohol and women in clubs.(a,0)
+    - You joined them in passing, and no one seems to have been harmed in this Shoah.(0,0)
     goodResultList:
-    - 'You''re such a powerhouse, you didn''t keep your girlfriend, but you kept
-      your girlfriend''s lover. The clown is actually your girlfriend. '
-    - 'You left evidence, you blackmailed the guy, you lost your girlfriend, but
-      you gained a lot of money. '
+    - You're such a powerhouse, you didn't keep your girlfriend, but you kept your
+      girlfriend's lover. The clown is actually your girlfriend.(0,0)
+    - You left evidence, you blackmailed the guy, you lost your girlfriend, but you
+      gained a lot of money.(1,0)

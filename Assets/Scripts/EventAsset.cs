@@ -3,6 +3,16 @@ using System.Collections.Generic;
 using UnityEngine;
 
 
+[Serializable]
+public struct EventResult
+{
+    public string result;
+
+    public int deltaWealth;
+    public int deltaStrength;
+}
+
+
 [CreateAssetMenu(fileName = "EventAssets", menuName = "ScriptableObject/EventAssets")]
 public class EventAsset : ScriptableObject
 {
@@ -25,10 +35,11 @@ public class EventAsset : ScriptableObject
 
 
 
-    // Implementation
+
+    // Interface
     //=========================
 
-    public string GetEvent(bool status)
+    public EventResult GetEvent(bool status)
     {
         int idx = 0;
         string res = "";
@@ -51,7 +62,33 @@ public class EventAsset : ScriptableObject
                 res += config.badResultList[idx];
         }
 
-        return res;
+
+        EventResult result;
+        // Get substring
+
+        char deltaStrength = res[res.Length - 2];
+        char deltaWealth = res[res.Length - 4];
+
+        int strength= 0;
+        int wealth = 0;
+
+        if (Convert.ToInt32(deltaStrength) <= 122 && Convert.ToInt32(deltaStrength) >= 97)
+            strength = -1 * (Convert.ToInt32(deltaStrength) - 96);
+        else
+            strength = int.Parse(deltaStrength.ToString());
+
+        if (Convert.ToInt32(deltaWealth) <= 122 && Convert.ToInt32(deltaWealth) >= 97)
+            wealth = -1 * (Convert.ToInt32(deltaWealth) - 96);
+        else
+            wealth = int.Parse(deltaWealth.ToString());
+
+        res = res.Substring(0, res.Length - 5);
+
+        result.result = res;
+        result.deltaStrength = strength;
+        result.deltaWealth = wealth;
+
+        return result;
     }
 
 }

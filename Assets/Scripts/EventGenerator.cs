@@ -75,18 +75,19 @@ public class EventGenerator : Singleton<EventGenerator>
             pivot = UnityEngine.Random.Range(0, 100);
             if (pivot <= m_rate_wealthEvent)
             {
-
                 pivot = UnityEngine.Random.Range(0, 10);
                 bool status = (pivot <= m_wealth) ? true : false;
-                playerEvent = m_wealthEvent.GetEvent(status);
-                //throw new NotImplementedException();
+
+                EventResult result = m_wealthEvent.GetEvent(status);
+                playerEvent = result.result;
             }
             else
             {
                 pivot = UnityEngine.Random.Range(0, 10);
                 bool status = (pivot <= m_strength) ? true : false;
-                playerEvent = m_strengthEvent.GetEvent(status);
-                //throw new NotImplementedException();
+
+                EventResult result = m_wealthEvent.GetEvent(status);
+                playerEvent = result.result;
             }
         }
 
