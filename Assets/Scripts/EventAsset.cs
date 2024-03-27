@@ -63,12 +63,10 @@ public class EventAsset : ScriptableObject
         }
 
 
-        EventResult result;
         // Get substring
-
+        EventResult result;
         char deltaStrength = res[res.Length - 2];
         char deltaWealth = res[res.Length - 4];
-
         int strength= 0;
         int wealth = 0;
 

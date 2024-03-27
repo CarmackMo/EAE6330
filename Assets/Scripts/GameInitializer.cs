@@ -53,6 +53,7 @@ public class GameInitializer : Singleton<GameInitializer>
         s_eventGenerator.IQ = m_IQ;
 
         s_startPanel.SetVisible(false);
+        s_gameplayPanel.UpdateUI();
         s_gameplayPanel.SetVisible(true);
         s_eventGenerator.SetActive(true);
     }

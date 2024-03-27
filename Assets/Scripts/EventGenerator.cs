@@ -26,7 +26,7 @@ public class EventGenerator : Singleton<EventGenerator>
     private float m_currentTime = 0.0f;
 
 
-    private GameplayPanel gameplayPanel = null;
+    private GameplayPanel s_gameplayPanel = null;
 
 
     // Implementation
@@ -54,7 +54,7 @@ public class EventGenerator : Singleton<EventGenerator>
 
     private void Init()
     {
-        gameplayPanel = GameplayPanel.Instance;
+        s_gameplayPanel = GameplayPanel.Instance;
 
         SetActive(false);
     }
@@ -97,22 +97,20 @@ public class EventGenerator : Singleton<EventGenerator>
             {
                 delta += " You get " + eventRes.deltaWealth.ToString() + " wealth.";
                 m_wealth += eventRes.deltaWealth;
-
-                // TODO: Update UI
+                s_gameplayPanel.UpdateUI();
             }
             if (eventRes.deltaStrength != 0)
             {
                 delta += " You get " + eventRes.deltaStrength.ToString() + " strength.";
                 m_strength += eventRes.deltaStrength;
-
-                // TODO: Update UI
+                s_gameplayPanel.UpdateUI();
             }
 
             playerEvent += delta;
 
         }
 
-        gameplayPanel.AddEvent(playerEvent);
+        s_gameplayPanel.AddEvent(playerEvent);
     }
 
 
