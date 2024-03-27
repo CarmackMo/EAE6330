@@ -9,9 +9,9 @@ public class GameInitializer : Singleton<GameInitializer>
 
     [SerializeField] private int m_totalProperty = 0;
 
-    private int m_wealth = 0;
-    private int m_strength = 0;
-    private int m_IQ = 0;
+    private int m_wealth = 1;
+    private int m_strength = 1;
+    private int m_IQ = 1;
 
     private StartPanel s_startPanel = null;
     private GameplayPanel s_gameplayPanel = null;

@@ -804,7 +804,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c4897d07e2a777a4a82fe4ae31e729e0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_totalProperty: 10
+  m_totalProperty: 6
 --- !u!1001 &1316239956
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -817,12 +817,64 @@ PrefabInstance:
       propertyPath: m_Name
       value: GameplayPanel
       objectReference: {fileID: 0}
+    - target: {fileID: 398350516606675135, guid: 8143ecee0fb02b549bc77d772c7dff7b, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 398350516606675135, guid: 8143ecee0fb02b549bc77d772c7dff7b, type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 398350516606675135, guid: 8143ecee0fb02b549bc77d772c7dff7b, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 398350516606675135, guid: 8143ecee0fb02b549bc77d772c7dff7b, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1815324435671493770, guid: 8143ecee0fb02b549bc77d772c7dff7b, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2319879254537974065, guid: 8143ecee0fb02b549bc77d772c7dff7b, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2319879254537974065, guid: 8143ecee0fb02b549bc77d772c7dff7b, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2319879254537974065, guid: 8143ecee0fb02b549bc77d772c7dff7b, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2319879254537974065, guid: 8143ecee0fb02b549bc77d772c7dff7b, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2685758751124731208, guid: 8143ecee0fb02b549bc77d772c7dff7b, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2685758751124731208, guid: 8143ecee0fb02b549bc77d772c7dff7b, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4878722968261623941, guid: 8143ecee0fb02b549bc77d772c7dff7b, type: 3}
       propertyPath: m_AnchorMax.x
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4878722968261623941, guid: 8143ecee0fb02b549bc77d772c7dff7b, type: 3}
       propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5065508540081270380, guid: 8143ecee0fb02b549bc77d772c7dff7b, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5065508540081270380, guid: 8143ecee0fb02b549bc77d772c7dff7b, type: 3}
+      propertyPath: m_SizeDelta.y
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7000492385399356167, guid: 8143ecee0fb02b549bc77d772c7dff7b, type: 3}
@@ -925,6 +977,22 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8914478717533912674, guid: 8143ecee0fb02b549bc77d772c7dff7b, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8914478717533912674, guid: 8143ecee0fb02b549bc77d772c7dff7b, type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8914478717533912674, guid: 8143ecee0fb02b549bc77d772c7dff7b, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8914478717533912674, guid: 8143ecee0fb02b549bc77d772c7dff7b, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -964,8 +1032,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5a98dafa216c03c41a2783241541ea61, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_rate_normalEvent: 1
+  m_rate_normalEvent: 70
   m_rate_wealthEvent: 50
+  m_rate_deathByWeak: 40
+  m_rate_deathByOld: 45
+  m_rate_deathAtBegin: 10
+  m_eventCoolDownTime: 5
   m_normalEvent: {fileID: 11400000, guid: d8e9e7bfc52b1b3479e08b5e90a6a6be, type: 2}
   m_wealthEvent: {fileID: 11400000, guid: 628b32b954964644e96409b80ffd78e4, type: 2}
   m_strengthEvent: {fileID: 11400000, guid: d84831c3a089db04b84b2f189662fcf5, type: 2}
