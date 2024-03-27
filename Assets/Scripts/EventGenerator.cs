@@ -12,21 +12,25 @@ public class EventGenerator : Singleton<EventGenerator>
     [SerializeField] private float m_rate_deathByOld = 0.0f;
     [SerializeField] private float m_rate_deathAtBegin = 0.0f;
     [SerializeField] private float m_eventCoolDownTime = 0.0f;
+    [SerializeField] private int m_propertyPoint = 0;
 
     [SerializeField] private NormalEventAsset m_normalEvent = null;
     [SerializeField] private EventAsset m_wealthEvent = null;
     [SerializeField] private EventAsset m_strengthEvent = null;
 
-
     private int m_wealth = 0;
     private int m_strength = 0;
     private int m_IQ = 0;
-    private int m_age = 1;
+    private int m_age = 0;
+
+    private int m_tmpProperty = 0;
+    private int m_tmpWealht = 0;
+    private int m_tmpStrength = 0;
+
     private bool m_active = false;
 
     private float m_currentTime = 0.0f;
     private float m_lastEventTime = 0.0f;
-
 
     private GameplayPanel s_gameplayPanel = null;
 
@@ -49,6 +53,7 @@ public class EventGenerator : Singleton<EventGenerator>
     private void Init()
     {
         s_gameplayPanel = GameplayPanel.Instance;
+
         SetActive(false);
     }
 
@@ -59,6 +64,7 @@ public class EventGenerator : Singleton<EventGenerator>
         {
             CheckEndCondition();
             GenerateEvent();
+            CheckSettingCondition();
 
             m_lastEventTime = m_currentTime;
         }
@@ -73,18 +79,14 @@ public class EventGenerator : Singleton<EventGenerator>
 
     private void GenerateEvent()
     {
+        if (!m_active)
+            return;
+
         int pivot = 0;
         string playerEvent = m_age.ToString() + " years old. ";
         EventResult eventRes;
         pivot = UnityEngine.Random.Range(0, 100);
 
-        if (m_age == 1)
-        {
-            playerEvent = "You are born.";
-            s_gameplayPanel.AddEvent(playerEvent);
-            m_age++;
-            return;
-        }
 
         if (pivot <= m_rate_normalEvent)
         {
@@ -134,13 +136,37 @@ public class EventGenerator : Singleton<EventGenerator>
     }
 
 
+    private void CheckSettingCondition()
+    {
+        if (!m_active)
+            return;
+
+        if (m_age == 3 || m_age == 30 || 
+            m_age == 45 || m_age == 60 || 
+            m_age == 75 || m_age == 90)
+        {
+            SetActive(false);
+            
+            m_tmpProperty = m_propertyPoint;
+            m_tmpStrength = 0;
+            m_tmpWealht = 0;
+
+            s_gameplayPanel.UpdateUI();
+            s_gameplayPanel.SetMenuVisible(true);
+        }
+    }
+
+
     private void CheckEndCondition()
     {
+        if (!m_active)
+            return;
+
         bool res = true;
         string text = "";
         float pivot = Random.Range(0.0f, 100.0f);
 
-        if (m_age == 1 && pivot <= m_rate_deathAtBegin)
+        if (m_age == 0 && pivot <= m_rate_deathAtBegin)
         {
             text = "Something went wrong during your birth and you died. But at least you can restart right away.";
             s_gameplayPanel.AddEvent(text);
@@ -159,7 +185,7 @@ public class EventGenerator : Singleton<EventGenerator>
             s_gameplayPanel.AddEvent(text);
             res = false;
         }
-        else if (m_strength <= 0 && pivot <= m_rate_deathByWeak + 35)
+        else if (m_strength <= 0 && pivot <= m_rate_deathByWeak + 55)
         {
             text = "You are too week, Darwin thought you were slowing down human evolution, so you died.";
             s_gameplayPanel.AddEvent(text);
@@ -196,10 +222,77 @@ public class EventGenerator : Singleton<EventGenerator>
     public int Wealth { get { return m_wealth; } set { m_wealth = value; } }
     public int Strength { get { return m_strength; } set { m_strength = value; } }
     public int IQ { get { return m_IQ; } set { m_IQ = value; } }
+    public int Property { get { return m_tmpProperty; }  private set { } }
+    public int TmpWealth { get { return m_tmpWealht; } private set { } }
+    public int TmpStrength { get { return m_tmpStrength; } private set { } }    
 
 
     public void SetActive(bool i_active)
     {
         m_active = i_active;
+    }
+
+
+    public void StartGame()
+    {
+        m_currentTime = Time.time;
+        CheckEndCondition();
+
+        if (m_active)
+        {
+            s_gameplayPanel.AddEvent("You are born");
+            m_age++;
+        }
+    }
+
+
+    public void AddTmpWealth()
+    {
+        if (m_tmpProperty > 0)
+        {
+            m_tmpWealht++;
+            m_tmpProperty--;
+        }
+    }
+
+
+    public void SubTmpWealth()
+    {
+        if (m_tmpWealht > 0)
+        {
+            m_tmpWealht--;
+            m_tmpProperty++;
+        }
+    }
+
+
+    public void AddTmpStrength()
+    {
+        if (m_tmpProperty > 0)
+        {
+            m_tmpStrength++;
+            m_tmpProperty--;
+        }
+    }
+
+
+    public void SubTmpStrength()
+    {
+        if (m_tmpStrength > 0)
+        {
+            m_tmpStrength--;
+            m_tmpProperty++;
+        }
+    }
+
+
+    public void ApplySetting()
+    {
+        m_wealth += m_tmpWealht;
+        m_strength += m_tmpStrength;
+
+        s_gameplayPanel.SetMenuVisible(false);
+
+        SetActive(true);
     }
 }

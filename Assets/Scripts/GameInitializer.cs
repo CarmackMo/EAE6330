@@ -56,6 +56,7 @@ public class GameInitializer : Singleton<GameInitializer>
         s_gameplayPanel.UpdateUI();
         s_gameplayPanel.SetVisible(true);
         s_eventGenerator.SetActive(true);
+        s_eventGenerator.StartGame();
     }
 
 
