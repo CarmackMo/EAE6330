@@ -64,6 +64,7 @@ public class EventGenerator : Singleton<EventGenerator>
     {
         int pivot = 0;
         string playerEvent = "";
+        EventResult eventRes;
         pivot = UnityEngine.Random.Range(0, 100);
 
         if (pivot <= m_rate_normalEvent)
@@ -78,17 +79,37 @@ public class EventGenerator : Singleton<EventGenerator>
                 pivot = UnityEngine.Random.Range(0, 10);
                 bool status = (pivot <= m_wealth) ? true : false;
 
-                EventResult result = m_wealthEvent.GetEvent(status);
-                playerEvent = result.result;
+                eventRes = m_wealthEvent.GetEvent(status);
+                playerEvent = eventRes.text;
             }
             else
             {
                 pivot = UnityEngine.Random.Range(0, 10);
                 bool status = (pivot <= m_strength) ? true : false;
 
-                EventResult result = m_wealthEvent.GetEvent(status);
-                playerEvent = result.result;
+                eventRes = m_wealthEvent.GetEvent(status);
+                playerEvent = eventRes.text;
             }
+
+
+            string delta = "";
+            if (eventRes.deltaWealth != 0)
+            {
+                delta += " You get " + eventRes.deltaWealth.ToString() + " wealth.";
+                m_wealth += eventRes.deltaWealth;
+
+                // TODO: Update UI
+            }
+            if (eventRes.deltaStrength != 0)
+            {
+                delta += " You get " + eventRes.deltaStrength.ToString() + " strength.";
+                m_strength += eventRes.deltaStrength;
+
+                // TODO: Update UI
+            }
+
+            playerEvent += delta;
+
         }
 
         gameplayPanel.AddEvent(playerEvent);

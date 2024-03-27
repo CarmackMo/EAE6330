@@ -6,7 +6,7 @@ using UnityEngine;
 [Serializable]
 public struct EventResult
 {
-    public string result;
+    public string text;
 
     public int deltaWealth;
     public int deltaStrength;
@@ -84,7 +84,7 @@ public class EventAsset : ScriptableObject
 
         res = res.Substring(0, res.Length - 5);
 
-        result.result = res;
+        result.text = res;
         result.deltaStrength = strength;
         result.deltaWealth = wealth;
 
