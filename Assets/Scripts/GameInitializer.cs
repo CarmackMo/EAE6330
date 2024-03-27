@@ -9,14 +9,13 @@ public class GameInitializer : Singleton<GameInitializer>
 
     [SerializeField] private int m_totalProperty = 0;
 
-
     private int m_wealth = 0;
-
     private int m_strength = 0;
-
     private int m_IQ = 0;
 
     private StartPanel s_startPanel = null;
+    private GameplayPanel s_gameplayPanel = null;
+    private EventGenerator s_eventGenerator = null;
 
 
 
@@ -31,7 +30,9 @@ public class GameInitializer : Singleton<GameInitializer>
 
     private void Init()
     {
+        s_eventGenerator = EventGenerator.Instance;
         s_startPanel = StartPanel.Instance;
+        s_gameplayPanel = GameplayPanel.Instance;
     }
 
 
@@ -44,6 +45,17 @@ public class GameInitializer : Singleton<GameInitializer>
     public int Strength { get { return m_strength; } private set { } }
     public int IQ { get { return m_IQ; } private set { } }
 
+
+    public void StartGame()
+    {
+        s_eventGenerator.Wealth = m_wealth;
+        s_eventGenerator.Strength = m_strength;
+        s_eventGenerator.IQ = m_IQ;
+
+        s_startPanel.SetVisible(false);
+        s_gameplayPanel.SetVisible(true);
+        s_eventGenerator.SetActive(true);
+    }
 
 
     public void AddWealth()

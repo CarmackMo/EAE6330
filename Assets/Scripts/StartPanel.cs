@@ -14,7 +14,6 @@ public class StartPanel : Singleton<StartPanel>
     [SerializeField] private TextMeshProUGUI text_strength = null;
     [SerializeField] private TextMeshProUGUI text_IQ = null;
 
-
     [SerializeField] private Button btn_addWealth = null;
     [SerializeField] private Button btn_subWealth = null;
     [SerializeField] private Button btn_addStrength = null;
@@ -25,6 +24,8 @@ public class StartPanel : Singleton<StartPanel>
     [SerializeField] private Button btn_start = null;
 
     private GameInitializer s_gameInitializer = null;
+    private EventGenerator s_eventGenerator = null;
+    private GameplayPanel s_gameplayPanel = null;
 
 
 
@@ -40,6 +41,8 @@ public class StartPanel : Singleton<StartPanel>
     private void Init()
     {
         s_gameInitializer = GameInitializer.Instance;
+        s_eventGenerator = EventGenerator.Instance;
+        s_gameplayPanel = GameplayPanel.Instance;
 
         btn_addWealth.onClick.AddListener(() => { OnClickButton(btn_addWealth); });
         btn_subWealth.onClick.AddListener(() => { OnClickButton(btn_subWealth); });
@@ -49,6 +52,9 @@ public class StartPanel : Singleton<StartPanel>
         btn_subIQ.onClick.AddListener(() => { OnClickButton(btn_subIQ); });
         
         btn_start.onClick.AddListener(() => { OnClickButton(btn_start); });
+
+        UpdateUI();
+        SetVisible(true);
     }
 
 
@@ -67,9 +73,7 @@ public class StartPanel : Singleton<StartPanel>
         else if (i_button == btn_subIQ)
             s_gameInitializer.SubIQ();
         else if (i_button == btn_start)
-        {
-            throw new NotImplementedException();
-        }
+            s_gameInitializer.StartGame();
 
         UpdateUI();
     }
@@ -83,5 +87,14 @@ public class StartPanel : Singleton<StartPanel>
         text_IQ.text = s_gameInitializer.IQ.ToString();
     }
 
+
+
+    // Interface
+    //=========================
+
+    public void SetVisible(bool i_visible)
+    {
+        gameObject.SetActive(i_visible);
+    }
 
 }

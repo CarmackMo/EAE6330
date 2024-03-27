@@ -1,14 +1,19 @@
 using UnityEngine;
 
 
-public class EventGenerator : MonoBehaviour
+public class EventGenerator : Singleton<EventGenerator>
 {
     // Data
     //=========================
 
-    public NormalEventAsset normalEvent = null;
+    [SerializeField] private NormalEventAsset normalEvent = null;
 
     private GameplayPanel gameplayPanel = null;
+
+    private int m_wealth = 0;
+    private int m_strength = 0;
+    private int m_IQ = 0;
+
 
     private float lastAdd = 0.0f;
     private float coolDown = 3.0f;
@@ -39,6 +44,8 @@ public class EventGenerator : MonoBehaviour
     private void Init()
     {
         gameplayPanel = GameplayPanel.Instance;
+
+        SetActive(false);
     }
 
 
@@ -53,5 +60,20 @@ public class EventGenerator : MonoBehaviour
             playerEvent = normalEvent.GetEvent();
             gameplayPanel.AddEvent(playerEvent);
         }
+    }
+
+
+
+    // Interface
+    //=========================
+
+    public int Wealth { get { return m_wealth; } set { m_wealth = value; } }
+    public int Strength { get { return m_strength; } set { m_strength = value; } }
+    public int IQ { get { return m_IQ; } set { m_IQ = value; } }
+
+
+    public void SetActive(bool i_active)
+    {
+        gameObject.SetActive(i_active);
     }
 }
