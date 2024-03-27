@@ -24,8 +24,6 @@ public class StartPanel : Singleton<StartPanel>
     [SerializeField] private Button btn_start = null;
 
     private GameInitializer s_gameInitializer = null;
-    private EventGenerator s_eventGenerator = null;
-    private GameplayPanel s_gameplayPanel = null;
 
 
 
@@ -41,8 +39,6 @@ public class StartPanel : Singleton<StartPanel>
     private void Init()
     {
         s_gameInitializer = GameInitializer.Instance;
-        s_eventGenerator = EventGenerator.Instance;
-        s_gameplayPanel = GameplayPanel.Instance;
 
         btn_addWealth.onClick.AddListener(() => { OnClickButton(btn_addWealth); });
         btn_subWealth.onClick.AddListener(() => { OnClickButton(btn_subWealth); });

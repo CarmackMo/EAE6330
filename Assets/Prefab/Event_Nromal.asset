@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 2fd9520cff9687e489bc4cc681962228, type: 3}
-  m_Name: NormalEventAssets
+  m_Name: Event_Nromal
   m_EditorClassIdentifier: 
   eventList:
   - You fell hard.

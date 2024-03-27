@@ -586,7 +586,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 681495040481775117, guid: 70e4a046489870b498b4f45c27efe689, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 0
+      value: 327.5
       objectReference: {fileID: 0}
     - target: {fileID: 681495040481775117, guid: 70e4a046489870b498b4f45c27efe689, type: 3}
       propertyPath: m_AnchoredPosition.y
@@ -746,7 +746,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6296545064295413810, guid: 70e4a046489870b498b4f45c27efe689, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 0
+      value: 327.5
       objectReference: {fileID: 0}
     - target: {fileID: 6296545064295413810, guid: 70e4a046489870b498b4f45c27efe689, type: 3}
       propertyPath: m_AnchoredPosition.y
@@ -1000,7 +1000,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5a98dafa216c03c41a2783241541ea61, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  normalEvent: {fileID: 11400000, guid: d8e9e7bfc52b1b3479e08b5e90a6a6be, type: 2}
+  m_rate_normalEvent: 1
+  m_rate_wealthEvent: 50
+  m_normalEvent: {fileID: 11400000, guid: d8e9e7bfc52b1b3479e08b5e90a6a6be, type: 2}
+  m_wealthEvent: {fileID: 11400000, guid: 628b32b954964644e96409b80ffd78e4, type: 2}
+  m_strengthEvent: {fileID: 11400000, guid: d84831c3a089db04b84b2f189662fcf5, type: 2}
 --- !u!4 &1582781877
 Transform:
   m_ObjectHideFlags: 0

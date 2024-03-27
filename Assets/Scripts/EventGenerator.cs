@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 
@@ -6,9 +7,13 @@ public class EventGenerator : Singleton<EventGenerator>
     // Data
     //=========================
 
-    [SerializeField] private NormalEventAsset normalEvent = null;
+    [SerializeField] private float m_rate_normalEvent = 0.0f;
+    [SerializeField] private float m_rate_wealthEvent = 0.0f;
 
-    private GameplayPanel gameplayPanel = null;
+    [SerializeField] private NormalEventAsset m_normalEvent = null;
+    [SerializeField] private EventAsset m_wealthEvent = null;
+    [SerializeField] private EventAsset m_strengthEvent = null;
+
 
     private int m_wealth = 0;
     private int m_strength = 0;
@@ -16,8 +21,12 @@ public class EventGenerator : Singleton<EventGenerator>
 
 
     private float lastAdd = 0.0f;
-    private float coolDown = 3.0f;
+    private float coolDown = 4.0f;
 
+    private float m_currentTime = 0.0f;
+
+
+    private GameplayPanel gameplayPanel = null;
 
 
     // Implementation
@@ -32,12 +41,14 @@ public class EventGenerator : Singleton<EventGenerator>
     void Update()
     {
         
-        if (Time.time - lastAdd >= coolDown) 
+        if (m_currentTime - lastAdd >= coolDown) 
         {
             GenerateEvent();
 
-            lastAdd = Time.time;    
+            lastAdd = m_currentTime;    
         }
+
+        m_currentTime += Time.deltaTime;
     }
 
 
@@ -51,15 +62,35 @@ public class EventGenerator : Singleton<EventGenerator>
 
     private void GenerateEvent()
     {
-        float pivot = 0.0f;
+        int pivot = 0;
         string playerEvent = "";
-        pivot = Random.Range(0.0f, 100.0f);
+        pivot = UnityEngine.Random.Range(0, 100);
 
-        if (pivot < 100.0f)
+        if (pivot <= m_rate_normalEvent)
         {
-            playerEvent = normalEvent.GetEvent();
-            gameplayPanel.AddEvent(playerEvent);
+            playerEvent = m_normalEvent.GetEvent();
         }
+        else
+        {
+            pivot = UnityEngine.Random.Range(0, 100);
+            if (pivot <= m_rate_wealthEvent)
+            {
+
+                pivot = UnityEngine.Random.Range(0, 10);
+                bool status = (pivot <= m_wealth) ? true : false;
+                playerEvent = m_wealthEvent.GetEvent(status);
+                //throw new NotImplementedException();
+            }
+            else
+            {
+                pivot = UnityEngine.Random.Range(0, 10);
+                bool status = (pivot <= m_strength) ? true : false;
+                playerEvent = m_strengthEvent.GetEvent(status);
+                //throw new NotImplementedException();
+            }
+        }
+
+        gameplayPanel.AddEvent(playerEvent);
     }
 
 

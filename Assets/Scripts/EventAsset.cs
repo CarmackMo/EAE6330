@@ -15,9 +15,9 @@ public class EventAsset : ScriptableObject
     {
         public string background;
 
+        public List<string> badResultList;
         public List<string> goodResultList;
 
-        public List<string> badResultList;
     }
 
     [SerializeField]
