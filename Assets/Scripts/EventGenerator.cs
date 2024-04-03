@@ -47,6 +47,11 @@ public class EventGenerator : Singleton<EventGenerator>
     void Update()
     {
         GameLoop();
+
+        if (Input.GetKeyUp(KeyCode.Escape)) 
+        {
+            Application.Quit();
+        }
     }
 
 
