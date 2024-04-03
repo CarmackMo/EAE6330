@@ -146,7 +146,7 @@ public class EventGenerator : Singleton<EventGenerator>
         if (!m_active)
             return;
 
-        if (m_age == 3 || m_age == 30 || 
+        if (m_age == 15 || m_age == 30 || 
             m_age == 45 || m_age == 60 || 
             m_age == 75 || m_age == 90)
         {
