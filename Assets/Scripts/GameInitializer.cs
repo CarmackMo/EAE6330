@@ -1,106 +1,122 @@
-using System;
-using System.Collections.Generic;
 using UnityEngine;
-
-
-
-[Serializable]
-struct MapRow
-{
-    public List<TileConfig> m_rowUnits;
-};
 
 
 
 public class GameInitializer : Singleton<GameInitializer>
 {
     // Data
-    //=================
+    //=========================
 
-    [SerializeField] private int m_width = 0;
-    [SerializeField] private int m_height = 0;
-    [SerializeField] private int m_stepCount = 0;
-    [SerializeField] private int m_keyCount = 0;
+    [SerializeField] private int m_totalProperty = 0;
 
-    [SerializeField] private Tile_Start m_prefab_startTile = null;
-    [SerializeField] private Tile_End m_prefab_endTile = null;
-    [SerializeField] private Tile_Norm m_prefab_normTile = null;
-    [SerializeField] private Tile_Firewall m_prefab_firewallTile = null;
-    [SerializeField] private Tile_Key m_prefab_keyTile = null;
-    [SerializeField] private Tile_Lock m_prefab_lockTile = null;
+    private int m_wealth = 1;
+    private int m_strength = 1;
+    private int m_IQ = 1;
 
-    [SerializeField] private List<MapRow> m_tileMap = new List<MapRow>();
-
-
-    GameController s_gameController = null;
+    private StartPanel s_startPanel = null;
+    private GameplayPanel s_gameplayPanel = null;
+    private EventGenerator s_eventGenerator = null;
 
 
 
-    // Implementations
-    //=================
+    // Implementation
+    //=========================
 
-    protected override void Start()
+    private void Start()
     {
-        base.Start();
-
         Init();
     }
 
 
     private void Init()
     {
-        // Initialize static variable
-        {
-            s_gameController = GameController.Instance;
-        }
-
-        // Initialize tile map
-        {
-            for (int row = 0; row < m_height; row++) 
-            {
-                for (int col = 0; col < m_width; col++) 
-                {
-                    TileConfig config = m_tileMap[row].m_rowUnits[col];
-
-                    Tile_Base newTile = InstantiateTile(config, row, col);
-                    s_gameController.AddTile(newTile);
-                }
-            }
-        }
-
+        s_eventGenerator = EventGenerator.Instance;
+        s_startPanel = StartPanel.Instance;
+        s_gameplayPanel = GameplayPanel.Instance;
     }
 
 
-    private Tile_Base InstantiateTile(TileConfig i_config, int i_row, int i_col)
+
+    // Interface
+    //=========================
+
+    public int TotalProperty { get { return m_totalProperty; }  private set { } }
+    public int Wealth { get { return m_wealth; } private set { } }
+    public int Strength { get { return m_strength; } private set { } }
+    public int IQ { get { return m_IQ; } private set { } }
+
+
+    public void StartGame()
     {
-        Tile_Base prefab = null;
-        if (i_config.m_tileType == TileType.Start)
-            prefab = m_prefab_startTile;
-        else if (i_config.m_tileType == TileType.End)
-            prefab = m_prefab_endTile;
-        else if (i_config.m_tileType == TileType.Normal)
-            prefab = m_prefab_normTile;
-        else if (i_config.m_tileType == TileType.FireWall)
-            prefab = m_prefab_firewallTile;
-        else if (i_config.m_tileType == TileType.Key)
-            prefab = m_prefab_keyTile;
-        else if (i_config.m_tileType == TileType.Lock)
-            prefab = m_prefab_lockTile;
+        s_eventGenerator.Wealth = m_wealth;
+        s_eventGenerator.Strength = m_strength;
+        s_eventGenerator.IQ = m_IQ;
 
-        Tile_Base newTile = Instantiate(prefab);
-        Vector2 tilePos = new Vector2(i_col * (newTile.Width + 0.25f), i_row * (newTile.Height + 0.25f));
-        newTile.SetTilePos(tilePos);
-
-        return newTile;
+        s_startPanel.SetVisible(false);
+        s_gameplayPanel.UpdateUI();
+        s_gameplayPanel.SetVisible(true);
+        s_eventGenerator.SetActive(true);
+        s_eventGenerator.StartGame();
     }
 
 
-    // Interfaces
-    //=================
+    public void AddWealth()
+    {
+        if (m_totalProperty > 0)
+        {
+            m_wealth++;
+            m_totalProperty--;
+        }
+    }
 
-    public int MapWidth { get { return m_width; } private set { } }
-    public int MapHeight { get { return m_height; } private set { } }
-    public int StepCount { get { return m_stepCount; } private set { } }
-    public int KeyCount { get { return m_keyCount; } private set { } }
+
+    public void SubWealth()
+    {
+        if (m_wealth > 0)
+        {
+            m_wealth--;
+            m_totalProperty++; 
+        }
+    }
+
+
+    public void AddStrength()
+    {
+        if (m_totalProperty > 0)
+        {
+            m_strength++;
+            m_totalProperty--;
+        }
+    }
+
+
+    public void SubStrength()
+    {
+        if (m_strength > 0)
+        {
+            m_strength--;
+            m_totalProperty++;
+        }
+    }
+
+
+    public void AddIQ()
+    {
+        if (m_totalProperty > 0) 
+        {
+            m_IQ++;
+            m_totalProperty--;
+        }
+    }
+
+
+    public void SubIQ()
+    {
+        if (m_IQ > 0)
+        {
+            m_IQ--;
+            m_totalProperty++;
+        }
+    }
 
 }

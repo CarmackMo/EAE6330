@@ -1,0 +1,50 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0234e80d7bcfb2d4bb9d433ce3bd706a, type: 3}
+  m_Name: Event_Wealth
+  m_EditorClassIdentifier: 
+  eventList:
+  - background: There was a famine.
+    badResultList:
+    - Because of your poverty, your family couldn't afford to buy food and you were
+      starved to death.(0,0)
+    - Your family couldn't afford to buy food and you had to risk eating pig food
+      to feed yourself, for which you ended up with diarrhea.(0,a)
+    - In order to get a bite to eat, you went to the door of the landlord's son to
+      beg for food, only to be beaten up by his houseboys.(0,0)
+    - Since you can't even afford to buy food, you starve and eat everything your
+      family can and can't eat, and as a result your family becomes even poorer.(a,0)
+    goodResultList:
+    - Luckily, there's still some left in the house, and you and your family survived
+      the famine.(0,0)
+    - You had to pay a lot of money to buy dog food from scalpers to feed your family.(a,0)
+    - While you can afford to buy food, that food is either spoiled or not meant
+      for human consumption, and as a result you eat the wrong things and become
+      stupid.(0,0)
+    - Your family is well-to-do, and you've made a fortune as a scalper selling grain
+      to the hungry at a high price.(1,0)
+  - background: 'The government wants to demolish your house to build a pig farm. '
+    badResultList:
+    - Your family worked hard for most of your life to buy this house, you said nothing
+      to agree to the government's demolition plan, and you were beaten up by the
+      demolition team.(0,0)
+    - The government says it will give you a compensation payment, but when you go
+      to ask for it, the initial official has retired, so naturally your compensation
+      is lost.(a,0)
+    - You said you wouldn't agree to move, so the government built a pig farm in
+      front of your house, and you smelled pig manure every day, and you couldn't
+      eat, and your body became thinner and thinner every day.(0,a)
+    goodResultList:
+    - You've got some contacts in the government. You convinced the government to
+      demolish your high school bully's house.(0,0)
+    - Your family was the local bully, and the government had to pay you a huge sum
+      of money as compensation for your influence.(2,0)
